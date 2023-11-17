@@ -129,36 +129,48 @@ def update_postdoc_section(text_data):
     return updated_text_data
 
 def update_masters_section(text_data):
-    # Define section label
-    label = "Master's Thesis"
+    # Define the two possible formats for "Master's Thesis"
+    master_thesis_options = ["Master's Thesis", "Master\\textquotesingle s Thesis"]
+
+    # Detect which format is used in the text
+    master_thesis_format = next((option for option in master_thesis_options if option in text_data), None)
+
+    if master_thesis_format is None:
+        print("Master's Thesis section format not detected!")
+        return text_data
+
+    # Escape backslashes for regex
+    escaped_master_thesis_format = master_thesis_format.replace('\\', '\\\\')
+
+    # Prepare regex pattern for the section
+    section_pattern = rf"(\\subsubsection\{{.*?{escaped_master_thesis_format}.*?\}}.*?\\begin\{{enumerate\}})(.*?)(\\end\{{enumerate\}})"
     
-    # Extract the Master's Thesis section
-    section_pattern = rf"\\subsubsection{{{label}}}.*?\\begin{{enumerate}}.*?\\end{{enumerate}}"
     section_match = re.search(section_pattern, text_data, re.DOTALL)
-    
+
     if not section_match:
         print("Master's Thesis section not found!")
         return text_data
+
+    section_start, section_content, section_end = section_match.groups()
     
-    section_content = section_match.group(0)
+    # Adjusting item pattern for matching items within the section
+    item_pattern = rf"\\item\s*{escaped_master_thesis_format}\.\s*\((.*?)\)\.\\\\\s*Advised:\s*(.*?),\s*\"(.*?)\""
     
-    # Extract individual items
-    item_pattern = r"Master's Thesis\. \((.*?)\).\\\\\s+Advised: (.*?), \"(.*?)\","
-    items = re.findall(item_pattern, section_content, re.DOTALL)
+    items = re.findall(item_pattern, section_content, re.DOTALL | re.MULTILINE)
     
+    if not items:
+        print("No items found in Master's Thesis section!")
+        return text_data
+
     # Format items
-    formatted_items = []
-    for time_period, name, title in items:
-        formatted_item = f"\\item {name}, \"{title}\", {time_period}"
-        formatted_items.append(formatted_item)
-    
-    # Combine formatted items with consistent spacing
-    #formatted_section = f"\\subsubsection{{{label}}}\n\\begin{{enumerate}}\n\\def\\labelenumi{{\\arabic{{enumi}}.}}\n" + "\n".join(formatted_items) + "\n\\end{{enumerate}}\n"
+    formatted_items = [f"\\item {name}, \"{title}\", {time_period}" for time_period, name, title in items]
+
     # Combine formatted items
-    formatted_section = "\\subsubsection{Master's Thesis}\n\\begin{enumerate}\n\\def\\labelenumi{\\arabic{enumi}.}\n" + "\n".join(formatted_items) + "\n\\end{enumerate}"
+    formatted_section_content = "\n".join(formatted_items)
 
     # Replace the old section with the new formatted section in the text data
-    updated_text_data = text_data.replace(section_content, formatted_section)
+    updated_section = section_start + formatted_section_content + section_end
+    updated_text_data = text_data.replace(section_content, formatted_section_content)
     
     return updated_text_data
 
@@ -592,7 +604,7 @@ def extract_subsubsection(text, title):
     if match:
         return match.group(0)
     else:
-        print(f"Title '{title}' not found!")
+        print(f"Title '{title}' not found in extract_subsubsection!")
         return None
 
 def reorder_student_sections(text):
@@ -615,6 +627,94 @@ def reorder_student_sections(text):
         end_idx = len(text)
     
     return text[:start_idx] + r'\subsection{Directed Student Learning}' + '\n' + reordered_sections + text[end_idx:]
+def reorder_student_sections4(text):
+    # Define the two possible formats for "Master's Thesis"
+    master_thesis_options = ["Master's Thesis", "Master\\textquotesingle s Thesis"]
+
+    # Detect which format is used in the text
+    master_thesis_format = next((option for option in master_thesis_options if option in text), None)
+
+    if master_thesis_format is None:
+        print("Master's Thesis section format not detected")
+        return text
+
+    # Define the desired order based on the detected format
+    order = ["Ph.D. Dissertation", master_thesis_format, "Postdoctoral Mentorship", "Undergraduate Honors\nThesis"]
+
+    # Extract each subsubsection based on the order
+    sections = [extract_subsubsection(text, title) for title in order]
+
+    # Check if any section is missing and remove it
+    sections = [section for section in sections if section is not None]
+
+    # Concatenate the reordered sections
+    reordered_sections = "\n".join(sections)
+
+    # Replace the original Directed Student Learning section with the reordered one
+    start_idx = text.find(r'\subsection{Directed Student Learning}')
+    end_idx = text.find(r'\subsection', start_idx + 1)
+    if end_idx == -1:
+        end_idx = len(text)
+
+    return text[:start_idx] + r'\subsection{Directed Student Learning}' + '\n' + reordered_sections + text[end_idx:]
+def reorder_student_sections3(text):
+    # Define the two possible orders for "Master's Thesis"
+    order1 = ["Ph.D. Dissertation", "Master's Thesis", "Postdoctoral Mentorship", "Undergraduate Honors\nThesis"]
+    order2 = ["Ph.D. Dissertation", "Master\\textquotesingle s Thesis", "Postdoctoral Mentorship", "Undergraduate Honors\nThesis"]
+
+    # Extract each subsubsection based on the two orders
+    sections1 = [extract_subsubsection(text, title) for title in order1]
+    sections2 = [extract_subsubsection(text, title) for title in order2]
+
+    # Combine the two sets of sections, removing any None entries
+    combined_sections = [section for section in sections1 + sections2 if section is not None]
+
+    # Remove duplicate sections (if any)
+    seen_titles = set()
+    unique_sections = []
+    for section in combined_sections:
+        title = section.split('\n', 1)[0]  # Extract the title of the section
+        if title not in seen_titles:
+            seen_titles.add(title)
+            unique_sections.append(section)
+
+    # Concatenate the reordered sections
+    reordered_sections = "\n".join(unique_sections)
+    
+    # Replace the original Directed Student Learning section with the reordered one
+    start_idx = text.find(r'\subsection{Directed Student Learning}')
+    end_idx = text.find(r'\subsection', start_idx + 1)
+    if end_idx == -1:
+        end_idx = len(text)
+    
+    return text[:start_idx] + r'\subsection{Directed Student Learning}' + '\n' + reordered_sections + text[end_idx:]
+def reorder_student_sections2(text):
+    # Define the desired order with both variations for "Master's Thesis"
+    order = ["Ph.D. Dissertation", "Master's Thesis", "Master\\textquotesingle s Thesis", "Postdoctoral Mentorship", "Undergraduate Honors\nThesis"]
+    
+    # Extract each subsubsection based on the order
+    sections = [extract_subsubsection(text, title) for title in order]
+    
+    # Check if any section is missing and remove it
+    sections = [section for section in sections if section is not None]
+
+    # Remove duplicate "Master's Thesis" sections (if both variations are present)
+    master_thesis_sections = [section for section in sections if "Master's Thesis" in section or "Master\\textquotesingle s Thesis" in section]
+    if len(master_thesis_sections) > 1:
+        sections = [section for section in sections if section not in master_thesis_sections]
+        sections.insert(1, master_thesis_sections[0])  # Keep only the first occurrence
+
+    # Concatenate the reordered sections
+    reordered_sections = "\n".join(sections)
+    
+    # Replace the original Directed Student Learning section with the reordered one
+    start_idx = text.find(r'\subsection{Directed Student Learning}')
+    end_idx = text.find(r'\subsection', start_idx + 1)
+    if end_idx == -1:
+        end_idx = len(text)
+    
+    return text[:start_idx] + r'\subsection{Directed Student Learning}' + '\n' + reordered_sections + text[end_idx:]
+
 
 def boldface_name_in_publications(text):
     # Extract the publications section
@@ -781,15 +881,15 @@ def set_section_colors(text):
 
 def process_courses(text):
     course_descriptions = {
-        "330": "ME 330 (Computational Tools for Engineers)",
-        "360": "ME 360 (Machine Design)",
-        "461": "ME 461 (Introduction to Finite Element Analysis)",
-        "563": "ME 563 (Nonlinear Finite Element Analysis)",
-        "497": "Development course for Computational Tools for Engineers",
-        "440": "Capstone Design",
+        "330": "Computational Tools for Engineers (ME 330)",
+        "360": "Machine Design (ME 360)",
+        "461": "Introduction to Finite Element Analysis (ME 461)",
+        "563": "Nonlinear Finite Element Analysis (ME 563)",
+        "497": "Development course for Computational Tools for Engineers (ME 497)",
+        "440": "Capstone Design (ME 440)",
     }
     excluded_courses = {"600", "596", "496", "494", "610"}
-    
+
     # Find the start and end of the course listings section
     start_of_section = text.find(r'\subsection{Teaching Experience}\label{teaching-experience}')
     end_of_section = text.find(r'\subsection{Service}\label{service}')
@@ -799,33 +899,33 @@ def process_courses(text):
         print("Warning: Course section markers not found.")
         return text
 
-    # Process the course listings
-    sections = re.split(r'\\subsubsection\{(\d{4})\}', text[start_of_section:end_of_section])[1:]
-    grouped_sections = [(sections[i], sections[i+1]) for i in range(0, len(sections), 2)]
+    # Extract the course listings section
+    course_section = text[start_of_section:end_of_section]
 
-    new_course_section = r'\subsection{Teaching Experience}\label{teaching-experience}' + '\n\n'
+    # Dictionary to store courses and their years
+    courses_years = {}
 
-    for year, courses in grouped_sections:
-        course_nums = re.findall(r'(?:ME|M\s?E) (\d{3})', courses)
-        course_nums = set(course_nums)  # remove duplicates
-        course_nums = [num for num in course_nums if num not in excluded_courses]  # exclude certain courses
-        course_nums = sorted(course_nums, reverse=True)  # Sort in descending order if needed
+    # Find each year and its associated courses
+    years_courses = re.findall(r'\\subsubsection\{(\d{4})\}(.*?)\\subsubsection|\\subsection', course_section, re.DOTALL)
+    for year, courses in years_courses:
+        for course_num in re.findall(r'(?:ME|M\s?E) (\d{3})', courses):
+            if course_num not in excluded_courses:
+                description = course_descriptions.get(course_num, f"ME {course_num}")
+                if description not in courses_years:
+                    courses_years[description] = []
+                courses_years[description].append(year)
 
-        courses_to_write = []
-        for num in course_nums:
-            if num in course_descriptions:
-                courses_to_write.append(course_descriptions[num])
-            else:
-                courses_to_write.append(f"ME{num}")
-
-        # Append to new course section text
-        new_course_section += f"\\textbf{{{year}}}\n"
-        new_course_section += r'\\'
-        new_course_section += ', '.join(courses_to_write)
-        new_course_section += '\n\n'
+    # Format the new course section
+    new_course_section = '\n\n' + r'\subsection{Teaching Experience}\label{teaching-experience}' + '\n'
+    for course, years in courses_years.items():
+        sorted_years = sorted(set(years), reverse=True)  # Sort and remove duplicates
+        new_course_section += f"{course}, {', '.join(sorted_years)}.\n\n"
 
     # Replace the original course listings section with the new one
     new_text = text[:start_of_section] + new_course_section + text[end_of_section:]
+
+    # Ensure a newline after \end{enumerate}
+    new_text = new_text.replace('\end{enumerate}\subsection', '\end{enumerate}\n\n\subsection')
 
     return new_text
 
@@ -860,7 +960,7 @@ def clean_service_section(text_data):
         section_match = re.search(section_pattern, text_data, re.DOTALL)
         
         if not section_match:
-            print(f"{label} section not found!")
+            print(f"{label} section not found in clean_service_section!")
             continue
         
         section_content = section_match.group(0)
@@ -1108,6 +1208,8 @@ def process_professional_section(text):
 
 
     return updated_text
+
+
 def process_dates(date_string):
     # Define possible date formats
     date_formats = ["%B %Y", "%B %d, %Y"]
@@ -1358,7 +1460,8 @@ def main():
     #open a file to read in C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV named main.tex 
     # open the file for reading
     #f = open(r'C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\main.tex', 'r')
-    f = open(r'C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\main.tex', 'r', encoding='utf-8')
+    #f = open(r'C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\main.tex', 'r', encoding='utf-8')
+    f = open(r'C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\trypandoc11162023.tex', 'r', encoding='utf-8')
 
     #open another file for writing
     f1 = open(r'C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\main_edited.tex', 'w')
@@ -1391,7 +1494,7 @@ def main():
     text = boldface_name_in_publications(text)
         
     # reorder the student sections
-    text = reorder_student_sections(text)
+    text = reorder_student_sections4(text)
     
     # process the student thesis titles
     text = process_student_thesis_titles(text,dossier_file_path)
