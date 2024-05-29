@@ -18,25 +18,29 @@ import datetime
 from docx import Document 
 
 
-def process_student_thesis_titles(text,dossier_file_path): 
+def process_student_thesis_titles(text): 
     # Extract master's thesis titles
-    masters_data = extract_student_titles(dossier_file_path)
- 
+    masters_pattern = r'\\item\s+([^,]+,\s+[A-Z]\.?),\s+MS\.\s+(.+?)(?:\.\s+\(.*?\))?\.'
+    masters_data = extract_titles(text, "Master\\textquotesingle s Thesis", masters_pattern)
+
     # Extract PhD dissertation titles
-    phd_data = extract_phd_titles(dossier_file_path)
-  
+    phd_pattern = r'\\item\s+([^,]+,\s+[A-Z]\.),\s+Ph\.D\.\s+(.+?)(?:\.\s+\(.*?\))?\.'
+    phd_data = extract_titles(text, "Ph\\.D\\. Dissertation Advisor", phd_pattern)
+
     # Extract postdoc titles
-    postdoc_data = extract_postdoc_titles(dossier_file_path)
-    
+    postdoc_pattern = r'\\item\s+([^,]+,\s+[A-Z]\.?),\s+([A-Z])\.\s+(.+?)(?:\.\s+\(.*?\))?\.'
+    postdoc_data = extract_titles(text, "Postdoctoral Mentorship Advisor", postdoc_pattern)
+
     # Extract undergrad thesis titles
-    undergrad_data = extract_undergrad_student_titles(dossier_file_path)
+    undergrad_pattern = r'\\item\s+([^,]+,\s+[A-Z]\.?),\s+Undergraduate\.\s+(.+?)(?:\.\s+\(.*?\))?\.'
+    undergrad_data = extract_titles(text, "Undergraduate Honors Thesis Advisor", undergrad_pattern)
      
     # Merge the dictionaries
-    student_data = {**masters_data, **phd_data, **postdoc_data, **undergrad_data}
+    student_data = {**masters_data, **phd_data,**postdoc_data, **undergrad_data}
 
     # Replace problematic characters in titles
     student_data = replace_problematic_characters_in_titles(student_data)
-        
+      
     # Update the LaTeX content with thesis titles - does not work for postdoc titles see next function
     text = add_title_to_name2(text, student_data)
        
@@ -51,8 +55,9 @@ def process_student_thesis_titles(text,dossier_file_path):
     
     # reformat undergrad section for name, title, date
     text = update_undergraduate_section(text)
-        
+   
     return text
+
 
 def replace_problematic_characters_in_titles(student_data):
     problematic_char = u'\u2013'  # En dash (U+2013)
@@ -286,6 +291,7 @@ def extract_undergrad_student_titles(file_path):
             title = re.sub(r"\. Date Graduated:.*$", "", title)
             
             undergrad_data[name.strip()] = title
+    
 
     return undergrad_data
 
@@ -344,52 +350,9 @@ def reformat_phd_section(text_data):
     # Replace the original Ph.D. section with the new one
     updated_text_data = text_data.replace(phd_section, new_phd_section)
     
+    
     return updated_text_data
 
-def add_title_to_name(text, data):
-    for name, title in data.items():
-        # Adjust for the name format in the postdoc section
-        if ',' in name:
-            last_name, first_initial = name.split(', ')
-            formatted_name_full = f"{first_initial}. {last_name}"
-            formatted_name_last = last_name
-        else:
-            formatted_name_full = name
-            formatted_name_last = name.split()[0]  # Just the first name
-        
-        # Check which naming convention exists in the LaTeX document
-        if formatted_name_full in text:
-            pattern = re.escape(formatted_name_full)
-        elif formatted_name_last in text:
-            pattern = re.escape(formatted_name_last)
-        else:
-            print(f"Pattern not found for: {name}")
-            continue
-        
-        # Extract the time period
-        time_period_match = re.search(r"\((.*?)\)", text)
-        if time_period_match:
-            time_period = time_period_match.group(1)
-        else:
-            time_period = ""
-
-        # If we're dealing with the postdoc section
-        if "Postdoctoral Mentorship" in title:
-            postdoc_section_pattern = r"(\\subsubsection\{Postdoctoral Mentorship\}.*?)" + pattern
-            match = re.search(postdoc_section_pattern, text, re.DOTALL)
-            if match:
-                text = text.replace(match.group(0), match.group(0).replace(f"Advised: {formatted_name_full}", f"{formatted_name_last}, \"{title}\", {time_period}"))
-        # If we're dealing with the undergraduate section
-        elif "Undergraduate Honors Thesis" in title:
-            undergrad_section_pattern = r"(\\subsubsection\{Undergraduate Honors\s*Thesis\}.*?Advised: )" + pattern
-            match = re.search(undergrad_section_pattern, text, re.DOTALL)
-            if match:
-                text = text.replace(match.group(0), match.group(0).replace(f"Advised: {formatted_name_full}", f"{formatted_name_last}, \"{title}\", {time_period}"))
-        # For Master's and Ph.D. students
-        else:
-            if re.search(pattern, text):
-                text = re.sub(pattern, f"{formatted_name_last}, \"{title}\", {time_period}", text)
-    return text
 
 def add_title_to_name2(text, data):
     # Extract the section between \subsection{Directed Student Learning} and \subsection{Teaching Experience}
@@ -444,10 +407,24 @@ def add_title_to_name2(text, data):
         else:
             if re.search(pattern, section):
                 section = re.sub(pattern, f"{formatted_name_last}, \"{title}\", {time_period}", section)
+    # Define patterns for subsections to remove
+    sections_to_remove = [
+        r"\\subsection\{Postdoctoral Mentorship Advisor\}.*?(?=\\subsection|\Z)",
+        r"\\subsection\{Ph\.D\. Dissertation Committee Member\}.*?(?=\\subsection|\Z)",
+        r"\\subsection\{Research Activity Advisor\}.*?(?=\\subsection|\Z)",
+        r"\\subsection\{Undergraduate Honors Thesis Advisor\}.*?(?=\\subsection|\Z)",
+        r"\\subsection\{Ph.D. Dissertation Advisor\}.*?(?=\\subsection|\Z)"
+    ]
+
+    # Remove specified subsections
+    for pattern in sections_to_remove:
+        text = re.sub(pattern, '', text, flags=re.DOTALL)
 
     # Replace the original section with the modified one
     text = text[:start_index] + section + text[end_index:]
-    
+    # Ensure \end{document} is present at the end of the document
+    if not text.strip().endswith("\\end{document}"):
+        text += "\n\\end{document}"
     return text
 
 def add_undergrad_titles(text, undergrad_data):
@@ -469,133 +446,31 @@ def add_undergrad_titles(text, undergrad_data):
             print(f"Pattern for {first_initial}. {last_name} not found in the text!")
     
     return text
+def extract_titles(tex_content, section_name, entry_pattern):
 
-def extract_postdoc_titles(file_path):
-    #file_path = r"C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\20231021-095357-CDT.docx"
-    
-    # Check if the file exists
-    if not os.path.exists(file_path):
-        return f"File not found at '{file_path}'"
-    
-    # If the file exists, proceed to read its content
-    doc = Document(file_path)
-    full_text = [para.text for para in doc.paragraphs]
+    # Pattern to extract the specified section
+    pattern = rf'\\subsection\{{{section_name}\}}(.*?)\\end\{{enumerate\}}'
+    match = re.search(pattern, tex_content, re.DOTALL)
 
-    # Define the sub-section titles
-    sub_section_title = "Postdoctoral Mentorship Advisor"
-    end_section_title = "Research Activity Advisor"
+    # Initialize a dictionary to store the extracted data
+    extracted_data = {}
 
-    # Find the start of the sub-section
-    start_index = next((i for i, text in enumerate(full_text) if sub_section_title in text), None)
-    if start_index is None:
-        return {}
+    if match:
+        if section_name=="Master\\textquotesingle s Thesis":
+            section_content = match.group(0).strip()
+        else:
+            section_content = match.group(1).strip()
+        # Extract individual entries
+        entries = re.findall(entry_pattern, section_content, re.MULTILINE)
 
-    # Find the end of the sub-section
-    end_index = next((i for i, text in enumerate(full_text[start_index:]) if end_section_title in text), None)
-    if end_index is None:
-        end_index = len(full_text)
+        # Populate the dictionary with extracted data
+        for entry in entries:
+            name, title = entry
+            extracted_data[name.strip()] = title.strip()
     else:
-        end_index += start_index
+        extracted_data["error"] = f"{section_name} section not found in the provided text."
 
-    # Extract postdoc names and work titles
-    postdoc_data = {}
-    for line in full_text[start_index + 1:end_index]:
-        if ". " in line:
-            name, title_with_dates = line.split(". ", 1)
-            title = title_with_dates.split(". (")[0].strip()
-            postdoc_data[name.strip()] = title
-
-    return postdoc_data
-
-def extract_phd_titles(file_path):
-    #file_path = r"C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\20231021-095357-CDT.docx"
-    
-    # Check if the file exists
-    if not os.path.exists(file_path):
-        return f"File not found at '{file_path}'"
-    
-    # If the file exists, proceed to read its content
-    doc = Document(file_path)
-    full_text = [para.text for para in doc.paragraphs]
-
-    # Define the sub-section titles
-    sub_section_title = "Ph.D. Dissertation Advisor"
-    end_section_title = "Ph.D. Dissertation Committee Member"  # This is the section that follows the Advisor section
-
-    # Find the start of the sub-section
-    start_index = next((i for i, text in enumerate(full_text) if sub_section_title in text), None)
-    if start_index is None:
-        print(f"Section '{sub_section_title}' not found")
-        return {}
-
-    # Find the end of the sub-section
-    end_index = next((i for i, text in enumerate(full_text[start_index + 1:]) if end_section_title in text), None)
-    if end_index is None:
-        end_index = len(full_text)
-    else:
-        end_index += start_index + 1
-
-    # Extract student names and dissertation titles
-    student_data = {}
-    for line in full_text[start_index + 1:end_index]:
-        if ", " in line and "Ph.D." in line:
-            name = line.split(",")[0].strip()
-            title_start = line.find("Ph.D.") + 6
-            title_end = line.find(".", title_start)
-            title = line[title_start:title_end].strip()
-            student_data[name] = title
-
-    return student_data
-
-def extract_student_titles(file_path):
-    #file_path = r"C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\20231021-095357-CDT.docx"
-    
-    # Check if the file exists
-    if not os.path.exists(file_path):
-        return f"File not found at '{file_path}'"
-    
-    # If the file exists, proceed to read its content
-    doc = Document(file_path)
-    full_text = [para.text for para in doc.paragraphs]
-
-    # Define the sub-section titles
-    sub_section_titles = ["Master's Thesis Advisor", "Master\u2019s Thesis Advisor"]
-    end_section_titles = ["Master's Thesis Committee Member", "Master\u2019s Thesis Committee Member"]
-
-    # Find the start of the sub-section
-    start_index = None
-    for title in sub_section_titles:
-        start_index = next((i for i, text in enumerate(full_text) if title in text), None)
-        if start_index is not None:
-            break
-
-    if start_index is None:
-        print(f"Section 'Master's Thesis Advisor' not found")
-        return
-
-    # Find the end of the sub-section
-    end_index = None
-    for title in end_section_titles:
-        end_index = next((i for i, text in enumerate(full_text[start_index:]) if title in text), None)
-        if end_index is not None:
-            break
-
-    if end_index is None:
-        end_index = len(full_text)
-    else:
-        end_index += start_index
-
-    # Extract student names and thesis titles
-    student_data = {}
-    for line in full_text[start_index + 1:end_index]:
-        if ", " in line and "MS." in line:
-            name = line.split(",")[0].strip()
-            title_start = line.find("MS.") + 4
-            title_end = line.find(".", title_start)
-            title = line[title_start:title_end].strip()
-            student_data[name] = title
-
-    return student_data
+    return extracted_data
 
 def extract_subsubsection(text, title):
     # Use regex to extract the subsubsection based on the title
@@ -1322,7 +1197,7 @@ def format_education_section(text, spacing='5pt'):
     # Define the pattern to find the education section
     education_section_pattern = r'(\\subsection\{Education\}\\label\{education\})(.+?)(\\subsection\{.*?\}\\label\{.*?\}|\Z)'
     match = re.search(education_section_pattern, text, re.DOTALL)
-
+   
     if match:
         subsection_title = match.group(1).strip()
         following_section_header = match.group(3).strip()
@@ -1330,7 +1205,7 @@ def format_education_section(text, spacing='5pt'):
 
         # Initialize an empty string to store the formatted Education section
         formatted_education = subsection_title + "\n\n\\begin{flushleft}\n\\begin{tabularx}{\\textwidth}{@{}Xr@{}}\n"
-
+        
         # Process each entry
         for index, entry in enumerate(education_entries):
             if entry:
@@ -1351,7 +1226,7 @@ def format_education_section(text, spacing='5pt'):
 
         # Close the tabularx and flushleft environments
         formatted_education += "\n\\end{tabularx}\n\\end{flushleft}\n\n" + following_section_header
-
+        # print(formatted_education)
         # Replace the original Education section with the formatted section
         text = text.replace(match.group(0), formatted_education)
 
@@ -1461,14 +1336,11 @@ def main():
     # open the file for reading
     #f = open(r'C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\main.tex', 'r')
     #f = open(r'C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\main.tex', 'r', encoding='utf-8')
-    f = open(r'C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\trypandoc11162023.tex', 'r', encoding='utf-8')
+    f = open(r'main.tex', 'r', encoding='utf-8')
 
     #open another file for writing
-    f1 = open(r'C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\main_edited.tex', 'w')
+    f1 = open(r'main_edited.tex', 'w')
 
-    #dossier_file_path = r"C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\20231021-095357-CDT.docx"
-    dossier_file_path = r"C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\20231024-203540-CDT.docx"
-    
     #read in the entire file and store it in a variable called text 
     text = f.read()
         
@@ -1497,7 +1369,7 @@ def main():
     text = reorder_student_sections4(text)
     
     # process the student thesis titles
-    text = process_student_thesis_titles(text,dossier_file_path)
+    text = process_student_thesis_titles(text)
 
     # clean up the service section to remove extra text
     text = clean_service_section(text)
