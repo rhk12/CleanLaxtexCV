@@ -21,12 +21,12 @@ from docx import Document
 def process_student_thesis_titles(text): 
     # Extract master's thesis titles
     masters_pattern = r'\\item\s+([^,]+,\s+[A-Z]\.?),\s+MS\.\s+(.+?)(?:\.\s+\(.*?\))?\.'
-    masters_data = extract_titles(text, "Master\\textquotesingle s Thesis", masters_pattern)
-
+    masters_data = {}
+    print(masters_data)
     # Extract PhD dissertation titles
     phd_pattern = r'\\item\s+([^,]+,\s+[A-Z]\.),\s+Ph\.D\.\s+(.+?)(?:\.\s+\(.*?\))?\.'
     phd_data = extract_titles(text, "Ph\\.D\\. Dissertation Advisor", phd_pattern)
-
+    print(phd_data)
     # Extract postdoc titles
     postdoc_pattern = r'\\item\s+([^,]+,\s+[A-Z]\.?),\s+([A-Z])\.\s+(.+?)(?:\.\s+\(.*?\))?\.'
     postdoc_data = extract_titles(text, "Postdoctoral Mentorship Advisor", postdoc_pattern)
@@ -446,6 +446,36 @@ def add_undergrad_titles(text, undergrad_data):
             print(f"Pattern for {first_initial}. {last_name} not found in the text!")
     
     return text
+
+def extract_titles_from_word(doc, section_name, entry_pattern):
+    # Initialize a dictionary to store the extracted data
+    extracted_data = {}
+    
+    # Locate the section
+    section_found = False
+    section_content = []
+    
+    for para in doc.paragraphs:
+        if section_name in para.text:
+            section_found = True
+        elif section_found and para.text.startswith('Section'):
+            break
+        elif section_found:
+            section_content.append(para.text)
+    
+    if section_content:
+        content_str = "\n".join(section_content).strip()
+        entries = re.findall(entry_pattern, content_str, re.MULTILINE)
+
+        for entry in entries:
+            name, title = entry
+            extracted_data[name.strip()] = title.strip()
+    else:
+        extracted_data["error"] = f"{section_name} section not found in the provided document."
+
+    return extracted_data
+
+
 def extract_titles(tex_content, section_name, entry_pattern):
 
     # Pattern to extract the specified section
@@ -456,8 +486,11 @@ def extract_titles(tex_content, section_name, entry_pattern):
     extracted_data = {}
 
     if match:
-        if section_name=="Master\\textquotesingle s Thesis":
+        print("aa",section_name)
+        if section_name=="Master's Thesis":
+
             section_content = match.group(0).strip()
+            
         else:
             section_content = match.group(1).strip()
         # Extract individual entries
@@ -1339,7 +1372,7 @@ def main():
     f = open(r'main.tex', 'r', encoding='utf-8')
 
     #open another file for writing
-    f1 = open(r'main_edited.tex', 'w')
+    f1 = open(r'main_edited2.tex', 'w')
 
     #read in the entire file and store it in a variable called text 
     text = f.read()
