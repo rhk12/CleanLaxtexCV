@@ -1,0 +1,284 @@
+
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{booktabs}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\usepackage{mystyle}
+\author{}
+\date{}
+
+\usepackage{titlesec}
+\usepackage{color}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{blue}} % format
+  {\thesubsection} % label
+  {1em} % sep
+  {} % before-code
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{red}} % format
+  {\thesubsubsection} % label
+  {1em} % sep
+  {} % before-code
+
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\definecolor{darkgray}{gray}{0.4} % Define a darker gray color
+\fancypagestyle{firstpage}{
+    \fancyhf{} % Clear all headers and footers first
+    \rhead{\textcolor{darkgray}{June 2024}}
+    \renewcommand{\headrulewidth}{0pt} % No header rule
+}
+\thispagestyle{firstpage}
+\begin{document}
+
+\begin{center}
+\LARGE \textbf{\textsc{REUBEN H. KRAFT}} \\
+\rule{\linewidth}{2pt}
+\end{center}
+\normalsize % Return to the default font size
+\subsection{Publications}\label{publications}
+
+\subsubsection{Journal Article}\label{journal-article}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+  \item	Martin, V. (Primary Author - Graduate Student), Hannah, T., Ellis, S., &
+ \textbf{\textbf{Kraft,} R. H.} (Corresponding Author) (2023). Using the embedded element finite element method to simulate impact of Dyneema plates. Fibers and Polymers. \url{https://doi.org/10.1007/s12221-023-00417-z}
+  \item	Hannah, T. (Student Author - Graduate Student), \textbf{\textbf{Kraft,} R. H.}, Martin, V. (Co-Author - Graduate Student), &
+ Ellis, S. Impact of imperfect Kolsky bar experiments across different scales using finite elements. Journal of Verification, Validation and Uncertainty Quantification.
+  \item	Hannah, T. (Student Author - Graduate Student), Shuster, B. (Co-Author - Graduate Student), Baker, Z., Ellis, S., &
+ \textbf{\textbf{Kraft,} R. H.} Miniature Kolsky Bar Experiment Techniques Applied to UHMWPE Composite Analysis. Journal of Dynamic Behavior of Materials.
+  \item	Zuidema, T. R., Bazarian, J. J., Kercher, K. A., Rettke, D. J., Mannix, R., \textbf{\textbf{Kraft,} R. H.}, Newman, S. D., Ejima, K., Steinfeldt, J. A., &
+ Kawata, K. (2023). Longitudinal association of clinical and biochemical biomarkers with head impact exposure in adolescent football. JAMA Network Open. \url{https://doi.org/10.1001/jamanetworkopen.2023.16601}
+  \item	Menghani, R. R. (Primary Author - Graduate Student), Dasans, A., &
+ \textbf{\textbf{Kraft,} R. H.} (Corresponding Author) (2023). A sensor-enabled cloud-based computing platform for computational brain biomechanics. Computer Methods in Biomechanics and Biomedical Engineering. \url{https://doi.org/10.1016/j.cmpb.2023.107470}
+  \item	Ramtani, S., Sánchez, J. F., Boucetta, A., \textbf{\textbf{Kraft,} R. H.}, Vaca-González, J. J., &
+ Garzón-Alvarado, D. A. (2023). A coupled mathematical model between bone remodeling and tumors: a study of different scenarios using Komarova’s model. Biomechanics and Modeling in Mechanobiology. \url{https://doi.org/10.1007/s10237-023-01689-3}
+  \item	Ji, S., Ghajari, M., Mao, H., \textbf{\textbf{Kraft,} R. H.}, Hajiaghamemar, M., Panzer, M. B., Willinger, R., Gilchrist, M. D., Kleiven, S., &
+ Stitzel, J. D. (2022). Use of brain biomechanical models for monitoring impact exposure in contact sports. Annals of Biomedical Engineering. \url{https://doi.org/10.1007/s10439-022-02999-w}
+  \item	Martin, V. (Primary Author - Graduate Student), \textbf{\textbf{Kraft,} R. H.} (Corresponding Author), Hannah, T. (Co-Author - Graduate Student), &
+ Ellis, S. (2022). An energy-based study of the embedded element method for explicit dynamics. Advanced Modeling and Simulation in Engineering Sciences. \url{https://doi.org/10.1186/s40323-022-00223-x}
+  \item	Adewole, D. O., Struzyna, L. A., Harris, J. P., Nemes, A. D., Burrell, J. C., Petrov, D., \textbf{\textbf{Kraft,} R. H.}, Chen, I., Serruya, M. D., Wolf, J. A., &
+ Cullen, K. (2021). Development of optically controlled “living electrodes” with long-projecting axon tracts for a synaptic brain-machine interface. Science Advances 7(4). \url{https://doi.org/10.1126/sciadv.aay5347}
+  \item	Marinov, T. (Student Author - Postdoctoral Student), Yuchi, L. (Student Author - Graduate Student), Adewole, D. O., Cullen, D. Kacy, &
+ \textbf{\textbf{Kraft,} R. H.} (2020). A computational model of bidirectional axonal growth in micro-tissue engineered neuronal networks (micro-TENNs). In Silico Biology 13(3-4), pp. 85-99. \url{https://doi.org/10.3233/ISB-180172}
+  \item	Subramani, A. V. (Student Author - Graduate Student), Whitley, P., Garimella, H. T. (Student Author), &
+ \textbf{\textbf{Kraft,} R. H.} (2020). Fatigue damage prediction in the annulus of cervical spine intervertebral discs using finite element analysis. Computer Methods in Biomechanics and Biomedical Engineering 23(11), 773-784. \url{https://doi.org/10.1080/10255842.2020.1764545}
+  \item	Carrera-Pinzón, A. F., Márquez-Flórez, K., \textbf{\textbf{Kraft,} R. H.}, Ramtani, S., &
+ Garzón-Alvarado, D. A. (2019). Computational model of a synovial joint morphogenesis. Biomechanics and Modeling in Mechanobiology, 1--14. \url{https://doi.org/10.1007/s10237-019-01277-4}
+  \item	\textbf{\textbf{Kraft,} R. H.} (Author), Lee, C. (Author - Graduate Student), Richtsmeier, J. T., &
+ Dolack, M. E. (Author - Graduate Student) (2019). Exploring mechanisms of cranial vault development using a coupled turing-biomechanical model. The FASEB Journal 33, 326.2-326.2. \url{https://doi.org/10.1096/fasebj.2019.33.1_supplement.326.2}
+  \item	Lee, C. (Student Author - Graduate Student), Richtsmeier, J. T., &
+ \textbf{\textbf{Kraft,} R. H.} (2019). A coupled reaction–diffusion–strain model predicts cranial vault formation in development and disease. Biomechanics and Modeling in Mechanobiology. \url{https://doi.org/10.1007/s10237-019-01139-z}
+  \item	Przekwas, A. J., Tan, X. Gary, Chen, Z. J., Miao, Y., Harrand, V., Garimella, H. T. (Student Author - Graduate Student), \textbf{\textbf{Kraft,} R. H.}, &
+ Gupta, R. K. (2019). Biomechanics of blast TBI with time resolved consecutive primary, secondary and tertiary loads. Military Medicine. \url{https://doi.org/10.1093/milmed/usy344}
+  \item	Garimella, H. T. (Student Author - Graduate Student), Menghani, R. (Student Author - Graduate Student), Gerber, J. I. (Student Author - Graduate Student), Sridhar, S. (Student Author - Graduate Student), &
+ \textbf{\textbf{Kraft,} R. H.} (2018). Embedded finite elements for modeling axonal injury. Annals of Biomedical Engineering. \url{https://doi.org/10.1007/s10439-018-02166-0}
+  \item	Motiwale, S. (Student Author - Graduate Student), Subramani, A. V. (Student Author - Graduate Student), Zhou, A., &
+ \textbf{\textbf{Kraft,} R. H.} (2018). A non-linear multi-axial fatigue damage model for the cervical intervertebral disc annulus. Advances in Mechanical Engineering 10(6). \url{https://doi.org/10.1177/1687814018779494}
+  \item	Dhobale, A. V. (Student Author - Graduate Student), Adewole, O., Chan, A., Marinov, T. (Student Author - Postdoctoral Student), Serruya, M., \textbf{\textbf{Kraft,} R. H.}, &
+ Cullen, D. Kacy (2018). Assessing functional connectivity across 3D tissue engineered axonal tracts using calcium fluorescence imaging. Journal of Neural Engineering 15(5). \url{https://doi.org/10.1088/1741-2552/aac96d}
+  \item	Ranslow, A. (Student Author - Graduate Student), Fang, Z. (Student Author - Graduate Student), De Tomas, P. (Student Author - Undergraduate Student), Gunnarsson, A., Weerasooriya, T., Satapathy, S., Thompson, K. A., &
+ \textbf{\textbf{Kraft,} R. H.} (2018). The multiaxial failure response of porcine trabecular skull bone estimated using microstructural simulations. American Society of Mechanical Engineers (ASME) Journal of Biomechanical Engineering 140(10). \url{https://doi.org/10.1115/1.4039895}
+  \item	Garimella, H. T. (Student Author - Graduate Student), \textbf{\textbf{Kraft,} R. H.}, &
+ Przekwas, A. J. (2018). Do blast-induced skull flexures result in axonal deformation? PLOS One 13(3). \url{https://doi.org/10.1371/journal.pone.0190881}
+  \item	Serruya, M. D., Harris, J. P., Adewole, D. O., Struzyna, L. A., Burrell, J. C., Nemes, A., Petrov, D., \textbf{\textbf{Kraft,} R. H.}, Chen, H. I., Wolf, J. A., &
+ Cullen, D. K. (2017). Engineered axonal tracts as  "living electrodes" for synaptic-based modulation of neural circuitry. Advanced Functional Materials, 1701183–n/a. \url{https://doi.org/10.1002/adfm.201701183}
+  \item	Lee, C. X. (Student Author - Graduate Student), Richtsmeier, J. T., &
+ \textbf{\textbf{Kraft,} R. H.} (2017). A computational analysis of bone formation in the cranial vault using a coupled reaction-diffusion-strain model. Journal of Mechanics in Medicine and Biology 17(4). \url{https://doi.org/10.1142/S0219519417500737}
+  \item	Garimella, H. T. (Student Author - Graduate Student), &
+ \textbf{\textbf{Kraft,} R. H.} (2017). A new computational approach for modeling diffusion tractography in the brain. Journal of Neural Regeneration Research 12(1). \url{https://doi.org/10.4103/1673-5374.198967}
+  \item	Garimella, H. T. (Student Author - Graduate Student), &
+ \textbf{\textbf{Kraft,} R. H.} (2016). Modeling the mechanics of axonal fiber tracts using the embedded finite element method. International Journal for Numerical Methods in Biomedical Engineering 33(5), 1–21. \url{https://doi.org/10.1002/cnm.2796}
+  \item	Fielding, R. A. (Student Author - Graduate Student), Przekwas, A. J., Tan, X. G., &
+ \textbf{\textbf{Kraft,} R. H.} (2015). Development of a lower extremity model for high strain rate impact loading. International Journal of Experimental and Computational Biomechanics 3(2), 161-186.
+  \item  \url{https://doi.org/10.1504/IJECB.2015.070427}
+  \item	Lee, C. X. (Student Author - Graduate Student), Richtsmeier, J. T., &
+ \textbf{\textbf{Kraft,} R. H.} (2015). A computational analysis of bone formation in the cranial vault in the mouse. Frontiers in Bioengineering and Biotechnology 3(24). \url{https://doi.org/10.3389/fbioe.2015.00024}
+  \item	Swab, J. J., Tice, J., Wereszczak, A. A., &
+ \textbf{\textbf{Kraft,} R. H.} (2014). Fracture toughness of advanced structural ceramics: Applying ASTM C1421. Journal of the American Ceramic Society, pp. 1-9. \url{https://doi.org/10.1111/jace.13293}
+  \item	Clayton, J. D., \textbf{\textbf{Kraft,} R. H.}, &
+ Leavy, R. B. (2012). Mesoscale modeling of nonlinear elasticity and fracture in ceramic polycrystals under dynamic shear and compression. Journal of Solids and Structures 49(18), 6. \url{https://doi.org/10.1016/j.ijsolstr.2012.05.035}
+  \item	\textbf{\textbf{Kraft,} R. H.}, Mckee, P. J., Dagro, A. M., &
+ Grafton, S. T. (2012). Combining the finite element method with structural connectome-based analysis for modeling neurotrauma: Connectome neurotrauma mechanics. PLoS Computational Biology 8(8), e1002619. \url{https://doi.org/10.1371%2Fjournal.pcbi.1002619}
+  \item	\textbf{\textbf{Kraft,} R. H.}, &
+ Molinari, J. F. (2008). A statistical investigation of the effects of grain boundary properties on transgranular fracture. Acta Materialia 56(17), 10. \url{https://doi.org/10.1016/j.actamat.2008.05.036}
+  \item	\textbf{\textbf{Kraft,} R. H.}, Molinari, J. F., Ramesh, K. T., &
+ Warner, D. W. (2008). Computational micromechanics of dynamic compressive loading of a brittle polycrystalline material using a distribution of grain boundary properties. The Journal of Mechanics and Physics of Solids 56, 23. \url{https://doi.org/10.1016/j.jmps.2008.03.009}
+
+\end{enumerate}
+
+\subsubsection{Conference Proceeding}\label{conference-proceeding}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+  \item Hannah, T. (Student Author - Graduate Student), \textbf{\textbf{Kraft,} R. H.}, Martin, V. (Co-Author - Graduate Student), &
+ Ellis, S. (2023). Impact of imperfect Kolsky bar experiments across different scales using finite elements.(IMECE2022-96816) . Proceedings of the 2022 American Society of Mechanical Engineers Congress and Exposition. \url{https://doi.org/10.1115/IMECE2022-96816}
+  \item Martin, V. (Author - Graduate Student), Hannah, T. (Co-Author - Graduate Student), Ellis, S., &
+ \textbf{\textbf{Kraft,} R. H.} (2023). Towards verification and validation of modeling Dyneema using the embedded finite element method.(IMECE2022-96784) . Proceedings of the 2022 American Society of Mechanical Engineers Congress and Exposition. \url{https://doi.org/10.1115/IMECE2022-96784}
+  \item Hannah, T. (Student Author - Graduate Student), \textbf{\textbf{Kraft,} R. H.}, Martin, V. (Co-Author - Graduate Student), &
+ Ellis, S. (2021). Implications of statistical spread to experimental analysis in a novel miniature Kolsky bar.(IMECE2020-23976) . Proceedings of the American Society of Mechanical Engineers Congress and Exposition.  Virtual, November 15-19, 2020 \url{https://doi.org/10.1115/IMECE2020-23976}
+  \item Fang, Z. (Student Author - Graduate Student), Ranslow, A. N. (Student Author - Graduate Student), &
+ \textbf{\textbf{Kraft,} R. H.} (2016). Computational micromechanics of trabecular porcine skull bone using the material point method. Volume 3: Biomedical and Biotechnology Engineering(IMECE2016-67748), (pp. V003T04A044; 9 pages). Proceedings of the American Society of Mechanical Engineers Congress and Exposition.  Phoenix, Arizona, USA, November 11–17, 2016 \url{https://doi.org/10.1115/IMECE2016-67748}
+  \item Motiwale, S. (Student Author - Graduate Student), Subramani, V. V. (Student Author - Graduate Student), Zhou, X., &
+ \textbf{\textbf{Kraft,} R. H.} (2016). Damage prediction for a cervical spine intervertebral disc. Volume 3: Biomedical and Biotechnology Engineering . Proceedings of the 2016 American Society of Mechanical Engineers Congress and Exposition.  Phoenix, Arizona, USA, November 11–17, 2016 \url{https://doi.org/10.1115/IMECE2016-67711}
+  \item Chan, A. H. W., Dhobale, A. (Student Author - Graduate Student), Adewole, O., Marinov, T. (Student Author - Postdoctoral Student), \textbf{\textbf{Kraft,} R. H.} (Author), Cullen, D. K., &
+ Serruya, M. (2016). Analysis of spontaneous calcium signals to infer functional connectivity within a novel “living electrode” neural construct. (pp. 1–2). Proceedings of IEEE.  Philadelphia, PA, USA, December 3, 2016. \url{https://doi.org/10.1109/SPMB.2016.7846870}
+  \item Ranslow, A. N. (Student Author - Graduate Student), \textbf{\textbf{Kraft,} R. H.}, Shannon, R. (Student Author - Undergraduate Student), De Tomas-Medina, P. (Student Author - Undergraduate Student), Radovitsky, R., Jean, A., Hautefeuille, M. P., Fagan, B., Ziegler, K. A., Weerasooriya, T., Dileonardi, A. M., Gunnarsson, A., &
+ Satapathy, S. (2016). Microstructural analysis of porcine skull bone subjected to impact loading. Volume 3: Biomedical and Biotechnology Engineering(IMECE2015-51979), (pp. V003T03A057; 10 pages). Proceedings of the American Society of Mechanical Engineers Congress and Exposition.  Houston, Texas, USA, November 13–19, 2015 \url{https://doi.org/10.1115/IMECE2015-51979}
+  \item Lee, C. (Student Author), &
+ \textbf{\textbf{Kraft,} R. H.} (2016). A coupled reaction-diffusion-strain model for bone growth in the cranial vault. Proceedings of the 2016 Summer Biomechanics, Bioengineering and Biotransport Conference (SB3C2016).  National Harbor, Maryland. June 29 – July 2, 2016
+  \item Ranslow, A. N. (Student Author - Graduate Student), &
+ \textbf{\textbf{Kraft,} R. H.} (2016). The development of a “fuzzy” yield envelope for trabecular porcine skull bone using numerical simulations. Proceedings of the 2016 Summer Biomechanics, Bioengineering and Biotransport Conference (SB3C2016).  National Harbor, Maryland. June 29 – July 2, 2016
+  \item Motiwale, S. (Student Author - Graduate Student), Eppler, W., Hollingsworth, D., Hollingsworth, C., Morgenthau, J., &
+ \textbf{\textbf{Kraft,} R. H.} (2016). Application of neural networks for filtering non-impact transients recorded from biomechanical sensors. Proceedings of the Institute of Electrical and Electronic Engineers (IEEE) International Conference on Biomedical and Health Informatics. (pp. 204 - 207). IEEE.  Las Vegas, NV. February, 2016. \url{https://doi.org/10.1109/BHI.2016.7455870}
+  \item Reddy, S. N. (Student Author - Graduate Student), Fielding, R. A. (Student Author - Graduate Student), Robinson, M. J. (Student Author - Undergraduate Student), &
+ \textbf{\textbf{Kraft,} R. H.} (2015). A computational study of fracture in the calcaneus under variable impact conditions. Volume 3: Biomedical and Biotechnology Engineering(IMECE2015-51984), (pp. V003T03A058; 10 pages). Proceedings of the American Society of Mechanical Engineers Congress and Exposition.  Houston, Texas, USA, November 13–19, 2015 \url{https://doi.org/10.1115/IMECE2015-51984}
+  \item \textbf{\textbf{Kraft,} R. H.}, &
+ Garimella, H. T. (Student Author - Graduate Student) (2015). Embedded finite elements for modeling traumatic axonal injury. Proceedings of the Summer Biomechanics, Bioengineering and Biotransport Conference  (SB3C 2015).  Snowbird, Utah, June 17-20, 2015
+  \item Fielding, R. A. (Student Author - Graduate Student), Tan, X. G., Przekwas, A. J., Kozuch, C. D. (Student Author - Undergraduate Student), &
+ \textbf{\textbf{Kraft,} R. H.} (2015). High rate impact to the human calcaneus: A micromechanical analysis. Volume 3: Biomedical and Biotechnology Engineering(IMECE2014-38930), (pp. V003T03A009, (8 pages)). Proceedings of the American Society of Mechanical Engineers Congress and Exposition.  Montreal, Canada, November 14 – 20, 2014. \url{https://doi.org/10.1115/IMECE2014-38930}
+  \item Garimella, H. T. (Student Author - Graduate Student), Yaun, H. (Student Author - Undergraduate Student), Johnson, B. D., Slobounov, S., &
+ \textbf{\textbf{Kraft,} R. H.} (2014). Anisotropic constitutive model of human brain with intravoxel heterogeneity of fiber orientation using diffusion spectrum imaging (DSI). Volume 3: Biomedical and Biotechnology Engineering(IMECE2014-39107), (pp. V003T03A011; 9 pages). Proceedings of the 2014 American Society of Mechanical Engineers Congress and Exposition.  Montreal, Canada, November 14 – 20, 2014. \url{https://doi.org/10.1115/IMECE2014-39107}
+  \item Makwana, A. R. (Student Author - Graduate Student), Krishna, A. R. (Student Author - Graduate Student), Yuan, H. (Student Author - Undergraduate Student), \textbf{\textbf{Kraft,} R. H.}, Zhou, X., Przekwas, A. J., &
+ Whitley, P. (2014). Towards a micromechanical model of intervertebral disc degeneration under cyclic loading.(IMECE2014-39174), (pp. V003T03A012; 7 pages). Proceedings of the American Society of Mechanical Engineers Congress and Exposition.  Montreal, Canada, November 14 – 20, 2014. \url{https://doi.org/10.1115/IMECE2014-39174}
+  \item Lee, C. (Student Author - Graduate Student), Richtsmeier, J. T., &
+ \textbf{\textbf{Kraft,} R. H.} (2014). A multiscale computational model for the growth of the cranial vault in craniosynostosis.(IMECE2014-38728), (pp. V009T12A061; 6 pages). Proceedings of the American Society of Mechanical Engineers Congress and Exposition.  Montreal, Canada, November 14 – 20, 2014. \url{https://doi.org/10.1115/IMECE2014-38728}
+  \item Fielding, R. A. (Student Author - Graduate Student), \textbf{\textbf{Kraft,} R. H.}, Ryan, T. M., &
+ Stecko, T. D. (2014). A micromechanics-based simulation of calcaneus fracture and fragmentation due to impact loading. Proceedings of the 11th World Congress on Computational Mechanics (WCCM XI) 5th. European Conference on Computational Mechanics (ECCM V)  6th. European Conference on Computational Fluid Dynamics (ECFD VI).
+  \item Zhang, J., Merkle, A. C., Carneal, C. M., Armiger, R. S., \textbf{\textbf{Kraft,} R. H.}, Ward, E. E., Ott, K. A., Wickwire, A. C., Dooley, C. J., Harrigan, T. P., &
+ Roberts, J. C. (2013). Effects of torso-borne mass and loading severity on early response of the lumbar spine under high-rate vertical loading. International Research Council on Biomechanics of Injury.  Gothenburg, Sweden, September 11 - 13,  2013
+  \item \textbf{\textbf{Kraft,} R. H.}, Dagro, A. M., McKee, P. J., Grafton, S. T., Vettel, J., McDowell, K., Vindiola, M., &
+ Merkle, A. C. (2013). Combining the finite element method with structural network-based analysis for modeling neurotrauma. (pp. 4). 11th International Symposium, Computer Methods in Biomechanics and Biomedical Engineering.
+  \item Scheidler, M., Fitzpatrick, J., &
+ \textbf{\textbf{Kraft,} R. H.} (2011). In Tom Proulx (Ed.), Optimal pulse shapes for SHPB tests on soft materials. 1, (pp. 259-268). Society for Experimental Mechanics Series, Dynamic Behavior of Materials.  ISBN/ISSN: 2191-5644 \url{https://doi.org/10.1007/978-1-4614-0216-9_37,}
+  \item DOI 10.1007/978-1-4614-0216-9. June, Uncasville, Connecticut.
+  \item \textbf{\textbf{Kraft,} R. H.}, Lynch, M. L., &
+ Vogel, E. W. (2011). Computational failure modeling of lower extremities. RTO-MP-HFM-207AC/323(HFM-207)(TP/412) . NATO Human Factors and Medicine Panel. ISBN/ISSN: 978-92-837-0153-8
+  \item Clayton, J. D., &
+ \textbf{\textbf{Kraft,} R. H.} (2011). Mesoscale modeling of dynamic failure of ceramic polycrystals. Advances in Ceramic Armor VII: Ceramic Engineering and Science Proceedings. (32), (pp. 237-248). Proceedings of the 35th International Conference on Advanced Ceramics and Composites. ISBN/ISSN: 10.1002/9781118095256.ch21
+  \item Vettel, J. M., Bassett, D. S., \textbf{\textbf{Kraft,} R. H.}, &
+ Grafton, S. T. (2010). Physics-based models of brain structure connectivity informed by diffusion weighted imaging. Proceedings of the 27th Army Science Conference.
+  \item Gazonas, G. A., McCauley, J. W., \textbf{\textbf{Kraft,} R. H.}, Love, B. M., Clayton, J. D., Casem, D., Dandekar, D., Rice, B., Batyrev, I., Weingarten, N. S., &
+ Schuster, B. E. (2010). Multiscale modeling of armor ceramics: Focus on AlON. 27th Army Science Conference.
+  \item Scheidler, M., &
+ \textbf{\textbf{Kraft,} R. H.} (2010). In C. P. Hoppel (Ed.), Inertial effects in compression Hopkinson bar tests on soft materials. U.S. Army Research Laboratory, 1st Annual ARL Ballistic Technology Workshop.
+  \item \textbf{\textbf{Kraft,} R. H.}, Batyrev, I., Lee, S., Rollett, A. D., &
+ Rice, B. (2010). In J. J. Swab, S. Mathur and T. Ohji (Eds.), "Multiscale modeling of armor ceramics." Journal of the American Ceramics Society Meeting Proceedings. 31 . Hoboken, NJ: John Wiley &
+ Sons, Inc.. \url{https://doi.org/10.1002/9780470944004.Ch.13.}
+  \item Wereszczak, A. A., &
+ \textbf{\textbf{Kraft,} R. H.} (2003). In W. M. Kriven and H. T. Lin (Eds.), Flexural and torsional resonances of ceramic tiles via impulse excitation of vibration. 24(4), (pp. 207-213). 27th Annual Conference on Advanced Ceramics and Composites: B: Ceramic Engineering and Science Proceedings. \url{https://doi.org/10.1002/9780470294826.ch31}
+  \item Wereszczak, A. A., &
+ \textbf{\textbf{Kraft,} R. H.} (2002). In H. T. Lin and M. Singh (Eds.), Instrumented Hertzian indentation of armor ceramics. 23(3), (pp. 11). 26th Annual Conference on Composites, Advanced Ceramics, Materials, and Structures: A: Ceramic Engineering and Science Proceedings. \url{https://doi.org/10.1002/9780470294741.ch7}
+
+\end{enumerate}
+
+\subsubsection{Book Chapters}\label{book-chapters}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+  \item Dolack, M. E. (Student Author - Graduate Student), Lee, C. (Student Author - Graduate Student), Ru, Y., Marghoub, A., Richtsmeier, J. T., Jabs, E. W., Moazen, M., Garzón-Alvarado, D. A., &
+ \textbf{\textbf{Kraft,} R. H.} (Author) (2020). Computational Morphogenesis of Embryonic Bone Development: Past, Present, and Future. Mechanobiology (pp. 197--219). Elsevier.
+  \item \textbf{\textbf{Kraft,} R. H.} (Primary Author), Fielding, R. A. (Student Author - Graduate Student), Lister, K., Shirley, A., Marler, T., Merkle, A. C., Przekwas, A. J., Tan, X. G., &
+ Zhou, X. (2016). Modeling skeletal injuries in military scenarios. Mechanobiology and Mechanophysiology of Military-Related Injuries. (19) . Springer Berlin Heidelberg. ISBN/ISSN: 10.1007/978-3-319-33012-9 Part of the series, Studies in Mechanobiology, Tissue Engineering and Biomaterials.
+  \item Clayton, J. D., &
+ \textbf{\textbf{Kraft,} R. H.} (2011). Mesoscale modeling of dynamic failure of ceramic polycrystals. In J. J. Swab (Ed.), Advances in Ceramic Armor VII: Ceramic Engineering and Science Proceedings. (568) . John Wiley &
+ Sons. Peer-reviewed/refereed. \url{https://doi.org/10.1002/9781118095256.ch21}
+
+\end{enumerate}
+
+\subsubsection{Other}\label{other}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+  \item Marinov, T. (Student Author - Postdoctoral Student), Yuchi, L. (Student Author - Graduate Student), Adewole, D. O., Cullen, D. K., &
+ \textbf{\textbf{Kraft,} R. H.} "A computational model of bidirectional axonal growth in micro-tissue engineered neuronal networks (micro-TENNs)." bioRxiv. Cold Spring Harbor Laboratory. \url{https://doi.org/10.1101/369843}
+  \item Gerber, J. I. (Student Author), \textbf{\textbf{Kraft,} R. H.}, &
+ Garimella, H. T. (Student Author) (2018). "Computation of history-dependent mechanical damage of axonal fiber tracts in the brain: towards tracking sub-concussive and occupational damage to the brain." bioRxiv. \url{https://doi.org/10.1101/346700}
+  \item Garimella, H. T. (Student Author - Graduate Student), Menghani, R. (Student Author - Graduate Student), Gerber, J. I. (Student Author - Graduate Student), Sridhar, S. (Student Author - Graduate Student), &
+ \textbf{\textbf{Kraft,} R. H.} (2018). "Embedded finite elements for modeling axonal injury." engrXiv. \url{https://doi.org/10.31224/osf.io/2dx5e}
+  \item Adewole, D. O., Struzyna, L. A., Harris, J. P., Nemes, A. D., Burrell, J. C., Petrov, D., \textbf{\textbf{Kraft,} R. H.}, Chen, I., Serruya, M. D., Wolf, J. A., &
+ Cullen, K. (2018). "Optically-controlled "living electrodes" with long-projecting axon tracts for a synaptic brain-machine interface." bioRxiv. \url{https://doi.org/10.1101/333526}
+  \item Dagro, A. M., McKee, P. J., \textbf{\textbf{Kraft,} R. H.}, Zhang, T. G., &
+ Satapathy, S. S. (2013). A preliminary investigation of traumatically induced axonal injury in a three-dimensional (3-D) finite element model (FEM) of the human head during blast-loading. Army Research Laboratory Technical Report (ARL-TR-6504).
+  \item Vettel, J., Dagro, A. M., Gordon, S., Kerick, S., \textbf{\textbf{Kraft,} R. H.}, Luo, S., Rawal, S., Vindiola, M., &
+ McDowell, K. (2012). Brain structure-function couplings (FY11). Army Research Laboratory Technical Report (ARL-TR-5893).
+  \item \textbf{\textbf{Kraft,} R. H.}, &
+ Wozniak, S. L. (2011). A review of computational spinal injury biomechanics research and recommendations for future efforts. Army Research Laboratory Technical Report (ARL-TR-5673).
+  \item \textbf{\textbf{Kraft,} R. H.}, &
+ Dagro, A. M. (2011). Design and implementation of a numerical technique to inform anisotropic hyperelastic finite element models using diffusion-weighted imaging. Army Research Laboratory Technical Report (ARL-TR-5796).
+  \item Clayton, J. D., &
+ \textbf{\textbf{Kraft,} R. H.} (2011). Mesoscale modeling of dynamic failure of ceramic polycrystals. Army Research Laboratory Reprint (ARL-RP-328).
+  \item Gozonas, G. A., McCauley, J. W., Batyrev, I. G., Casem, D., Clayton, J. D., Dandekar, D. P., \textbf{\textbf{Kraft,} R. H.}, Love, B. M., Rice, B. M., Schuster, B. E., &
+ Weingarten, N. S. (2011). Multiscale modeling of armor ceramics: Focus on AlON. Army Research Laboratory Reprint (ARL-RP-337).
+  \item Vettel, J. M., Bassett, D., \textbf{\textbf{Kraft,} R. H.}, &
+ Grafton, S. (2010). Physics-based models of brain structure connectivity informed by diffusion-weighted imaging. Army Research Laboratory Technical Reprint (ARL-RP-0355). Aberdeen Proving Ground, MD: U.S. Army Research Laboratory.
+  \item Wereszczak, A. A., Swab, J. J., &
+ \textbf{\textbf{Kraft,} R. H.} (2005). Effects of machining on the uniaxial and equibiaxial flexure strength of CAP3 AD-995 Al2O3. Army Research Laboratory Technical Report (ARL-TR-3617).
+  \item Swab, J. J., Wereszczak, A. A., Tice, J., Caspe, R., \textbf{\textbf{Kraft,} R. H.}, &
+ Adams, J. (2005). Mechanical and thermal properties of advanced ceramics for gun barrel applications. Army Research Laboratory Technical Report (ARL-TR-3417).
+
+\end{enumerate}
+
+
+
+\subsection{TEACHING EXPERIENCE}\label{teaching-experience}
+Computational Tools for Engineers (ME 330), 2024, 2023, 2022, 2021, 2020.
+
+Nonlinear Finite Element Analysis (ME 563), 2024, 2022, 2020, 2019, 2018, 2017.
+
+Machine Design (ME 360), 2023, 2022.
+
+Introduction to Finite Element Analysis (ME 461), 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2015.
+
+Development course for Computational Tools for Engineers (ME 497), 2020, 2019, 2018.
+
+Capstone Design (ME 440), 2016.
+
+\end{document}

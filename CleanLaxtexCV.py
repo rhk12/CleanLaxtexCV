@@ -19,10 +19,7 @@ from docx import Document
 
 
 def process_student_thesis_titles(text): 
-    # Extract master's thesis titles
-    masters_pattern = r'\\item\s+([^,]+,\s+[A-Z]\.?),\s+MS\.\s+(.+?)(?:\.\s+\(.*?\))?\.'
-    masters_data = {}
-    print(masters_data)
+    
     # Extract PhD dissertation titles
     phd_pattern = r'\\item\s+([^,]+,\s+[A-Z]\.),\s+Ph\.D\.\s+(.+?)(?:\.\s+\(.*?\))?\.'
     phd_data = extract_titles(text, "Ph\\.D\\. Dissertation Advisor", phd_pattern)
@@ -36,7 +33,7 @@ def process_student_thesis_titles(text):
     undergrad_data = extract_titles(text, "Undergraduate Honors Thesis Advisor", undergrad_pattern)
      
     # Merge the dictionaries
-    student_data = {**masters_data, **phd_data,**postdoc_data, **undergrad_data}
+    student_data = { **phd_data,**postdoc_data, **undergrad_data}
 
     # Replace problematic characters in titles
     student_data = replace_problematic_characters_in_titles(student_data)
@@ -419,7 +416,7 @@ def add_title_to_name2(text, data):
     # Remove specified subsections
     for pattern in sections_to_remove:
         text = re.sub(pattern, '', text, flags=re.DOTALL)
-
+    
     # Replace the original section with the modified one
     text = text[:start_index] + section + text[end_index:]
     # Ensure \end{document} is present at the end of the document
@@ -486,7 +483,7 @@ def extract_titles(tex_content, section_name, entry_pattern):
     extracted_data = {}
 
     if match:
-        print("aa",section_name)
+        
         if section_name=="Master's Thesis":
 
             section_content = match.group(0).strip()
@@ -563,7 +560,7 @@ def reorder_student_sections4(text):
     end_idx = text.find(r'\subsection', start_idx + 1)
     if end_idx == -1:
         end_idx = len(text)
-
+    #print("aaa",reordered_sections)
     return text[:start_idx] + r'\subsection{Directed Student Learning}' + '\n' + reordered_sections + text[end_idx:]
 def reorder_student_sections3(text):
     # Define the two possible orders for "Master's Thesis"
@@ -624,26 +621,7 @@ def reorder_student_sections2(text):
     return text[:start_idx] + r'\subsection{Directed Student Learning}' + '\n' + reordered_sections + text[end_idx:]
 
 
-def boldface_name_in_publications(text):
-    # Extract the publications section
-    start_publications = text.find(r'\subsection{Publications}\label{publications}')
-    start_presentations = text.find(r'\subsection{Presentations}\label{presentations}')
-    
-    if start_publications == -1 or start_presentations == -1:
-        print("Publications or Presentations subsection not found!")
-        return text
 
-    publications_section = text[start_publications:start_presentations]
-    
-    # Boldface the name in the publications section
-    patterns = [r'(Kraft, R\. H\.)', r'(Kraft,)', r'(Kraft, R\.)']
-    for pattern in patterns:
-        publications_section = re.sub(pattern, r'\\textbf{\1}', publications_section)
-    
-    # Replace the old publications section with the modified one
-    modified_text = text[:start_publications] + publications_section + text[start_presentations:]
-    
-    return modified_text
 
 def reorder_publications(content):
     # Extract the content from \subsection{Publications} up to \subsection{Presentations}
@@ -673,7 +651,7 @@ def reorder_publications(content):
     
     # Replace old subsubsections with sorted ones in the publications section
     updated_publications = publications_section.replace(''.join(subsubsections), sorted_content)
-    
+   
     # Construct the updated content
     return content.replace(publications_section, updated_publications)
 
@@ -725,35 +703,7 @@ def add_date_to_header(text_content):
     else:
         print("Warning: Marker for preamble end (\\begin{document}) not found in the text content.")
         return text_content  # Return the original content if marker is not found
-def format_header(text):
-    # Define the block of text to be removed
-    to_remove = r"""
-\textbf{Dr. Reuben H. Kraft}\\
-The Pennsylvania State University\\
-EN - Mechanical Engineering\\
-(814) 867-4570\\
-Email: rhk12@psu.edu
-""".strip()  # .strip() is used to remove any leading/trailing whitespace
 
-    # Replace the block with an empty string
-    text = text.replace(to_remove, '')
-
-    # Add the desired formatted name after \begin{document}
-    new_header = r"""
-\begin{center}
-\LARGE \textbf{\textsc{REUBEN H. KRAFT}} \\
-\rule{\linewidth}{2pt}
-\end{center}
-"""
-    # Add a line space
-    new_header += '\n\n'
-    new_header += r"\normalsize % Return to the default font size"
-    
-    # Find the position of \begin{document} and insert the new header after it
-    insert_pos = text.find(r'\begin{document}') + len(r'\begin{document}')
-    text = text[:insert_pos] + '\n\n' + new_header + '\n\n' + text[insert_pos:]
-
-    return text
 def add_custom_package(text, package_name="mystyle"):
     # Find the position of \author{}
     insert_pos = text.find(r'\author{')
@@ -763,29 +713,36 @@ def add_custom_package(text, package_name="mystyle"):
         text = text[:insert_pos] + f"\\usepackage{{{package_name}}}\n" + text[insert_pos:]
     
     return text
-def set_section_colors(text):
-    # Define the LaTeX commands to change the colors
-    color_commands = r"""
-\usepackage{titlesec}
-\usepackage{color}
-\titleformat{\subsection}
-  {\normalfont\large\bfseries\color{blue}} % format
-  {\thesubsection} % label
-  {1em} % sep
-  {} % before-code
-\titleformat{\subsubsection}
-  {\normalfont\normalsize\bfseries\color{red}} % format
-  {\thesubsubsection} % label
-  {1em} % sep
-  {} % before-code
+def format_header(text_content):
+    new_header = r"""
+\begin{center}
+\LARGE \textbf{\textsc{REUBEN H. KRAFT}} \\
+\rule{\linewidth}{2pt}
+\end{center}
+\normalsize % Return to the default font size
 """
-
-    # Insert the color commands before \begin{document}
-    insert_pos = text.find(r'\begin{document}')
-    if insert_pos != -1:
-        text = text[:insert_pos] + color_commands + text[insert_pos:]
-
-    return text
+    insertion_point = text_content.find(r'\begin{document}') + len(r'\begin{document}')
+    if insertion_point != -1:
+        text_content = text_content[:insertion_point] + '\n' + new_header + '\n' + text_content[insertion_point:]
+    return text_content
+def add_date_to_header(text_content):
+    now = datetime.datetime.now()
+    month_year = now.strftime("%B %Y")
+    header_settings = r"""
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\definecolor{darkgray}{gray}{0.4} % Define a darker gray color
+\fancypagestyle{firstpage}{
+    \fancyhf{} % Clear all headers and footers first
+    \rhead{\textcolor{darkgray}{""" + month_year + r"""}}
+    \renewcommand{\headrulewidth}{0pt} % No header rule
+}
+\thispagestyle{firstpage}
+"""
+    insertion_point = text_content.find(r'\begin{document}')
+    if insertion_point != -1:
+        text_content = text_content[:insertion_point] + header_settings + text_content[insertion_point:]
+    return text_content
 
 def process_courses(text):
     course_descriptions = {
@@ -828,13 +785,13 @@ def process_courses(text):
     for course, years in courses_years.items():
         sorted_years = sorted(set(years), reverse=True)  # Sort and remove duplicates
         new_course_section += f"{course}, {', '.join(sorted_years)}.\n\n"
-
+    
     # Replace the original course listings section with the new one
     new_text = text[:start_of_section] + new_course_section + text[end_of_section:]
 
     # Ensure a newline after \end{enumerate}
     new_text = new_text.replace('\end{enumerate}\subsection', '\end{enumerate}\n\n\subsection')
-
+   
     return new_text
 
 def replace_straight_quotes_with_latex_quotes(text_data):
@@ -1364,13 +1321,563 @@ def update_documentclass_font_size(latex_content, font_size):
     
     return updated_content
 
+def create_template_latex_file(filename):
+    with open(filename, 'w') as file:
+        file.write(r"""
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{booktabs}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+\begin{document}
+\end{document}
+""")
+def add_custom_package(text_content, package_name="mystyle"):
+    insertion_point = text_content.find(r'\author{')
+    if insertion_point != -1:
+        text_content = text_content[:insertion_point] + f"\\usepackage{{{package_name}}}\n" + text_content[insertion_point:]
+    return text_content
+def set_section_colors(text_content):
+    color_commands = r"""
+\usepackage{titlesec}
+\usepackage{color}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{blue}} % format
+  {\thesubsection} % label
+  {1em} % sep
+  {} % before-code
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{red}} % format
+  {\thesubsubsection} % label
+  {1em} % sep
+  {} % before-code
+"""
+    insertion_point = text_content.find(r'\begin{document}')
+    if insertion_point != -1:
+        text_content = text_content[:insertion_point] + color_commands + text_content[insertion_point:]
+    return text_content
+
+def read_word_document(file_path):
+    doc = Document(file_path)
+    full_text = []
+    for para in doc.paragraphs:
+        full_text.append(para.text)
+    return '\n'.join(full_text)
+
+def extract_text_between_markers(full_text, start_marker, end_marker):
+    # Escape special characters in start and end markers for regex
+    start_marker = re.escape(start_marker)
+    end_marker = re.escape(end_marker)
+    
+    # Compile the regex pattern
+    pattern = re.compile(f'{start_marker}(.*?){end_marker}', re.DOTALL)
+    # Search for the pattern
+    match = pattern.search(full_text)
+    if match:
+        
+        return match.group(1).strip()
+    else:
+        return ""
+
+def process_courses_from_word( word_text,latex_text):
+   
+
+    # Define markers
+    start_marker = "List of Credit Courses Taught at Penn State for Each Semester with Enrollments in Each Course"
+    end_marker = "Concise Compilation of Results of Student Feedback from Multiple Sources, Documented Evaluation of Candidate’s Programs, Activities, and Skills in Relating to Clientele"
+
+    # Extract the relevant courses section
+    relevant_text = extract_text_between_markers(word_text, start_marker, end_marker)
+
+    # Define course descriptions and excluded courses
+    course_descriptions = {
+        "330": "Computational Tools for Engineers (ME 330)",
+        "360": "Machine Design (ME 360)",
+        "461": "Introduction to Finite Element Analysis (ME 461)",
+        "563": "Nonlinear Finite Element Analysis (ME 563)",
+        "497": "Development course for Computational Tools for Engineers (ME 497)",
+        "440": "Capstone Design (ME 440)",
+    }
+    excluded_courses = {"600", "596", "496", "494", "610"}
+
+    # Dictionary to store courses and their years
+    courses_years = {}
+
+    current_year = None
+    for line in relevant_text.split('\n'):
+        if re.match(r'(Spring|Summer|Fall) \d{4}', line):
+            current_year = line.split()[-1]
+        elif re.match(r'ME\s?\d{3}', line):
+            match = re.search(r'ME\s?(\d{3})', line)
+            course_num = match.group(1)
+            if course_num not in excluded_courses:
+                description = course_descriptions.get(course_num, f"ME {course_num}")
+                if description not in courses_years:
+                    courses_years[description] = []
+                if current_year and current_year not in courses_years[description]:
+                    courses_years[description].append(current_year)
+
+    # Format the new course section
+    new_course_section = '\\subsection{TEACHING EXPERIENCE}\\label{teaching-experience}\n'
+    for course, years in courses_years.items():
+        sorted_years = sorted(set(years), reverse=True)  # Sort and remove duplicates
+        new_course_section += f"{course}, {', '.join(sorted_years)}.\n\n"
+
+    # Insert the new course section before \end{document}
+    new_text = latex_text.replace("\\end{document}", new_course_section + "\\end{document}")
+   
+    return new_text
+def format_publication_entry(publication):
+    # Extract the DOI and format it as a URL
+    
+    doi_match = re.search(r"DOI: (\S+)", publication)
+    if doi_match:
+        doi_url = f"\\url{{https://doi.org/{doi_match.group(1)}}}"
+        publication = re.sub(r"DOI: \S+", "", publication)
+    else:
+        doi_url = ""
+    # Adding emphasis to the author name "Kraft, R. H."
+    publication = re.sub(r'(Kraft,)( R\.\s*H\.)', r'\\textbf{\\textbf{\1}\2}', publication)
+    
+
+    # Combine the formatted publication entry
+    formatted_entry = f"\\item {publication.strip()} {doi_url}".strip()
+    formatted_entry = formatted_entry.replace('&', '&\n')
+    return formatted_entry
+
+def extract_publications(word_text,latex_text):
+    start_marker_journal = "Journal Article"
+    end_marker_journal = "Parts of Books"
+    start_marker_conference = "Conference Proceedings"
+    end_marker_conference = "Other Works"
+    start_marker_book = "Book Chapter"
+    end_marker_book = "Refereed Conference Proceedings"
+    start_marker_other = "Other Works"
+    end_marker_other = "Manuscripts Submitted for Publication"
+
+    journal_publications = extract_text_between_markers(word_text, start_marker_journal, end_marker_journal)
+    conference_publications = extract_text_between_markers(word_text, start_marker_conference, end_marker_conference)
+    book_chapters = extract_text_between_markers(word_text, start_marker_book, end_marker_book)
+    other_publications = extract_text_between_markers(word_text, start_marker_other, end_marker_other)
+    latex_output = r"""
+\subsection{Publications}\label{publications}
+
+\subsubsection{Journal Article}\label{journal-article}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+"""
+    
+   
+    for publication in journal_publications.split("\n"):
+        if publication.strip():
+            # Remove numbers after \item
+            publication = re.sub(r'^\\item\s*\d+\.', r'\\item', format_publication_entry(publication))
+            latex_output += f"  {publication}\n"
+
+    latex_output += r"""
+\end{enumerate}
+
+\subsubsection{Conference Proceeding}\label{conference-proceeding}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+"""
+    for publication in conference_publications.split("\n"):
+        if publication.strip():
+            latex_output += f"  {format_publication_entry(publication)}\n"
+
+    latex_output += r"""
+\end{enumerate}
+
+\subsubsection{Book Chapters}\label{book-chapters}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+"""
+    for publication in book_chapters.split("\n"):
+        if publication.strip():
+            latex_output += f"  {format_publication_entry(publication)}\n"
+
+    latex_output += r"""
+\end{enumerate}
+
+\subsubsection{Other}\label{other}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+"""
+    for publication in other_publications.split("\n"):
+        if publication.strip() and not publication.startswith(r"Pre-Print") and not publication.startswith(r"Technical Report"):
+            latex_output += f"  {format_publication_entry(publication)}\n"
+
+    latex_output += r"""
+\end{enumerate}
+"""
+    
+     # Insert the new publication section after \begin{document}
+    new_text = latex_text.replace("\\normalsize % Return to the default font size",  "\\normalsize % Return to the default font size" +latex_output)
+    return new_text
+def process_student_thesis_titles(text,dossier_file_path): 
+    # Extract master's thesis titles
+    masters_data = extract_student_titles(dossier_file_path)
+ 
+    # Extract PhD dissertation titles
+    phd_data = extract_phd_titles(dossier_file_path)
+  
+    # Extract postdoc titles
+    postdoc_data = extract_postdoc_titles(dossier_file_path)
+    
+    # Extract undergrad thesis titles
+    undergrad_data = extract_undergrad_student_titles(dossier_file_path)
+     
+    # Merge the dictionaries
+    student_data = {**masters_data, **phd_data, **postdoc_data, **undergrad_data}
+
+    # Replace problematic characters in titles
+    student_data = replace_problematic_characters_in_titles(student_data)
+        
+    # Update the LaTeX content with thesis titles - does not work for postdoc titles see next function
+    text = add_title_to_name2(text, student_data)
+       
+    # reformat phd section for name, title, date
+    text = reformat_phd_section(text)
+    
+    # reformat masters section for name, title, date    
+    text = update_masters_section(text)
+    
+    # reformat postdoc section for name, title, date
+    text = update_postdoc_section(text)
+    
+    # reformat undergrad section for name, title, date
+    text = update_undergraduate_section(text)
+        
+    return text
+
+def replace_problematic_characters_in_titles(student_data):
+    problematic_char = u'\u2013'  # En dash (U+2013)
+
+    for name, title in student_data.items():
+        if problematic_char in title:
+            #print(f"Found character '{problematic_char}' in {name}: {title}")
+            student_data[name] = title.replace(problematic_char, '--')
+
+    return student_data
+
+def update_undergraduate_section(text_data):
+    # Define section label
+    label = "Undergraduate Honors\nThesis"
+    
+    # Extract the Undergraduate Honors Thesis section
+    section_pattern = rf"\\subsubsection{{{label}}}.*?\\begin{{enumerate}}.*?\\end{{enumerate}}"
+    section_match = re.search(section_pattern, text_data, re.DOTALL)
+    
+    if not section_match:
+        print("Undergraduate Honors Thesis section not found!")
+        return text_data
+    
+    section_content = section_match.group(0)
+    
+    # Extract individual items
+    item_pattern = r"Undergraduate Honors Thesis\. \((.*?)\).\\\\\s+Advised: (.*?), \"(.*?)\","
+    items = re.findall(item_pattern, section_content, re.DOTALL)
+    
+    # Format items
+    formatted_items = []
+    for time_period, name, title in items:
+        formatted_item = f"\\item {name}, \"{title}\", {time_period}"
+        formatted_items.append(formatted_item)
+    
+    # Combine formatted items
+    formatted_section = "\\subsubsection{Undergraduate Honors\nThesis}\n\\begin{enumerate}\n\\def\\labelenumi{\\arabic{enumi}.}\n" + "\n".join(formatted_items) + "\n\\end{enumerate}"
+    
+    # Replace the old section with the new formatted section in the text data
+    updated_text_data = text_data.replace(section_content, formatted_section)
+    
+    return updated_text_data
+
+def update_postdoc_section(text_data):
+    # Define section label
+    label = "Postdoctoral Mentorship"
+    
+    # Extract the Postdoctoral Mentorship section
+    section_pattern = rf"\\subsubsection{{{label}}}.*?\\begin{{enumerate}}.*?\\end{{enumerate}}"
+    section_match = re.search(section_pattern, text_data, re.DOTALL)
+    
+    if not section_match:
+        print("Postdoctoral Mentorship section not found!")
+        return text_data
+    
+    section_content = section_match.group(0)
+    
+    # Extract individual items
+    item_pattern = r"Postdoctoral Mentorship\. \((.*?)\).\\\\\s+Advised: (.*?), \"(.*?)\","
+    items = re.findall(item_pattern, section_content, re.DOTALL)
+    
+    # Format items
+    formatted_items = []
+    for time_period, name, title in items:
+        formatted_item = f"\\item {name}, \"{title}\", {time_period}"
+        formatted_items.append(formatted_item)
+    
+    # Combine formatted items
+    formatted_section = "\\subsubsection{Postdoctoral Mentorship}\n\\begin{enumerate}\n\\def\\labelenumi{\\arabic{enumi}.}\n" + "\n".join(formatted_items) + "\n\\end{enumerate}"
+    
+    # Replace the old section with the new formatted section in the text data
+    updated_text_data = text_data.replace(section_content, formatted_section)
+    
+    return updated_text_data
+
+def update_masters_section(text_data):
+    # Define the two possible formats for "Master's Thesis"
+    master_thesis_options = ["Master's Thesis", "Master\\textquotesingle s Thesis"]
+
+    # Detect which format is used in the text
+    master_thesis_format = next((option for option in master_thesis_options if option in text_data), None)
+
+    if master_thesis_format is None:
+        print("Master's Thesis section format not detected!")
+        return text_data
+
+    # Escape backslashes for regex
+    escaped_master_thesis_format = master_thesis_format.replace('\\', '\\\\')
+
+    # Prepare regex pattern for the section
+    section_pattern = rf"(\\subsubsection\{{.*?{escaped_master_thesis_format}.*?\}}.*?\\begin\{{enumerate\}})(.*?)(\\end\{{enumerate\}})"
+    
+    section_match = re.search(section_pattern, text_data, re.DOTALL)
+
+    if not section_match:
+        print("Master's Thesis section not found!")
+        return text_data
+
+    section_start, section_content, section_end = section_match.groups()
+    
+    # Adjusting item pattern for matching items within the section
+    item_pattern = rf"\\item\s*{escaped_master_thesis_format}\.\s*\((.*?)\)\.\\\\\s*Advised:\s*(.*?),\s*\"(.*?)\""
+    
+    items = re.findall(item_pattern, section_content, re.DOTALL | re.MULTILINE)
+    
+    if not items:
+        print("No items found in Master's Thesis section!")
+        return text_data
+
+    # Format items
+    formatted_items = [f"\\item {name}, \"{title}\", {time_period}" for time_period, name, title in items]
+
+    # Combine formatted items
+    formatted_section_content = "\n".join(formatted_items)
+
+    # Replace the old section with the new formatted section in the text data
+    updated_section = section_start + formatted_section_content + section_end
+    updated_text_data = text_data.replace(section_content, formatted_section_content)
+    
+    return updated_text_data
+def extract_student_titles(file_path):
+    #file_path = r"C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\20231021-095357-CDT.docx"
+    
+    # Check if the file exists
+    if not os.path.exists(file_path):
+        return f"File not found at '{file_path}'"
+    
+    # If the file exists, proceed to read its content
+    doc = Document(file_path)
+    full_text = [para.text for para in doc.paragraphs]
+
+    # Define the sub-section titles
+    sub_section_titles = ["Master's Thesis Advisor", "Master\u2019s Thesis Advisor"]
+    end_section_titles = ["Master's Thesis Committee Member", "Master\u2019s Thesis Committee Member"]
+
+    # Find the start of the sub-section
+    start_index = None
+    for title in sub_section_titles:
+        start_index = next((i for i, text in enumerate(full_text) if title in text), None)
+        if start_index is not None:
+            break
+
+    if start_index is None:
+        print(f"Section 'Master's Thesis Advisor' not found")
+        return
+
+    # Find the end of the sub-section
+    end_index = None
+    for title in end_section_titles:
+        end_index = next((i for i, text in enumerate(full_text[start_index:]) if title in text), None)
+        if end_index is not None:
+            break
+
+    if end_index is None:
+        end_index = len(full_text)
+    else:
+        end_index += start_index
+
+    # Extract student names and thesis titles
+    student_data = {}
+    for line in full_text[start_index + 1:end_index]:
+        if ", " in line and "MS." in line:
+            name = line.split(",")[0].strip()
+            title_start = line.find("MS.") + 4
+            title_end = line.find(".", title_start)
+            title = line[title_start:title_end].strip()
+            student_data[name] = title
+    
+    return student_data
+def add_undergrad_titles(text, undergrad_data):
+    for name, title in undergrad_data.items():
+        # Convert the name format from 'Last, F.' to 'First Last'
+        last_name, first_initial = name.split(', ')
+        # We'll use a placeholder for the first name since we don't have the full first name
+        first_name_placeholder = f"{first_initial}.*"
+        
+        # Define the pattern to search for the student's entry in the LaTeX content
+        pattern = rf"(Advised: {first_name_placeholder} {last_name})"
+        
+        # Check if the pattern exists in the text
+        if re.search(pattern, text):
+            # Replace the pattern with the pattern + title
+            text =  re.sub(pattern, f"\\1, \"{title}\"", text)
+            print(f"Updated {first_initial}. {last_name}'s entry.")
+        else:
+            print(f"Pattern for {first_initial}. {last_name} not found in the text!")
+    
+    return text
+
+def extract_postdoc_titles(file_path):
+    #file_path = r"C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\20231021-095357-CDT.docx"
+    
+    # Check if the file exists
+    if not os.path.exists(file_path):
+        return f"File not found at '{file_path}'"
+    
+    # If the file exists, proceed to read its content
+    doc = Document(file_path)
+    full_text = [para.text for para in doc.paragraphs]
+
+    # Define the sub-section titles
+    sub_section_title = "Postdoctoral Mentorship Advisor"
+    end_section_title = "Research Activity Advisor"
+
+    # Find the start of the sub-section
+    start_index = next((i for i, text in enumerate(full_text) if sub_section_title in text), None)
+    if start_index is None:
+        return {}
+
+    # Find the end of the sub-section
+    end_index = next((i for i, text in enumerate(full_text[start_index:]) if end_section_title in text), None)
+    if end_index is None:
+        end_index = len(full_text)
+    else:
+        end_index += start_index
+
+    # Extract postdoc names and work titles
+    postdoc_data = {}
+    for line in full_text[start_index + 1:end_index]:
+        if ". " in line:
+            name, title_with_dates = line.split(". ", 1)
+            title = title_with_dates.split(". (")[0].strip()
+            postdoc_data[name.strip()] = title
+
+    return postdoc_data
+
+def extract_phd_titles(file_path):
+    #file_path = r"C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\20231021-095357-CDT.docx"
+    
+    # Check if the file exists
+    if not os.path.exists(file_path):
+        return f"File not found at '{file_path}'"
+    
+    # If the file exists, proceed to read its content
+    doc = Document(file_path)
+    full_text = [para.text for para in doc.paragraphs]
+
+    # Define the sub-section titles
+    sub_section_title = "Ph.D. Dissertation Advisor"
+    end_section_title = "Ph.D. Dissertation Committee Member"  # This is the section that follows the Advisor section
+
+    # Find the start of the sub-section
+    start_index = next((i for i, text in enumerate(full_text) if sub_section_title in text), None)
+    if start_index is None:
+        print(f"Section '{sub_section_title}' not found")
+        return {}
+
+    # Find the end of the sub-section
+    end_index = next((i for i, text in enumerate(full_text[start_index + 1:]) if end_section_title in text), None)
+    if end_index is None:
+        end_index = len(full_text)
+    else:
+        end_index += start_index + 1
+
+    # Extract student names and dissertation titles
+    student_data = {}
+    for line in full_text[start_index + 1:end_index]:
+        if ", " in line and "Ph.D." in line:
+            name = line.split(",")[0].strip()
+            title_start = line.find("Ph.D.") + 6
+            title_end = line.find(".", title_start)
+            title = line[title_start:title_end].strip()
+            student_data[name] = title
+
+    return student_data
 def main():
     #open a file to read in C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV named main.tex 
     # open the file for reading
     #f = open(r'C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\main.tex', 'r')
     #f = open(r'C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\main.tex', 'r', encoding='utf-8')
+    # Read the document
+    word_text = read_word_document("University+Dossier-20240524-075749-CDT.docx")
     f = open(r'main.tex', 'r', encoding='utf-8')
-
+    filename = 'output.tex'
+    create_template_latex_file(filename)
+    
+    with open(filename, 'r') as file:
+        text2 = file.read()
     #open another file for writing
     f1 = open(r'main_edited2.tex', 'w')
 
@@ -1378,37 +1885,39 @@ def main():
     text = f.read()
         
     # add my formating package
-    text = add_custom_package(text)
+    text2 = add_custom_package(text2)
     
     # Set the section colors
-    text = set_section_colors(text)
+    text2 = set_section_colors(text2)
       
      # Format the header
-    text = format_header(text)
+    text2 = format_header(text2)
     
     # add the date to the latex file
-    text = add_date_to_header(text)
-
+    text2 = add_date_to_header(text2)
+    
     # write_courses_to_file(text, f1)
+    text2 = process_courses_from_word(word_text, text2)
+    
     text = process_courses(text)
     
     # reorder the publications
     text = reorder_publications(text)
+    text2=extract_publications(word_text,text2)
     
-    # boldface my name in the publications
-    text = boldface_name_in_publications(text)
-        
+
     # reorder the student sections
     text = reorder_student_sections4(text)
     
     # process the student thesis titles
-    text = process_student_thesis_titles(text)
-
+    text = process_student_thesis_titles(text,"University+Dossier-20240524-075749-CDT.docx")
+    with open(filename, 'w') as file:
+        file.write(text2)
     # clean up the service section to remove extra text
     text = clean_service_section(text)
 
     # replace straight quotes with latex quotes
-    text = replace_straight_quotes_with_latex_quotes(text)
+    #text = replace_straight_quotes_with_latex_quotes(text)
     
     # add emphasis for mentees  - pick between astericks or underlines
     #text = highlight_mentored_authors_astericks2(text)
