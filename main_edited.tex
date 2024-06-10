@@ -1,0 +1,2558 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{booktabs}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\usepackage{mystyle}
+\author{}
+\date{}
+
+
+\usepackage{titlesec}
+\usepackage{color}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{black}} % format
+  {\thesubsection} % label
+  {1em} % sep
+  {} % before-code
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{black}} % format
+  {\thesubsubsection} % label
+  {1em} % sep
+  {} % before-code
+
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{booktabs}
+\definecolor{darkgray}{gray}{0.4} % Define a darker gray color
+\fancypagestyle{firstpage}{
+    \fancyhf{} % Clear all headers and footers first
+    \rhead{\textcolor{darkgray}{May 2024}}
+    \renewcommand{\headrulewidth}{0pt} % No header rule
+}
+\thispagestyle{firstpage}
+\begin{document}
+
+
+\begin{center}
+\LARGE \textbf{\textsc{REUBEN H. 
+KRAFT}} \\
+\rule{\linewidth}{2pt}
+\end{center}
+
+
+\normalsize % Return to the default font size
+
+
+
+
+
+\subsection{PROFESSIONAL POSITIONS}\label{professional-positions}
+
+\subsubsection{Academic}\label{academic}
+
+\begin{tabularx}{\textwidth}{@{}Xr@{}}
+Associate Professor of Biomedical Engineering (Courtesy), The Pennsylvania State University. & 2019 - Present \\
+\addlinespace[5pt]
+Associate Professor of Mechanical Engineering, The Pennsylvania State University. & 2019 - Present \\
+\addlinespace[5pt]
+Assistant Professor of Biomedical Engineering (Courtesy), The Pennsylvania State University. & 2016 - 2019 \\
+\addlinespace[5pt]
+Assistant Professor of Mechanical Engineering, The Pennsylvania State University. & 2013 - 2019\end{tabularx}
+
+\subsubsection{Government}\label{government}
+
+\begin{tabularx}{\textwidth}{@{}Xr@{}}
+Mechanical Engineer, The U.S. 
+Army Research Laboratory, Soldier Protection Sciences Branch. & 2009 - 2012 \\
+\addlinespace[5pt]
+Post-Doc, Oak Ridge Associated Universities at The U.S. 
+Army Research Laboratory, Impact Physics Branch. & 2008 - 2009\end{tabularx}
+
+\subsubsection{Professional}\label{professional}
+
+\begin{tabularx}{\textwidth}{@{}Xr@{}}
+Founder and Chief Engineer, BrainSim Technologies Inc. & 2019 - Present \\
+\addlinespace[5pt]
+Lead Researcher of Computational Biomechanics, The Johns Hopkins University Applied Physics Laboratory, Research and Exploratory Development Department, Biomechanics and Injury Mitigation Systems Group. & 2012 - 2013\end{tabularx}
+
+\subsection{EDUCATION}\label{education}
+
+\begin{flushleft}
+\begin{tabularx}{\textwidth}{@{}Xr@{}}
+Post-Doctoral, U.S. 
+Army Research Laboratory & 2009\\
+Major: Mechanics \\
+\addlinespace[5pt]
+Ph D, The Johns Hopkins University & 2008\\
+Major: Mechanical Engineering\\
+Dissertation Title: Computational Modeling of Damage in Brittle
+Materials \\
+\addlinespace[5pt]
+MS, The Johns Hopkins University & 2006\\
+Major: Mechanical Engineering \\
+\addlinespace[5pt]
+BS, University of Maryland, Baltimore County (UMBC) & 2003\\
+Major: Mechanical Engineering
+\end{tabularx}
+\end{flushleft}
+
+\subsection{AWARDS AND HONORS}\label{awards-and-honors}
+
+\newlength{\mylength}
+\newlength{\myotherlength}
+\setlength{\myotherlength}{1.0in}
+\setlength{\mylength}{\dimexpr(\textwidth-\myotherlength-0\tabcolsep)\relax}
+\begin{longtable}{@{}p{\mylength}@{}>{\raggedleft\arraybackslash}p{\myotherlength}@{}}
+Fellow, American Society of Mechanical Engineering. & 2023 \\
+\addlinespace[5pt]
+Outstanding Presentation Award, Penn State Center of Neural Engineering. & 2023 \\
+\addlinespace[5pt]
+Best Poster Award, Penn State Center of Neural Engineering. & 2022 \\
+\addlinespace[5pt]
+Faculty Early Career Development (CAREER) Program Award, National Science Foundation. & 2019 \\
+\addlinespace[5pt]
+PSEAS Outstanding Teaching Award, The Penn State Engineering Alumni Society (PSEAS). & 2018 \\
+\addlinespace[5pt]
+Shuman Early Career Professorship, Penn State University Department of Mechanical and Nuclear Engineering. & 2013 \\
+\addlinespace[5pt]
+First Place Paper and Oral Presentation (presented by my graduate student, I was senior author on paper), 13th Annual Penn State College of Engineering Research Symposium (CERS). & 2016 \\
+\addlinespace[5pt]
+People\textquotesingle s Choice Poster Award (presented by my student, I was senior author on poster), 2016 (Ernst) Mach Conference. & 2016 \\
+\addlinespace[5pt]
+Presidential Early Career Awards for Scientists and Engineers (PECASE), The White House; Office of Science and Technology Policy. & 2011 \\
+\addlinespace[5pt]
+Eagle Scout, Boy Scouts of America. & 1998 \\\end{longtable}
+\subsection{PUBLICATIONS}\label{publications}
+
+
+\textit{Mentored student and postdoc co-authors are underlined.}
+\subsubsection{Journal Articles}\label{journal-article}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \underline{Martin, V.}, \underline{Hannah, T.}, Ellis, S., \& \textbf{\textbf{Kraft,} R. 
+H.} (2023). 
+Using the
+  embedded element finite element method to simulate impact of Dyneema
+  plates. 
+\emph{Fibers and Polymers}. 
+Published.
+  \url{https://doi.org/10.1007/s12221-023-00417-z}
+\item
+  \underline{Hannah, T.}, \textbf{\textbf{Kraft,} R. 
+H.}, \underline{Martin, V.}, \& Ellis, S. 
+(published). 
+Impact
+  of imperfect Kolsky bar experiments across different scales using
+  finite elements. 
+\emph{Journal of Verification, Validation and
+  Uncertainty Quantification}.
+\item
+  \underline{Hannah, T.}, Shuster, B., Baker, Z., Ellis, S., \& \textbf{\textbf{Kraft,} R. 
+H.}
+  (published). 
+Miniature Kolsky Bar Experiment Techniques Applied to
+  UHMWPE Composite Analysis. 
+\emph{Journal of Dynamic Behavior of
+  Materials}.
+\item
+  Zuidema, T. 
+R., Bazarian, J. 
+J., Kercher, K. 
+A., Rettke, D. 
+J.,
+  Mannix, R., \textbf{\textbf{Kraft,} R. 
+H.}, Newman, S. 
+D., Ejima, K., Steinfeldt, J. 
+A.,
+  \& Kawata, K. 
+(2023). 
+Longitudinal association of clinical and
+  biochemical biomarkers with head impact exposure in adolescent
+  football. 
+\emph{JAMA Network Open}. 
+Published.
+  \url{https://doi.org/10.1001/jamanetworkopen.2023.16601}
+\item
+  \underline{Menghani, R. 
+R}., Dasans, A., \& \textbf{\textbf{Kraft,} R. 
+H.} (2023). 
+A sensor-enabled
+  cloud-based computing platform for computational brain biomechanics.
+  \emph{Computer Methods in Biomechanics and Biomedical Engineering}.
+  Published. 
+\url{https://doi.org/10.1016/j.cmpb.2023.107470}
+\item
+  Ramtani, S., Sánchez, J. 
+F., Boucetta, A., \textbf{\textbf{Kraft,} R. 
+H.},
+  Vaca-González, J. 
+J., \& Garzón-Alvarado, D. 
+A. 
+(2023). 
+A coupled
+  mathematical model between bone remodeling and tumors: a study of
+  different scenarios using Komarova's model. 
+\emph{Biomechanics and
+  Modeling in Mechanobiology}. 
+Published.
+  \url{https://doi.org/10.1007/s10237-023-01689-3}
+\item
+  Ji, S., Ghajari, M., Mao, H., \textbf{\textbf{Kraft,} R. 
+H.}, Hajiaghamemar, M., Panzer,
+  M. 
+B., Willinger, R., Gilchrist, M. 
+D., Kleiven, S., \& Stitzel, J. 
+D.
+  (2022). 
+Use of brain biomechanical models for monitoring impact
+  exposure in contact sports. 
+\emph{Annals of Biomedical Engineering}.
+  Published. 
+\url{https://doi.org/10.1007/s10439-022-02999-w}
+\item
+  \underline{Martin, V.}, \textbf{\textbf{Kraft,} R. 
+H.}, \underline{Hannah, T.}, \& Ellis, S. 
+(2022). 
+An
+  energy-based study of the embedded element method for explicit
+  dynamics. 
+\emph{Advanced Modeling and Simulation in Engineering
+  Sciences}. 
+Published. 
+\url{https://doi.org/10.1186/s40323-022-00223-x}
+\item
+  Adewole, D. 
+O., Struzyna, L. 
+A., Harris, J. 
+P., Nemes, A. 
+D., Burrell,
+  J. 
+C., Petrov, D., \textbf{\textbf{Kraft,} R. 
+H.}, Chen, I., Serruya, M. 
+D., Wolf, J.
+  A., \& Cullen, K. 
+(2021). 
+Development of optically controlled ``living
+  electrodes'' with long-projecting axon tracts for a synaptic
+  brain-machine interface. 
+\emph{Science Advances}, \emph{7}(4).
+  \url{https://doi.org/10.1126/sciadv.aay5347}
+\item
+  Marinov, T., Yuchi, L., Adewole, D. 
+O., Cullen, D. 
+K., \& \textbf{\textbf{Kraft,} R. 
+H.}
+  (2020). 
+A computational model of bidirectional axonal growth in
+  micro-tissue engineered neuronal networks (micro-TENNs). 
+\emph{In
+  Silico Biology}, \emph{13}(3-4), pp. 
+85--pp. 
+99.
+  \url{https://doi.org/10.3233/ISB-180172}
+\item
+  \underline{Subramani, A. 
+V}., Whitley, P., \underline{Garimella, H. 
+T}., \& \textbf{\textbf{Kraft,} R. 
+H.}
+  (2020). 
+Fatigue damage prediction in the annulus of cervical spine
+  intervertebral discs using finite element analysis. 
+\emph{Computer
+  Methods in Biomechanics and Biomedical Engineering}, \emph{23}(11),
+  773--784. 
+\url{https://doi.org/10.1080/10255842.2020.1764545}
+\item
+  Carrera-Pinzón, A. 
+F., Márquez-Flórez, K., \textbf{\textbf{Kraft,} R. 
+H.}, Ramtani, S.,
+  \& Garzón-Alvarado, D. 
+A. 
+(2019). 
+Computational model of a synovial
+  joint morphogenesis. 
+\emph{Biomechanics and Modeling in
+  Mechanobiology}, 1-\/-14.
+  \url{https://doi.org/10.1007/s10237-019-01277-4}
+\item
+  \textbf{\textbf{Kraft,} R. 
+H.}, \underline{Lee, C.}, Richtsmeier, J. 
+T., \& Dolack, M. 
+E. 
+(2019).
+  Exploring mechanisms of cranial vault development using a coupled
+  turing-biomechanical model. 
+\emph{The FASEB Journal}, \emph{33},
+  326.2--326.2.
+  \url{https://doi.org/10.1096/fasebj.2019.33.1_supplement.326.2}
+\item
+  \underline{Lee, C.}, Richtsmeier, J. 
+T., \& \textbf{\textbf{Kraft,} R. 
+H.} (2019). 
+A coupled
+  reaction--diffusion--strain model predicts cranial vault formation in
+  development and disease. 
+\emph{Biomechanics and Modeling in
+  Mechanobiology}. 
+Published.
+  \url{https://doi.org/10.1007/s10237-019-01139-z}
+\item
+  Przekwas, A. 
+J., Tan, X. 
+G., Chen, Z. 
+J., Miao, Y., Harrand, V.,
+  \underline{Garimella, H. 
+T}., \textbf{\textbf{Kraft,} R. 
+H.}, \& Gupta, R. 
+K. 
+(2019). 
+Biomechanics
+  of blast TBI with time resolved consecutive primary, secondary and
+  tertiary loads. 
+\emph{Military Medicine}. 
+Published.
+  \url{https://doi.org/10.1093/milmed/usy344}
+\item
+  \underline{Garimella, H. 
+T}., \underline{Menghani, R.}, Gerber, J. 
+I., Sridhar, S., \& \textbf{Kraft,}
+  R. 
+H. 
+(2018). 
+Embedded finite elements for modeling axonal injury.
+  \emph{Annals of Biomedical Engineering}. 
+Published.
+  \url{https://doi.org/10.1007/s10439-018-02166-0}
+\item
+  Motiwale, S., \underline{Subramani, A. 
+V}., Zhou, A., \& \textbf{\textbf{Kraft,} R. 
+H.} (2018). 
+A
+  non-linear multi-axial fatigue damage model for the cervical
+  intervertebral disc annulus. 
+\emph{Advances in Mechanical
+  Engineering}, \emph{10}(6).
+  \url{https://doi.org/10.1177/1687814018779494}
+\item
+  Dhobale, A. 
+V., Adewole, O., Chan, A., Marinov, T., Serruya, M.,
+  \textbf{\textbf{Kraft,} R. 
+H.}, \& Cullen, D. 
+K. 
+(2018). 
+Assessing functional
+  connectivity across 3D tissue engineered axonal tracts using calcium
+  fluorescence imaging. 
+\emph{Journal of Neural Engineering},
+  \emph{15}(5). 
+\url{https://doi.org/10.1088/1741-2552/aac96d}
+\item
+  Ranslow, A., Fang, Z., De Tomas, P., Gunnarsson, A., Weerasooriya, T.,
+  Satapathy, S., Thompson, K. 
+A., \& \textbf{\textbf{Kraft,} R. 
+H.} (2018). 
+The multiaxial
+  failure response of porcine trabecular skull bone estimated using
+  microstructural simulations. 
+\emph{American Society of Mechanical
+  Engineers (ASME) Journal of Biomechanical Engineering},
+  \emph{140}(10). 
+\url{https://doi.org/10.1115/1.4039895}
+\item
+  \underline{Garimella, H. 
+T}., \textbf{\textbf{Kraft,} R. 
+H.}, \& Przekwas, A. 
+J. 
+(2018). 
+Do
+  blast-induced skull flexures result in axonal deformation?. 
+\emph{PLOS
+  One}, \emph{13}(3). 
+\url{https://doi.org/10.1371/journal.pone.0190881}
+\item
+  Serruya, M. 
+D., Harris, J. 
+P., Adewole, D. 
+O., Struzyna, L. 
+A.,
+  Burrell, J. 
+C., Nemes, A., Petrov, D., \textbf{\textbf{Kraft,} R. 
+H.}, Chen, H. 
+I.,
+  Wolf, J. 
+A., \& Cullen, D. 
+K. 
+(2017). 
+Engineered axonal tracts as
+  ``living electrodes'' for synaptic-based modulation of neural circuitry.
+  \emph{Advanced Functional Materials}, 1701183--1701n/a.
+  \url{https://doi.org/10.1002/adfm.201701183}
+\item
+  \underline{Lee, C. 
+X}., Richtsmeier, J. 
+T., \& \textbf{\textbf{Kraft,} R. 
+H.} (2017). 
+A
+  computational analysis of bone formation in the cranial vault using a
+  coupled reaction-diffusion-strain model. 
+\emph{Journal of Mechanics in
+  Medicine and Biology}, \emph{17}(4).
+  \url{https://doi.org/10.1142/S0219519417500737}
+\item
+  \underline{Garimella, H. 
+T}., \& \textbf{\textbf{Kraft,} R. 
+H.} (2017). 
+A new computational approach
+  for modeling diffusion tractography in the brain. 
+\emph{Journal of
+  Neural Regeneration Research}, \emph{12}(1).
+  \url{https://doi.org/10.4103/1673-5374.198967}
+\item
+  \underline{Garimella, H. 
+T}., \& \textbf{\textbf{Kraft,} R. 
+H.} (2016). 
+Modeling the mechanics of
+  axonal fiber tracts using the embedded finite element method.
+  \emph{International Journal for Numerical Methods in Biomedical
+  Engineering}, \emph{33}(5), 1--21.
+  \url{https://doi.org/10.1002/cnm.2796}
+\item
+  Fielding, R. 
+A., Przekwas, A. 
+J., Tan, X. 
+G., \& \textbf{\textbf{Kraft,} R. 
+H.} (2015).
+  Development of a lower extremity model for high strain rate impact
+  loading. 
+\emph{International Journal of Experimental and Computational
+  Biomechanics}, \emph{3}(2), 161--186.
+\item
+  \underline{Lee, C. 
+X}., Richtsmeier, J. 
+T., \& \textbf{\textbf{Kraft,} R. 
+H.} (2015). 
+A
+  computational analysis of bone formation in the cranial vault in the
+  mouse. 
+\emph{Frontiers in Bioengineering and Biotechnology},
+  \emph{3}(24). 
+\url{https://doi.org/10.3389/fbioe.2015.00024}
+\item
+  Swab, J. 
+J., Tice, J., Wereszczak, A. 
+A., \& \textbf{\textbf{Kraft,} R. 
+H.} (2014).
+  Fracture toughness of advanced structural ceramics: Applying ASTM
+  C1421. 
+\emph{Journal of the American Ceramic Society}, pp. 
+1--pp. 
+9.
+  \url{https://doi.org/10.1111/jace.13293}
+\item
+  Clayton, J. 
+D., \textbf{\textbf{Kraft,} R. 
+H.}, \& Leavy, R. 
+B. 
+(2012). 
+Mesoscale
+  modeling of nonlinear elasticity and fracture in ceramic polycrystals
+  under dynamic shear and compression. 
+\emph{Journal of Solids and
+  Structures}, \emph{49}(18), 6.
+  \url{https://doi.org/10.1016/j.ijsolstr.2012.05.035}
+\item
+  \textbf{\textbf{Kraft,} R. 
+H.}, Mckee, P. 
+J., Dagro, A. 
+M., \& Grafton, S. 
+T. 
+(2012).
+  Combining the finite element method with structural connectome-based
+  analysis for modeling neurotrauma: Connectome neurotrauma mechanics.
+  \emph{PLoS Computational Biology}, \emph{8}(8), e1002619.
+  \url{https://doi.org/10.1371\%2Fjournal.pcbi.1002619}
+\item
+  \textbf{\textbf{Kraft,} R. 
+H.}, \& Molinari, J. 
+F. 
+(2008). 
+A statistical investigation
+  of the effects of grain boundary properties on transgranular fracture.
+  \emph{Acta Materialia}, \emph{56}(17), 10.
+  \url{https://doi.org/10.1016/j.actamat.2008.05.036}
+\item
+  \textbf{\textbf{Kraft,} R. 
+H.}, Molinari, J. 
+F., Ramesh, K. 
+T., \& Warner, D. 
+W. 
+(2008).
+  Computational micromechanics of dynamic compressive loading of a
+  brittle polycrystalline material using a distribution of grain
+  boundary properties. 
+\emph{The Journal of Mechanics and Physics of
+  Solids}, \emph{56}, 23.
+  \url{https://doi.org/10.1016/j.jmps.2008.03.009}
+\end{enumerate}
+
+\subsubsection{Conference Proceedings}\label{conference-proceeding}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \underline{Hannah, T.}, \textbf{\textbf{Kraft,} R. 
+H.}, \underline{Martin, V.}, \& Ellis, S. 
+(2023, February).
+  \emph{Impact of imperfect Kolsky bar experiments across different
+  scales using finite elements}. 
+Published.
+  \url{https://doi.org/10.1115/IMECE2022-96816}
+\item
+  \underline{Martin, V.}, \underline{Hannah, T.}, Ellis, S., \& \textbf{\textbf{Kraft,} R. 
+H.} (2023, February).
+  \emph{Towards verification and validation of modeling Dyneema using
+  the embedded finite element method}. 
+Published.
+  \url{https://doi.org/10.1115/IMECE2022-96784}
+\item
+  \underline{Hannah, T.}, \textbf{\textbf{Kraft,} R. 
+H.}, \underline{Martin, V.}, \& Ellis, S. 
+(2021, February).
+  \emph{Implications of statistical spread to experimental analysis in a
+  novel miniature Kolsky bar}. 
+Published.
+  \url{https://doi.org/10.1115/IMECE2020-23976}
+\item
+  Fang, Z., Ranslow, A. 
+N., \& \textbf{\textbf{Kraft,} R. 
+H.} (2016). 
+\emph{Computational
+  micromechanics of trabecular porcine skull bone using the material
+  point method.}. 
+\emph{Volume 3: Biomedical and Biotechnology
+  Engineering}, V003T04A044; 9 pages.
+  \url{https://doi.org/10.1115/IMECE2016-67748}
+\item
+  Motiwale, S., \underline{Subramani, V. 
+V}., Zhou, X., \& \textbf{\textbf{Kraft,} R. 
+H.} (2016).
+  \emph{Damage prediction for a cervical spine intervertebral disc}.
+  \emph{Volume 3: Biomedical and Biotechnology Engineering}.
+  \url{https://doi.org/10.1115/IMECE2016-67711}
+\item
+  Chan, A. 
+H. 
+W., Dhobale, A., Adewole, O., Marinov, T., \textbf{\textbf{Kraft,} R. 
+H.},
+  Cullen, D. 
+K., \& Serruya, M. 
+(2016). 
+\emph{Analysis of spontaneous
+  calcium signals to infer functional connectivity within a novel
+  ``living electrode'' neural construct}. 
+1--2.
+  \url{https://doi.org/10.1109/SPMB.2016.7846870}
+\item
+  Ranslow, A. 
+N., \textbf{\textbf{Kraft,} R. 
+H.}, Shannon, R., De \underline{Tomas-Medina, P.},
+  Radovitsky, R., Jean, A., Hautefeuille, M. 
+P., Fagan, B., Ziegler, K.
+  A., Weerasooriya, T., Dileonardi, A. 
+M., Gunnarsson, A., \& Satapathy,
+  S. 
+(2016). 
+\emph{Microstructural analysis of porcine skull bone
+  subjected to impact loading}. 
+\emph{Volume 3: Biomedical and
+  Biotechnology Engineering}, V003T03A057; 10 pages.
+  \url{https://doi.org/10.1115/IMECE2015-51979}
+\item
+  \underline{Lee, C.}, \& \textbf{\textbf{Kraft,} R. 
+H.} (2016, July). 
+\emph{A coupled
+  reaction-diffusion-strain model for bone growth in the cranial vault}.
+  Published.
+\item
+  Ranslow, A. 
+N., \& \textbf{\textbf{Kraft,} R. 
+H.} (2016, July). 
+\emph{The development of
+  a ``fuzzy'' yield envelope for trabecular porcine skull bone using
+  numerical simulations}. 
+Published.
+\item
+  Motiwale, S., Eppler, W., Hollingsworth, D., Hollingsworth, C.,
+  Morgenthau, J., \& \textbf{\textbf{Kraft,} R. 
+H.} (2016). 
+Application of neural networks
+  for filtering non-impact transients recorded from biomechanical
+  sensors. 
+\emph{Proceedings of the Institute of Electrical and
+  Electronic Engineers (IEEE) International Conference on Biomedical and
+  Health Informatics}, 204--207.
+  \url{https://doi.org/10.1109/BHI.2016.7455870}
+\item
+  Reddy, S. 
+N., Fielding, R. 
+A., \underline{Robinson, M. 
+J}., \& \textbf{\textbf{Kraft,} R. 
+H.}
+  (2015). 
+\emph{A computational study of fracture in the calcaneus under
+  variable impact conditions}. 
+\emph{Volume 3: Biomedical and
+  Biotechnology Engineering}, V003T03A058; 10 pages.
+  \url{https://doi.org/10.1115/IMECE2015-51984}
+\item
+  \textbf{\textbf{Kraft,} R. 
+H.}, \& \underline{Garimella, H. 
+T}. 
+(2015, September). 
+\emph{Embedded
+  finite elements for modeling traumatic axonal injury}. 
+Published.
+\item
+  Fielding, R. 
+A., Tan, X. 
+G., Przekwas, A. 
+J., Kozuch, C. 
+D., \& \textbf{Kraft,}
+  R. 
+H. 
+(2015). 
+\emph{High rate impact to the human calcaneus: A
+  micromechanical analysis}. 
+\emph{Volume 3: Biomedical and
+  Biotechnology Engineering}, V003T03A009, (8 pages).
+  \url{https://doi.org/10.1115/IMECE2014-38930}
+\item
+  \underline{Garimella, H. 
+T}., Yaun, H., Johnson, B. 
+D., Slobounov, S., \& \textbf{Kraft,}
+  R. 
+H. 
+(2014). 
+\emph{Anisotropic constitutive model of human brain with
+  intravoxel heterogeneity of fiber orientation using diffusion spectrum
+  imaging (DSI)}. 
+\emph{Volume 3: Biomedical and Biotechnology
+  Engineering}, V003T03A011; 9 pages.
+  \url{https://doi.org/10.1115/IMECE2014-39107}
+\item
+  Makwana, A. 
+R., Krishna, A. 
+R., Yuan, H., \textbf{\textbf{Kraft,} R. 
+H.}, Zhou, X.,
+  Przekwas, A. 
+J., \& Whitley, P. 
+(2014). 
+\emph{Towards a
+  micromechanical model of intervertebral disc degeneration under cyclic
+  loading}. 
+V003T03A012; 7 pages.
+  \url{https://doi.org/10.1115/IMECE2014-39174}
+\item
+  \underline{Lee, C.}, Richtsmeier, J. 
+T., \& \textbf{\textbf{Kraft,} R. 
+H.} (2014). 
+\emph{A
+  multiscale computational model for the growth of the cranial vault in
+  craniosynostosis}. 
+V009T12A061; 6 pages.
+  \url{https://doi.org/10.1115/IMECE2014-38728}
+\item
+  Fielding, R. 
+A., \textbf{\textbf{Kraft,} R. 
+H.}, Ryan, T. 
+M., \& Stecko, T. 
+D. 
+(2014,
+  July). 
+\emph{A micromechanics-based simulation of calcaneus fracture
+  and fragmentation due to impact loading}. 
+Published.
+\item
+  Zhang, J., Merkle, A. 
+C., Carneal, C. 
+M., Armiger, R. 
+S., \textbf{Kraft,} R.
+  H., Ward, E. 
+E., Ott, K. 
+A., Wickwire, A. 
+C., Dooley, C. 
+J., Harrigan,
+  T. 
+P., \& Roberts, J. 
+C. 
+(2013, September). 
+\emph{Effects of
+  torso-borne mass and loading severity on early response of the lumbar
+  spine under high-rate vertical loading}. 
+Published.
+\item
+  \textbf{\textbf{Kraft,} R. 
+H.}, Dagro, A. 
+M., McKee, P. 
+J., Grafton, S. 
+T., Vettel, J.,
+  McDowell, K., Vindiola, M., \& Merkle, A. 
+C. 
+(2013). 
+\emph{Combining
+  the finite element method with structural network-based analysis for
+  modeling neurotrauma}. 
+4.
+\item
+  Scheidler, M., Fitzpatrick, J., \& \textbf{\textbf{Kraft,} R. 
+H.} (2011). 
+\emph{Optimal
+  pulse shapes for SHPB tests on soft materials: Vol. 
+1} (T. 
+Proulx,
+  Ed.; pp. 
+259--268). 
+Society for Experimental Mechanics Series, Dynamic
+  Behavior of Materials.
+  \url{https://doi.org/10.1007/978-1-4614-0216-9_37}
+\item
+  \textbf{\textbf{Kraft,} R. 
+H.}, Lynch, M. 
+L., \& Vogel, E. 
+W. 
+(2011).
+  \emph{Computational failure modeling of lower extremities}.
+  \emph{RTO-MP-HFM-207AC/323(HFM-207)}.
+\item
+  Clayton, J. 
+D., \& \textbf{\textbf{Kraft,} R. 
+H.} (2011). 
+Mesoscale modeling of dynamic
+  failure of ceramic polycrystals. 
+\emph{Advances in Ceramic Armor VII:
+  Ceramic Engineering and Science Proceedings}, \emph{32}, 237--248.
+\item
+  Vettel, J. 
+M., Bassett, D. 
+S., \textbf{\textbf{Kraft,} R. 
+H.}, \& Grafton, S. 
+T. 
+(2010,
+  December). 
+\emph{Physics-based models of brain structure connectivity
+  informed by diffusion weighted imaging}. 
+Published.
+\item
+  Gazonas, G. 
+A., McCauley, J. 
+W., \textbf{\textbf{Kraft,} R. 
+H.}, Love, B. 
+M., Clayton,
+  J. 
+D., Casem, D., Dandekar, D., Rice, B., Batyrev, I., Weingarten, N.
+  S., \& Schuster, B. 
+E. 
+(2010, November). 
+\emph{Multiscale modeling of
+  armor ceramics: Focus on AlON}. 
+Published.
+\item
+  Scheidler, M., \& \textbf{\textbf{Kraft,} R. 
+H.} (2010). 
+\emph{Inertial effects in
+  compression Hopkinson bar tests on soft materials} (C. 
+P. 
+Hoppel,
+  Ed.). 
+U.S. 
+Army Research Laboratory, 1st Annual ARL Ballistic
+  Technology Workshop.
+\item
+  \textbf{\textbf{Kraft,} R. 
+H.}, Batyrev, I., \underline{Lee, S.}, Rollett, A. 
+D., \& Rice, B.
+  (2010). 
+Multiscale modeling of armor ceramics. 
+In S. 
+M. 
+J. 
+J. 
+Swab \&
+  T. 
+Ohji (Eds.), \emph{Advances in Ceramics Armor VI: Ceramic
+  Engineering and Science Proceedings: Vol. 
+31}. 
+John Wiley \& Sons,
+  Inc. 
+\url{https://doi.org/10.1002/9780470944004}
+\item
+  Wereszczak, A. 
+A., \& \textbf{\textbf{Kraft,} R. 
+H.} (2003). 
+\emph{Flexural and
+  torsional resonances of ceramic tiles via impulse excitation of
+  vibration: Vol. 
+24} (W. 
+M. 
+Kriven \& H. 
+T. 
+Lin, Eds.; 4th ed., pp.
+  207--213). 
+27th Annual Conference on Advanced Ceramics and Composites:
+  B: Ceramic Engineering and Science Proceedings.
+  \url{https://doi.org/10.1002/9780470294826.ch31}
+\item
+  Wereszczak, A. 
+A., \& \textbf{\textbf{Kraft,} R. 
+H.} (2002). 
+\emph{Instrumented Hertzian
+  indentation of armor ceramics: Vol. 
+23} (H. 
+T. 
+Lin \& M. 
+Singh, Eds.;
+  3rd ed., p. 
+11). 
+26th Annual Conference on Composites, Advanced
+  Ceramics, Materials, and Structures: A: Ceramic Engineering and
+  Science Proceedings. 
+\url{https://doi.org/10.1002/9780470294741.ch7}
+\end{enumerate}
+
+\subsubsection{Preprints and Technical Reports}\label{other}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Marinov, T., Yuchi, L., Adewole, D. 
+O., Cullen, D. 
+K., \& \textbf{\textbf{Kraft,} R. 
+H.}
+  (published). 
+A computational model of bidirectional axonal growth in
+  micro-tissue engineered neuronal networks (micro-TENNs). 
+In
+  \emph{bioRxiv}. 
+Cold Spring Harbor Laboratory.
+  \url{https://doi.org/10.1101/369843}
+\item
+  Gerber, J. 
+I., \textbf{\textbf{Kraft,} R. 
+H.}, \& \underline{Garimella, H. 
+T}. 
+(2018). 
+Computation
+  of history-dependent mechanical damage of axonal fiber tracts in the
+  brain: towards tracking sub-concussive and occupational damage to the
+  brain. 
+In \emph{bioRxiv}. 
+\url{https://doi.org/10.1101/346700}
+\item
+  \underline{Garimella, H. 
+T}., \underline{Menghani, R.}, Gerber, J. 
+I., Sridhar, S., \& \textbf{Kraft,}
+  R. 
+H. 
+(2018). 
+Embedded finite elements for modeling axonal injury. 
+In
+  \emph{engrXiv}. 
+\url{https://doi.org/10.31224/osf.io/2dx5e}
+\item
+  Adewole, D. 
+O., Struzyna, L. 
+A., Harris, J. 
+P., Nemes, A. 
+D., Burrell,
+  J. 
+C., Petrov, D., \textbf{\textbf{Kraft,} R. 
+H.}, Chen, I., Serruya, M. 
+D., Wolf, J.
+  A., \& Cullen, K. 
+(2018). 
+Optically-controlled ``living electrodes''
+  with long-projecting axon tracts for a synaptic brain-machine
+  interface. 
+In \emph{bioRxiv}. 
+\url{https://doi.org/10.1101/333526}
+\item
+  Dagro, A. 
+M., McKee, P. 
+J., \textbf{\textbf{Kraft,} R. 
+H.}, Zhang, T. 
+G., \& Satapathy,
+  S. 
+S. 
+(2013). 
+A preliminary investigation of traumatically induced
+  axonal injury in a three-dimensional (3-D) finite element model (FEM)
+  of the human head during blast-loading. 
+In \emph{Army Research
+  Laboratory Technical Report (ARL-TR-6504)}.
+\item
+  Vettel, J., Dagro, A. 
+M., Gordon, S., Kerick, S., \textbf{\textbf{Kraft,} R. 
+H.}, Luo,
+  S., Rawal, S., Vindiola, M., \& McDowell, K. 
+(2012). 
+Brain
+  structure-function couplings (FY11). 
+In \emph{Army Research Laboratory
+  Technical Report (ARL-TR-5893)}.
+\item
+  \textbf{\textbf{Kraft,} R. 
+H.}, \& Wozniak, S. 
+L. 
+(2011). 
+A review of computational
+  spinal injury biomechanics research and recommendations for future
+  efforts. 
+In \emph{Army Research Laboratory Technical Report
+  (ARL-TR-5673)}.
+\item
+  \textbf{\textbf{Kraft,} R. 
+H.}, \& Dagro, A. 
+M. 
+(2011). 
+Design and implementation of a
+  numerical technique to inform anisotropic hyperelastic finite element
+  models using diffusion-weighted imaging. 
+In \emph{Army Research
+  Laboratory Technical Report (ARL-TR-5796)}.
+\item
+  Clayton, J. 
+D., \& \textbf{\textbf{Kraft,} R. 
+H.} (2011). 
+Mesoscale modeling of dynamic
+  failure of ceramic polycrystals. 
+In \emph{Army Research Laboratory
+  Reprint (ARL-RP-328)}.
+\item
+  Gozonas, G. 
+A., McCauley, J. 
+W., Batyrev, I. 
+G., Casem, D., Clayton,
+  J. 
+D., Dandekar, D. 
+P., \textbf{\textbf{Kraft,} R. 
+H.}, Love, B. 
+M., Rice, B. 
+M.,
+  Schuster, B. 
+E., \& Weingarten, N. 
+S. 
+(2011). 
+Multiscale modeling of
+  armor ceramics: Focus on AlON. 
+In \emph{Army Research Laboratory
+  Reprint (ARL-RP-337)}.
+\item
+  Vettel, J. 
+M., Bassett, D., \textbf{\textbf{Kraft,} R. 
+H.}, \& Grafton, S. 
+(2010).
+  Physics-based models of brain structure connectivity informed by
+  diffusion-weighted imaging. 
+In \emph{Army Research Laboratory
+  Technical Reprint (ARL-RP-0355)}. 
+U.S. 
+Army Research Laboratory.
+\item
+  Wereszczak, A. 
+A., Swab, J. 
+J., \& \textbf{\textbf{Kraft,} R. 
+H.} (2005). 
+Effects of
+  machining on the uniaxial and equibiaxial flexure strength of CAP3
+  AD-995 Al2O3. 
+In \emph{Army Research Laboratory Technical Report
+  (ARL-TR-3617)}.
+\item
+  Swab, J. 
+J., Wereszczak, A. 
+A., Tice, J., Caspe, R., \textbf{\textbf{Kraft,} R. 
+H.}, \&
+  Adams, J. 
+(2005). 
+Mechanical and thermal properties of advanced
+  ceramics for gun barrel applications. 
+In \emph{Army Research
+  Laboratory Technical Report (ARL-TR-3417)}.
+\end{enumerate}
+
+\subsection{PRESENTATIONS}\label{presentations}
+
+\subsubsection{Invited Talks and Seminars}\label{invited}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Kraft, R. 
+H., The American Society of Mechanical Engineers (ASME)
+  International Mechanical Engineering Congress \& Exposition (IMECE)
+  2022, ``New Trends in Medical Devices Technology,'' Columbus, Ohio.
+\item
+  Kraft, R. 
+H., IRCOBI Pre-conference Workshop: Wearable Technologies
+  for the Study of Head Injury: Applications, Challenges, and
+  Opportunities, ``High throughput multiscale modeling of axonal fiber
+  bundles in the brain of civilian athletes and the military,''
+  International Research Council on Biomechanics of Injury, Porto,
+  Portugal.
+\item
+  Kraft, R. 
+H. 
+(Author), 2022 Mach Conference, ``Metaverse Mechanics: How
+  the metaverse will save mechanics, and how mechanics will safe the
+  metaverse.,'' Hopkins Extreme Materials Institute, Virtual.
+\item
+  Kraft, R. 
+H., Penn State Workshop: Celebrating International Research
+  and Education Partnership (CIREP 2021), ``International collaboration
+  in mechanical engineering,'' Remote.
+\item
+  Kraft, R. 
+H., Penn State Center for Neural Engineering Seminar,
+  ``On-demand, no-click brain simulations,'' University Park, PA.
+\item
+  Kraft, R. 
+H., Mechanical Engineering Department Seminar, ``The
+  emergence of digital health care: a focus on the brain,'' East Lansing,
+  Michigan.
+\item
+  Kraft, R. 
+H., Society for Experimental Mechanics, ``The emergence of
+  digital health care and what it means for experimental mechanics: a
+  focus on the brain,'' Reno, NV.
+\item
+  Kraft, R. 
+H., 16th International Symposium on Computer Methods in
+  Biomechanics and Biomedical Engineering and the 4th Conference on
+  Imaging and Visualization, ``Multiscale modeling of axonal fiber
+  bundles in the brain,'' New York City, NY.
+\item
+  Kraft, R. 
+H., 2019 Summer Biomechanics, Bioengineering and
+  Biotransport Conference (SB3C), ``History dependent damage modelling
+  for axonal fiber tracts of the brain,'' Seven Springs, PA.
+\item
+  Kraft, R. 
+H. 
+(Author and Presenter), 11th Structural Birth Defects
+  Meeting, ``A coupled reaction-diffusion-strain model of bone growth in
+  the cranial vault,'' Society for Developmental Biology, Bethesda, MD.
+\item
+  Kraft, R. 
+H., Invited Speaker, 43rd Northeast Bioengineering
+  Conference, ``Multiscale modeling of the axonal tract level in the
+  brain,'' New Jersey Institute of Technology (NJIT), Department of
+  Biomedical Engineering, Newark, NJ.
+\item
+  Kraft, R. 
+H., Soldier Protection Sciences Branch Seminar Series,
+  ``Recent innovations in modeling the brain,'' Army Research Laboratory,
+  Aberdeen Proving Ground, MD.
+\item
+  Kraft, R. 
+H., Invited Speaker, Engineering Science and Mechanics
+  Seminar Series, ``Modeling axonal fiber tracts in the brain,'' Penn
+  State University, Department of Engineering Science and Mechanics,
+  University Park, PA.
+\item
+  Kraft, R. 
+H., Invited Speaker, Department of Neurosurgery Seminar
+  Series, ``Modeling axonal fiber tracts in the brain,'' University of
+  Pennsylvania, Department of Neurosurgery, Philadelphia, PA.
+\item
+  Kraft, R. 
+H., Invited Speaker, ``Modeling axonal fiber tracts in the
+  brain,'' Penn State University, Department of Biomedical Engineering,
+  University Park, PA.
+\item
+  Kraft, R. 
+H., Guest Lecture, ``Modeling concussions in sports,'' KINES
+  497D: Concussion in Athletics: From Brain to Behavior, University
+  Park, PA.
+\item
+  Kraft, R. 
+H., Biomedical Engineering Seminar Series, ``Modeling damage
+  in axonal fiber tracts,'' New Jersey Institute of Technology,
+  Department of Biomedical engineering, University Heights Newark, New
+  Jersey.
+\item
+  Lee, C. 
+(Author and Presenter), Richtsmeier, J. 
+T. 
+(Author), Kraft, R.
+  H. 
+(Author), 1st Pan American Congresses on Computational Mechanics
+  (PANACM), ``A computational model for biomechanical analysis of bone
+  formation in the cranial vault,'' International Association for
+  Computational Mechanics (IACM), Buenos Aires, Argentina.
+\item
+  Kraft, R. 
+H., Garimella, H. 
+T., 1st Pan American Congresses on
+  Computational Mechanics (PANACM), ``Computational modeling of axonal
+  injury using the embedded element approach,'' International Association
+  for Computational Mechanics (IACM), Buenos Aires, Argentina.
+\item
+  Kraft, R. 
+H., Biomedical Engineering Seminar Series, ``Biomechanics of
+  humans in extreme environments,'' Pontificia Universidad Catolica de
+  Chile, Department of Structural and Geotechnical Engineering,
+  Biomedical Engineering Group, Chile.
+\item
+  Kraft, R. 
+H., ``Damaged connectomes: A physics-based method to degrade
+  brain networks,'' Penn State Center for Neural Engineering, University
+  Park, PA.
+\item
+  Kraft, R. 
+H. 
+(Presenter), Mechanical and Nuclear Engineering Seminar
+  Series, ``The mechanics and response of humans in extreme
+  environments,'' University Park, PA.
+\item
+  Kraft, R. 
+H., Frontiers of Cyberscience Seminar Series, ``The mechanics
+  and response of humans in extreme environments,'' Penn State
+  University, University Park, PA.
+\item
+  Kraft, R. 
+H., Joint Materials/Solid Mechanics Seminar Series,
+  ``Connectome neurotrauma mechanics: Combining the finite element method
+  with structural network-based analysis for modeling neurotrauma,''
+  Brown University, Providence, RI.
+\item
+  Kraft, R. 
+H., Applied Physics Laboratory Biomechanics Seminar Series,
+  ``Computational trauma biomechanics,'' The Johns Hopkins University,
+  Laurel, MD.
+\item
+  Kraft, R. 
+H., SIERRA Seminar Series, ``Biomechanical simulations with
+  Sierra Presto,'' Sandia National Laboratories, Albuquerque, NM.
+\item
+  Kraft, R. 
+H., Exxon Mobil Research Seminar Series, ``Multiscale
+  modeling of brittle materials,'' Exxon Mobil Strategic Research Center,
+  Clinton, NJ.
+\item
+  Kraft, R. 
+H., Computational Solid Mechanics Laboratory Seminar Series,
+  ``High-fidelity computational injury biomechanics,'' Ecole Polytechnique
+  Federale de Lausanne (EPFL), Lausanne, Switzerland.
+\item
+  Kraft, R. 
+H., École Normale Supérieure, ``A finite element based
+  micromechanical damage model for brittle materials under compressive
+  loading,'' Solid Mechanics Seminar Series, Paris, France.
+\item
+  Kraft, R. 
+H., Impact Physics Branch Seminar Series, ``Optimization of a
+  dynamic hardness test methodology,'' U.S. 
+Army Research Laboratory.
+\end{enumerate}
+
+\subsubsection{Conferences and Workshops}\label{uncategorized-presentations}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Kraft, R. 
+H. 
+(Author and Presenter), 2024 Mach Conference, ``The quest
+  to establish finite element brain strain as a cognitive change
+  indicator,'' Annapolis, MD.
+\item
+  Reyes Kadozono, A., Kraft, R. 
+H., Penn State Graduate Exhibition,
+  ``Effect of seat angle on intervertebral disc in pilots exposed to
+  high-G forces,'' Penn State Graduate School, University Park, PA.
+\item
+  Menghani, R. 
+R., Kraft, R. 
+H., Penn State Center for Neural
+  Engineering Fall 2022 Retreat, ``Adding axonal fiber tractography to
+  the brain simulation research platform\hspace{0pt},'' Penn State Center
+  for Neural Engineering, State College, PA.
+\item
+  Menghani, R. 
+(Presenter), Kraft, R. 
+H., 2023 Summer Biomechanics,
+  Bioengineering and Biotransport Conference (SB3C), ``Analyzing real
+  world head impacts using the brain simulation research platform,''
+  Vail, CO.
+\item
+  Huber, C. 
+M. 
+(Presenter), Patton, D. 
+A., Kraft, R. 
+H., Arbogast, K.
+  B., Neurotrauma 2023, ``Head kinematics and brain strain associated
+  with adolescent soccer heading,'' Austin, TX.
+\item
+  Kraft, R. 
+H. 
+(Author and Presenter), Dasans, A., 2023 Mach Conference,
+  ``A scalable platform for modeling blast injuries using sensors, cloud
+  computing, and machine learning,'' Annapolis, MD.
+\item
+  Hannah, T. 
+(Author and Presenter), Kraft, R. 
+H., Martin, V., Ellis,
+  S., ASME 2022 International Mechanical Engineering Congress \&
+  Exposition, ``Impact of imperfect Kolsky bar experiments across
+  different scales using finite elements,'' The American Society of
+  Mechanical Engineers, Columbus, Ohio.
+\item
+  Menghani, R. 
+(Co-Author), Kraft, R. 
+H. 
+(Author and Presenter), Dasans,
+  A., ASME 2022 International Mechanical Engineering Congress \&
+  Exposition, ``Verification and validation of a cloud-based brain
+  computing service,'' The American Society of Mechanical Engineers,
+  Columbus, Ohio.
+\item
+  Kraft, R. 
+H., Dye, C., Mackay, J. 
+C., 2022 Society of Engineering
+  Science Annual Technical Meeting, ``Prediction of facial overpressure
+  using body worn sensors and machine learning algorithms in military
+  blast environments,'' Society of Engineering Science, College Station,
+  Texas.
+\item
+  Menghani, R. 
+R., Kraft, R. 
+H., Penn State Center for Neural
+  Engineering Fall 2022 Retreat, ``The brain simulation research
+  platform: A sensor-enabled automated brain injury prediction service,''
+  Penn State Center for Neural Engineering, State College, PA.
+\item
+  Kraft, R. 
+H., 11th European Solid Mechanics Conference (ESMC2022),
+  ``Prediction of facial overpressure using body worn sensors and machine
+  learning algorithms in military blast environments,'' Galway, Ireland.
+\item
+  Menghani, R. 
+(Co-Author), Kraft, R. 
+H. 
+(Author and Presenter), Dasans,
+  A., Rawat, M., Bartsch, A., ASME 2021 International Mechanical
+  Engineering Congress \& Exposition, ``Cost and scalability analysis of
+  a cloud-based brain computing service,'' The American Society of
+  Mechanical Engineers, Virtual.
+\item
+  Hannah, T. 
+(Author and Presenter), Kraft, R. 
+H. 
+(Author and
+  Presenter), Martin, V. 
+(Co-Author), Ellis, S., ASME 2020 International
+  Mechanical Engineering Congress \& Exposition, ``Implications of
+  statistical spread to experimental analysis in a novel miniature
+  kolsky bar,'' The American Society of Mechanical Engineers, Virtual.
+\item
+  Kraft, R. 
+H. 
+(Author and Presenter), Menghani, R. 
+(Co-Author), ASME
+  2020 International Mechanical Engineering Congress \& Exposition,
+  ``On-demand brain simulations for prediction of cumulative head
+  trauma,'' The American Society of Mechanical Engineers, Virtual.
+\item
+  Martin, V. 
+(Author and Presenter), Kraft, R. 
+H. 
+(Author), Ellis, S.,
+  2020 Mach Conference, ``Multiscale Modeling of Dyneema using the
+  Embedded Element Method,'' Hopkins Extreme Materials Institute, Remote.
+\item
+  Menghani, R. 
+(Author and Presenter), Kraft, R. 
+H., ASME 2019
+  International Mechanical Engineering Congress \& Exposition, ``Effect
+  of an advanced combat helmet on axonal injury caused by primary blast
+  loading,'' The American Society of Mechanical Engineers, Salt Lake
+  City, UT.
+\item
+  Kraft, R. 
+H., ASME 2019 International Mechanical Engineering Congress
+  \& Exposition, ``Sensor-enabled cloud based computational modeling of
+  the brain,'' The American Society of Mechanical Engineers, Salt Lake
+  City, UT.
+\item
+  Subramani, V. 
+V. 
+(Presenter), Whitley, P. 
+E., Garimella, H. 
+T., Kraft,
+  R. 
+H., 2019 Summer Biomechanics, Bioengineering and Biotransport
+  Conference (SB3C), ``Location-wise fatigue damage prediction for the
+  intervertebral disc annulus of the cervical spine,'' Seven Springs, PA.
+\item
+  Kraft, R. 
+H., 4th International Forum on Blast Injury Countermeasures
+  (IFBIC), ``Mechanism-based brain models to study primary blast loading
+  effects on axonal deformation: the past, present and future,'' McLean,
+  VA.
+\item
+  Kraft, R. 
+H. 
+(Author and Presenter), Penn State Institute of the
+  Neurosciences 2019 Neuro-Retreat, ``Multiscale modeling of axonal fiber
+  tracts in the brain,'' Institute of the Neurosciences, University Park,
+  PA.
+\item
+  Kraft, R. 
+H., American Association of Anatomists (AAA) 2019 Annual
+  Meeting, ``Exploring mechanisms of cranial vault development using a
+  coupled Turing-biomechanical model,'' Orlando, FL.
+\item
+  Hannah, T. 
+W. 
+(Author and Presenter), Kraft, R. 
+H. 
+(Author), 2019 Mach
+  Conference, ``Computationally confirmed Kolsky bar: An application to
+  high rate testing of non-ideal Dyneema,'' Hopkins Extreme Materials
+  Institute, Annapolis, MD.
+\item
+  Dolack, M. 
+(Author and Presenter), Lee, C., Richtsmeier, J. 
+T., Kraft,
+  R. 
+H., ASME 2018 International Mechanical Engineering Congress \&
+  Exposition, ``A coupled reaction-diffusion-strain model of Mesenchymal
+  stem cell differentiation into osteoblasts,'' The American Society of
+  Mechanical Engineers, Pittsburgh, PA.
+\item
+  Lee, C., Dolack, M., Richtsmeier, J. 
+T., Kraft, R. 
+H. 
+(Author and
+  Presenter), Center for Engineering MechanoBiology (CEMB) 2018
+  Mechanobiology Symposium, ``A new reaction-diffusion-strain model for
+  skull growth and defect formation,'' University of Pennsylvania NSF
+  Center for Engineering MechanoBiology (CEMB), Philadelphia, PA.
+\item
+  Kraft, R. 
+H. 
+(Author and Presenter), Garimella, H. 
+T. 
+(Author), World
+  Congress of Biomechanics, ``Do blast-induced skull flexures result in
+  axonal deformation?,'' Dublin, Ireland.
+\item
+  Kraft, R. 
+H. 
+(Author and Presenter), Garimella, H. 
+T. 
+(Author),
+  Gerber, J. 
+I. 
+(Author), World Congress of Biomechanics, ``Tracking
+  damage in a digital brain,'' Dublin, Ireland.
+\item
+  Kraft, R. 
+H. 
+(Author and Presenter), Slobounov, S. 
+(Author), 2018 Big
+  Ten -- Ivy League Traumatic Brain Injury Summit, ``Athlete-specific
+  digital brain models to characterize every impact,'' Philadelphia, PA.
+\item
+  Hertel, Z. 
+R. 
+(Author and Presenter), Schumacher, S. 
+C. 
+(Author),
+  Kraft, R. 
+H. 
+(Author), 2018 Mach Conference, ``Failure models for soft
+  materials in particle based methods,'' Hopkins Extreme Materials
+  Institute, Annapolis, MD.
+\item
+  Gerber, J. 
+I. 
+(Author and Presenter), Garimella, T. 
+(Author), Kraft,
+  R. 
+H. 
+(Author), ASME 2017 International Mechanical Engineering
+  Congress \& Exposition, ``A computational approach to model damage in
+  axonal fiber tracts of the brain,'' The American Society of Mechanical
+  Engineers, Tampa, FL.
+\item
+  Hertel, Z. 
+R. 
+(Author and Presenter), Schumacher, S. 
+C. 
+(Author),
+  Kraft, R. 
+H. 
+(Author), 2017 Mach Conference, ``Development of a failure
+  model for biological materials within the particle based software
+  Kodiak,'' Hopkins Extreme Materials Institute, Annapolis, MD.
+\item
+  Yuchi, L. 
+(Author and Presenter), Kraft, R. 
+H. 
+(Author), Keystone
+  Connectomics Conference X2, ``Bidirectional growth model of
+  micro-tissue engineered neuronal networks (micro-TENNs),'' Santa Fe,
+  New Mexico.
+\item
+  Dhobale, A. 
+(Author and Presenter), Kraft, R. 
+H. 
+(Author), Keystone
+  Connectomics Conference X2, ``Functional connectivity analysis of
+  micro-tissue engineered neural networks,'' Santa Fe, New Mexico.
+\item
+  Fang, Z. 
+(Author and Presenter), Ranslow, A. 
+N. 
+(Author), Kraft, R. 
+H.
+  (Author), ASME 2016 International Mechanical Engineering Congress \&
+  Exposition, ``Computational micromechanics of trabecular porcine skull
+  bone using the material point method,'' The American Society of
+  Mechanical Engineers, Phoenix, AZ.
+\item
+  Garimella, H. 
+T. 
+(Author), Kraft, R. 
+H. 
+(Author), ASME 2016
+  International Mechanical Engineering Congress \& Exposition,
+  ``Validation of embedded element method in the prediction of white
+  matter disruption in concussions,'' The American Society of Mechanical
+  Engineers, Phoenix, AZ.
+\item
+  Garimella, H. 
+T. 
+(Author and Presenter), Kraft, R. 
+H. 
+(Author), ASME
+  2016 International Mechanical Engineering Congress \& Exposition,
+  ``Disruption in electromechanical behavior of axonal fiber tracts
+  during concussion: A multiscale modeling approach,'' The American
+  Society of Mechanical Engineers, Phoenix, AZ.
+\item
+  Yuchi, L. 
+(Author and Presenter), Kraft, R. 
+H. 
+(Author), Bernstein
+  Conference in Computational Neuroscience, ``Progress on bidirectional
+  growth model of micro-tissue engineered neuronal networks
+  (micro-TENNs),'' Berlin, Germany.
+\item
+  Lee, C. 
+(Author and Presenter), Kraft, R. 
+H. 
+(Author), The 12th World
+  Congress on Computational Mechanics WCCM XII \& The 6th Asia-Pacific
+  Congress on Computational Mechanics APCOM VI, ``A coupled
+  reaction-diffusion-strain model of bone growth in the cranial vault,''
+  International Association for Computational Mechanics (IACM) and the
+  Korean Society for Computational Mechanics (KSCM), Seoul, Korea.
+\item
+  Garimella, H. 
+T. 
+(Author and Presenter), Kraft, R. 
+H. 
+(Author), The
+  12th World Congress on Computational Mechanics WCCM XII \& The 6th
+  Asia-Pacific Congress on Computational Mechanics APCOM VI, ``Modeling
+  the electromechanical behavior of axonal fiber bundles,'' International
+  Association for Computational Mechanics (IACM) and the Korean Society
+  for Computational Mechanics (KSCM), Seoul, Korea.
+\item
+  Kraft, R. 
+H. 
+(Author and Presenter), Garimella, H. 
+T. 
+(Author), The
+  12th World Congress on Computational Mechanics WCCM XII \& The 6th
+  Asia-Pacific Congress on Computational Mechanics APCOM VI, ``Modeling
+  the mechanics of axonal fiber tracts using the embedded element
+  method,'' International Association for Computational Mechanics (IACM)
+  and the Korean Society for Computational Mechanics (KSCM), Seoul,
+  Korea.
+\item
+  Hertel, Z. 
+R. 
+(Author and Presenter), Schumacher, S. 
+C. 
+(Author),
+  Kraft, R. 
+H. 
+(Author), 2016 Mach Conference, ``Implementation of
+  viscoelasticity into the CTH marker method,'' Hopkins Extreme Materials
+  Institute, Annapolis, MD.
+\item
+  Ranslow, A. 
+N. 
+(Author and Presenter), Kraft, R. 
+H. 
+(Author), 2016
+  Mach Conference, ``The computational characterization of the multiaxial
+  failure response of trabecular skull bone,'' Hopkins Extreme Materials
+  Institute, Annapolis, MD.
+\item
+  Motiwale, S. 
+(Author and Presenter), Kraft, R. 
+H. 
+(Author), Penn State
+  13th Annual College of Engineering Research Symposium, ``Understanding
+  impact forces to the brain: Neural networks based impact
+  classification for head impacts in sports,'' Penn State Engineering
+  Graduate Student Council, University Park, PA.
+\item
+  Motiwale, S. 
+(Author and Presenter), Eppler, W. 
+(Author),
+  Hollingsworth, D. 
+(Author), Hollingsworth, C. 
+(Author), Morgenthau, J.
+  (Author), Kraft, R. 
+H. 
+(Author), The IEEE International Conference on
+  Biomedical and Health Informatics (BHI), ``Application of neural
+  networks for filtering non-impact transients recorded from
+  biomechanical sensors,'' IEEE Engineering in Medicine and Biology
+  Society (IEEE-EMBS), Las Vegas, NV.
+\item
+  Garimella, H. 
+T. 
+(Presenter), Kraft, R. 
+H., ASME 2015 International
+  Mechanical Engineering Congress \& Exposition, ``Modeling
+  electromechanical deficits in the human brain,'' The American Society
+  Of Mechanical Engineers, Houston, TX.
+\item
+  Sodha, K. 
+B. 
+(Presenter), Kraft, R. 
+H., ASME 2015 International
+  Mechanical Engineering Congress \& Exposition, ``Exploration of
+  miniaturized Kolsky bar designs for testing soft material properties
+  at high loading rates using finite element modeling,'' The American
+  Society Of Mechanical Engineers, Houston, TX.
+\item
+  Kraft, R. 
+H., Fielding, R. 
+A., 1st Pan American Congresses on
+  Computational Mechanics (PANACM), ``Fracture networks in the human
+  calcaneus due to impact loading,'' International Association for
+  Computational Mechanics (IACM), Buenos Aires, Argentina.
+\item
+  Motiwale, S. 
+(Author and Presenter), Kraft, R. 
+H. 
+(Author), Penn State
+  Neuroscience Retreat, ``Understanding impact forces to the brain:
+  Neural networks based impact classification for head impacts in
+  sports,'' Penn State Institute of the Neurosciences, University Park,
+  PA.
+\item
+  Lee, C. 
+X. 
+(Author and Presenter), Richtsmeier, J. 
+T., Kraft, R. 
+H.,
+  The Mid-Atlantic American Physics Society (APS) Meeting, ``A
+  computational analysis of bone formation in the cranial vault,''
+  University Park, PA.
+\item
+  Lee, C. 
+X. 
+(Presenter), Richtsmeier, J. 
+T. 
+(Author), Kraft, R. 
+H., The
+  Mid-Atlantic American Physics Society (APS) Meeting, ``A computational
+  analysis of bone formation in the cranial vault,'' University Park, PA.
+\item
+  Fielding, R. 
+A., Tan, X. 
+G., Przekwas, A., Kraft, R. 
+H., The
+  Mid-Atlantic American Physics Society (APS) Meeting, ``Finite element
+  modeling of impact and injury to the lower extremity,'' University
+  Park, PA.
+\item
+  Ranslow, A. 
+N., Ziegler, K. 
+A., Satapathy, S. 
+S., Radovitsky, R.,
+  Kraft, R. 
+H., The Mid-Atlantic American Physics Society (APS) Meeting,
+  ``Microstructural analysis of porcine skull bone subjected to impact
+  loading,'' University Park, PA.
+\item
+  Garimella, H. 
+T., Kraft, R. 
+H., The Mid-Atlantic American Physics
+  Society (APS) Meeting, ``Reinforced composite based modeling of axonal
+  injury - A physics based approach,'' University Park, PA.
+\item
+  Garimella, H. 
+T. 
+(Author and Presenter), Kraft, R. 
+H. 
+(Author), The
+  Mid-Atlantic American Physics Society (APS) Meeting, ``Reinforced
+  composite based modeling of axonal injury - A physics based approach,''
+  University Park, PA.
+\item
+  Kraft, R. 
+H., ``Towards a micromechanics-based simulation of calcaneus
+  fracture and fragmentation due to impact loading,'' Department of
+  Defense, U.S. 
+Army, Aberdeen Proving Ground, MD.
+\item
+  Zhang, J. 
+(Presenter), Merkle, A. 
+C., Carneal, C. 
+M., Armiger, R. 
+S.,
+  Kraft, R. 
+H., Ward, E. 
+E., Ott, K. 
+A., Wickwire, A. 
+C., Dooley, C. 
+J.,
+  Harrigan, T. 
+P., Roberts, J. 
+C., International Research Council on
+  Biomechanics of Injury, ``Effects of torso-borne mass and loading
+  severity on early response of the lumbar spine under high-rate
+  vertical loading,'' Sweden.
+\item
+  Kraft, R. 
+H., Dagro, A. 
+M., McKee, P. 
+J., Grafton, S. 
+T., Vettel, J.,
+  McDowell, K., Vindiola, M., Merkle, A. 
+C., 11th International
+  Symposium on Computer Methods in Biomechanics and Biomedical
+  Engineering (CMBBE), ``Combining the finite element method with
+  structural network-based analysis for modeling neurotrauma,'' Salt Lake
+  City, UT.
+\item
+  Kraft, R. 
+H., A Survey of Blast Injury across the Full Landscape of
+  Military Science, ``Computational failure modeling of lower
+  extremities,'' NATO-HFM-207 Panel, Halifax, Canada.
+\item
+  Kraft, R. 
+H., U.S. 
+Army Research Laboratory/U.S. 
+Army Medical Research
+  and Material Command Home on Home Workshop, ``Spine modeling efforts
+  and opportunities for future work,'' U.S Army Research Laboratory
+  Research Portfolio Showcase, Aberdeen Proving Ground, MD.
+\item
+  Kraft, R. 
+H., Office of the Surgeon General, ``BrainAid: A smartphone
+  app for field-deployable multimodal screening and detection of mild
+  traumatic brain injury,'' San Antonio, TX.
+\item
+  Kraft, R. 
+H., Neurodiagnostic for the Battlefield, ``BrainAid: A
+  smartphone app for field-deployable multimodal screening and detection
+  of mild traumatic brain injury,'' U.S. 
+Medical Research and Materiel
+  Command, Fort Detrick, MD.
+\item
+  Kraft, R. 
+H., Department of Defense/Department of Energy Neural
+  Restoration Workshop at the Center for Neurotechnology Studies of the
+  Potomac Institute for Policy Studies, ``A structural mechanics-based
+  approach for predicting neural deficits,'' Arlington, VA.
+\item
+  Cullen, D. 
+K. 
+(Presenter), Kraft, R. 
+H., Biomedical Engineering
+  Society Annual Meeting, ``Macro- to micro- biomechanics of traumatic
+  brain injury,'' Austin, TX.
+\item
+  Kraft, R. 
+H., U.S. 
+Army Research Laboratory\textquotesingle s
+  Accelerative Injury Workshop, ``A finite element-based comparative
+  study between high rate accelerative and blast-induced head trauma,''
+  Aberdeen Proving Ground, MD.
+\item
+  Kraft, R. 
+H., U.S. 
+Army Research Laboratory\textquotesingle s
+  Accelerative Injury Workshop, ``Development of a computational
+  framework for high rate injury biomechanics of lower extremities,''
+  Aberdeen Proving Ground, MD.
+\item
+  Kraft, R. 
+H., Defense and Veterans Brain Injury Center/Combat Casualty
+  Care Research Program of the U.S. 
+Army Medical Research and Materiel
+  Command/National Institutes of Neurological Disorders and Stroke of
+  the National Institute of Health at the Advanced Technology
+  Applications for Combat Casualty Care Conference, ``Recommendations for
+  a field deployable diagnostic device for mild traumatic brain injury,''
+  St. 
+Pete\textquotesingle s Beach, FL.
+\item
+  Cullen, D. 
+K. 
+(Presenter), Kraft, R. 
+H., Neurotrauma Society Annual
+  Meeting, ``Determining trauma-specific neuropathology based on macro-
+  to micro-injury biomechanics,'' Las Vegas, NV.
+\item
+  Kraft, R. 
+H., 1st Annual Ballistic Protection Technologies Workshop,
+  ``High rate computational brain injury biomechanics: Linkages with
+  simulation-based neurophysiology,'' Rockville, MD.
+\item
+  Kraft, R. 
+H., The Technical Cooperation Program (TTCP), ``High fidelity
+  computational injury biomechanics,'' The Defence Science and Technology
+  Laboratory (DSTL), Porton Down, UK.
+\item
+  Kraft, R. 
+H., Department of Defense Brain Injury Computational
+  Modeling Expert Panel Meeting, ``High rate computational brain injury
+  biomechanics: Linkages with simulation-based neurophysiology,''
+  Chantilly, VA.
+\item
+  Kraft, R. 
+H., American Ceramics Society International Conference and
+  Exposition, ``Multiscale modeling of armor ceramics,'' Daytona Beach,
+  FL.
+\item
+  Kraft, R. 
+H., Neural Restoration Workshop, ``A structural
+  mechanics-based approach for predicting neural deficits,'' Potomac
+  Institute for Policy Studies, Albuquerque, NM.
+\item
+  Kraft, R. 
+H., 8th World Congress on Computational Mechanics, ``A
+  micromechanics-based multiscale approach for simulating dynamic crack
+  propagation,'' Lido Island, Venice, Italy.
+\item
+  Kraft, R. 
+H., American Physics Society Topical Group on Shock
+  Compression of Condensed Matter, ``A parallel multiscale model for
+  brittle materials using a finite element based micromechanical model
+  and homogenization theory,'' Kona, Hawaii.
+\item
+  Kraft, R. 
+H., American Ceramics Society International Conference and
+  Exposition, ``Macroscopic measures of strength and damage computed from
+  physically-based mechanisms at the micro-level,'' Cocoa Beach, FL.
+\item
+  Kraft, R. 
+H., 9th U.S. 
+National Congress on Computational Mechanics,
+  ``Finite element based modeling of damage in brittle materials: From
+  micro to macro,'' San Francisco, CA.
+\item
+  Kraft, R. 
+H., 17th US Army Symposium on Solid Mechanics, ``Finite
+  element based micromechanical modeling of brittle materials under
+  compressive loading,'' Baltimore, MD.
+\item
+  Kraft, R. 
+H., American Society of Mechanical Engineers International
+  Congress, ``A finite element based micromechanical damage model for
+  brittle materials under compressive loading,'' Orlando, FL.
+\item
+  Kraft, R. 
+H., American Ceramics Society International Conference and
+  Exposition, ``A computational framework for intergranular and cleavage
+  fracture,'' Daytona Beach, FL.
+\item
+  Kraft, R. 
+H., American Society of Mechanical Engineers International
+  Congress, ``Controlling microcracking events in ceramics: A grain
+  boundary engineering approach,'' Orlando, FL.
+\item
+  Kraft, R. 
+H., MRS Fall Meeting, ``A numerical model for intergranular
+  and cleavage fracture in ceramic materials,'' Boston, MA.
+\end{enumerate}
+
+\subsection{CONTRACT, FELLOWSHIPS, GRANTS AND SPONSORED RESEARCH}\label{contract-fellowships-grants-and-sponsored-research}
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``Development of Predictive Disc
+Degeneration Simulations for Pilots,'' Sponsored by Air Force Research
+Laboratory, Federal Agencies, \$359,796.00. 
+(September 30, 2022 -
+September 30, 2025).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``Examining the link between
+finite element-based strain predictions and cognitive changes.,''
+Sponsored by Chuck Noll Foundation {[}MP{]}, Nonprofit Foundations,
+\$77,589.00. 
+(August 1, 2022 - August 1, 2024).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``Elucidating High Strain Rate
+Deformation Mechanisms in Penetration-Resistant Composites,'' Sponsored
+by Triad National Security, LLC (was LANL - Los Alamos National
+Laboratory), Federal Laboratories, \$214,423.00. 
+(June 16, 2022 - June
+30, 2024).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``Unfunded Collaborative Research
+Agreement - Sports \& Wellbeing Analytics,'' Sponsored by Sports \&
+Wellbeing Analytics, Corporations, \$1.00. 
+(March 17, 2021 - March 16,
+2024).
+
+Hill, K., Kraft, R. 
+H. 
+(Principal Investigator), ``CAREER: Multiscale
+Modeling of Axonal Fiber Bundles in the Brain,'' Sponsored by National
+Science Foundation, Federal Agencies, \$396,514.00. 
+(February 15, 2019 -
+January 31, 2024).
+
+Hillman, M. 
+(Principal Investigator), Kraft, R. 
+H. 
+(Co-Principal
+Investigator), Warn, G. 
+P. 
+(Principal Investigator), ``STTR PHASE II
+Enhancing Thermo-Mechanically Coupled Computational Models for
+High-Temperature Impact and Fracture,'' Sponsored by Karagozian \& Case,
+Inc., Corporations, \$179,000.00. 
+(July 1, 2021 - December 2, 2023).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``Occupational mTBI from repeated
+exposure to low-level blast,'' Sponsored by Biokinetics and Associates
+Ltd, Corporations, \$111,000.00. 
+(May 1, 2022 - March 31, 2023).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``Development of a Novel Ballistic
+Armor Concept using FEM,'' Sponsored by Triad National Security, LLC (was
+LANL - Los Alamos National Laboratory), Federal Laboratories,
+\$56,363.00. 
+(July 24, 2017 - March 31, 2022).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``An Exploration of the Material
+Point Method (MPM) in CTH Applied to Soft Material Systems Subjected to
+Dynamic Loading (Continuation),'' Sponsored by Sandia National
+Laboratories, Federal Laboratories, \$50,000.00. 
+(February 2, 2017 -
+December 31, 2021).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``Development of Predictive Disc
+Degeneration Simulations for Pilots,'' Sponsored by Air Force Research
+Laboratory, Federal Agencies, \$39,315.00. 
+(February 22, 2021 - August
+21, 2021).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``Head Kinematics Experimentation
+and Data Analysis,'' Sponsored by SURVICE Engineering Company, LLC,
+Corporations, \$5,000.00. 
+(September 1, 2020 - May 31, 2021).
+
+Richtsmeier, J. 
+T. 
+(Principal Investigator), Drew, P. 
+(Co-Principal
+Investigator), Kraft, R. 
+H. 
+(Co-Principal Investigator),
+``Craniosynostosis Network (formerly award number 0254-3543-4609),''
+Sponsored by Icahn School of Medicine at Mount Sinai, Universities and
+Colleges, \$322,692.00. 
+(February 1, 2016 - January 31, 2021).
+
+Niyibizi, C. 
+(Co-Investigator), Kraft, R. 
+H. 
+(Co-Investigator),
+Szczesny, S. 
+(Principal Investigator), Wong, P. 
+K. 
+(Co-Investigator),
+``Stem Cell Mechanotransduction with Tendon Fatigue,'' Sponsored by
+University of Pittsburgh, Universities and Colleges, \$50,335.00. 
+(July
+1, 2019 - June 30, 2020).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``SBIR Phase II: Global-Local
+Modeling of Aircraft Occupant Safety Assessment during Ejection (Air
+Force Phase II SBIR),'' Sponsored by CFD Research Corporation,
+Corporations, \$139,494.00. 
+(October 25, 2017 - January 20, 2020).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``Development of Commercial Tools
+for Brain Modeling,'' Sponsored by CFD Research Corporation,
+Corporations, \$70,637.00. 
+(November 15, 2017 - September 15, 2019).
+
+Niyibizi, C. 
+(Co-Investigator), Kraft, R. 
+H. 
+(Co-Investigator),
+Szczesny, S. 
+(Principal Investigator), Wong, P. 
+K. 
+(Co-Investigator),
+``Stem Cell Mechanotransduction with Tendon Fatigue,'' Sponsored by
+University of Pittsburgh, Universities and Colleges, \$49,666.00. 
+(July
+1, 2018 - June 30, 2019).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``NEUP: Multilayer Composite Fuel
+Cladding for LWR Performance Enhancement and Severe Accident Tolerance,''
+Sponsored by Massachusetts Institute of Technology, Universities and
+Colleges, \$50,000.00. 
+(October 1, 2015 - June 30, 2019).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``Embedded Finite Elements for a
+Multiscale, Multifunctional Approach for Modeling Axonal Bundles,''
+Sponsored by SURVICE Engineering Company, LLC, Corporations,
+\$114,460.00. 
+(December 13, 2017 - March 13, 2019).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``Biological Living Electrodes
+Using Tissue Engineered Axonal Tracts to Probe and Modulate the Nervous
+System (Previously Agreement \#569770),'' Sponsored by Pennsylvania,
+University of, Universities and Colleges, \$124,527.00. 
+(August 1, 2017
+- July 31, 2018).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``STTR Phase I: Synchronizing
+Video Imagery with Wearable Sensor Data and Side-by-Side Modeling
+Software to Develop Healthy Habits in Children,'' Sponsored by CoachSafe
+PlaySafe, LLC, Corporations, \$132,750.00. 
+(July 1, 2016 - June 30,
+2018).
+
+Richtsmeier, J. 
+T. 
+(Principal Investigator), Drew, P. 
+(Co-Principal
+Investigator), Kraft, R. 
+H. 
+(Co-Principal Investigator), Rizk, E. 
+B.
+(Co-Principal Investigator), ``Craniosynostosis Network,'' Sponsored by
+Icahn School of Medicine at Mount Sinai, Universities and Colleges,
+\$374,032.00. 
+(February 1, 2015 - January 31, 2018).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``Embedded Finite Elements for a
+Multiscale, Multifunctional Approach for Modeling Axonal Bundles,''
+Sponsored by IAP Worldwide Services, Inc., Corporations, \$107,684.00.
+(October 1, 2016 - September 24, 2017).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``Microstructural Analysis of
+Porcine Skull Bone Subjected to Impact Loading,'' Sponsored by
+Massachusetts Institute of Technology, Universities and Colleges,
+\$98,000.00. 
+(July 1, 2014 - September 1, 2017).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``Biological Living Electrodes
+Using Tissue Engineered Axonal Tracts to Probe and Modulate the Nervous
+System (Previously Agreement \#568000),'' Sponsored by Pennsylvania,
+University of, Universities and Colleges, \$122,898.00. 
+(August 1, 2016
+- July 31, 2017).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``SBIR: Phase II: A Neck Injury
+Assessment Tool for Prolonged Wear of Head Supported Mass,'' Sponsored by
+CFD Research Corporation, Corporations, \$69,086.00. 
+(April 21, 2015 -
+June 14, 2017).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``SBIR Phase II: Physics and
+Physiology Based Human Body Model of Blast Injury and Protection,''
+Sponsored by CFD Research Corporation, Corporations, \$100,000.00.
+(April 1, 2015 - May 31, 2017).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``Global-Local Modeling of
+Aircraft Occupant Safety Assessment during Ejection (Air Force SBIR
+Phase I),'' Sponsored by CFD Research Corporation, Corporations,
+\$22,000.00. 
+(August 4, 2016 - April 15, 2017).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``An Exploration of the Material
+Point Method (MPM) in CTH Applied to Soft Material Systems Subjected to
+Dynamic Loading,'' Sponsored by Sandia National Laboratories, Federal
+Laboratories, \$190,644.00. 
+(January 16, 2015 - December 31, 2016).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``Biological Living Electrodes
+Using Tissue Engineered Axonal Tracts to Probe and Modulate the Nervous
+System,'' Sponsored by Pennsylvania, University of, Universities and
+Colleges, \$120,313.00. 
+(September 30, 2015 - July 31, 2016).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``A Neck Injury Assessment Tool
+for Prolonged Wear of Head Supported Mass,'' Sponsored by CFD Research
+Corporation, Corporations, \$18,568.00. 
+(January 15, 2014 - August 14,
+2014).
+
+Kraft, R. 
+H. 
+(Principal Investigator), ``Physics and Physiology Based
+Human Body Model of Blast Injury and Protection,'' Sponsored by CFD
+Research Corporation, Corporations, \$36,000.00. 
+(January 7, 2014 -
+August 6, 2014).
+
+\subsection{INTELLECTUAL PROPERTY}\label{intellectual-property}
+
+Kraft, R. 
+H. 
+``Brain Simulation Technology.'' (Application: 2017).
+
+Kraft, R. 
+H. 
+``SmartGear: Instrumented Wrestling Headgear using Sensors.''
+(Application: 2017).
+
+Kraft, R. 
+H. 
+``Method and Apparatus for Multimodal Mobile Screening to
+Quantitatively Detect Brain Function Impairment.'' (Application:
+September 2011).
+
+\subsection{DIRECTED STUDENT LEARNING}
+\subsubsection{Ph.D. 
+Dissertation}
+
+\begin{enumerate}
+\item
+  Ryan Grube, ``High strain rate material response of Dyneema'', 2023 - Present
+\item
+  Ann Reyes, ``Modeling of spinal disc degeneration in fighter jet pilots'', 2022 - Present
+\item
+  Ritika Menghani, ``Sensor enabled, cloud-based modeling of the brain'', 2017 - Present
+\item
+  Valarie Martin, ``Modeling Armor Composites Undergoing High Strain Rate Deformation'', 2019 - August 2023
+\item
+  Thomas Hannah, ``Computational and experimental characterization of high strain rate response of Dyneema'', January 2018 - July 2023
+\item
+  Zacarie Hertel, ``An exploration of the Material Point Method (MPM) in CTH applied to soft material systems subjected to dynamic loading'', January 2015 - April 2023
+\item
+  Vikram Subramani, ``Modeling of spinal injury under extreme loading Conditions with emphasis on military loading Scenarios -- a mathematical fatigue damage model and finite element study'', November 2015 - August 2020
+\item
+  Chanyoung Lee, ``A computational analysis of bone formation in the cranial vault using a reaction-diffusion-strain model'', December 2013 - May 2018
+\item
+  Harsha Garimella, ``An embedded element based human head model to investigate axonal injury'', September 2013 - June 2017
+\end{enumerate}
+
+\subsubsection{Master\textquotesingle s Thesis}\label{masters-thesis}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item Fournier, N.,
+ MS. 
+Finite element modeling of gasket interfaces. 
+(November 2023 - Present).
+\item Lovett, J.,
+ MS. 
+Energy based body armor design. 
+Date Graduated: August 2023. 
+(August 2021 - August 2023).
+\item Norris, I., 
+MS. 
+Computational modeling of spinal degeneration in F35 pilots. 
+(November 2020 - December 2022).
+\item Dolack, M.,
+ MS. 
+Computational morphogenesis of embryonic bone development: past, present, and future. 
+(September 2017 - May 2019).
+\item Gerber, J., 
+MS. 
+Development of a history-dependent damage model for the brain due to repetitive impacts. 
+(November 2016 - May 2018).
+\item Dhobale, A.,
+ MS. 
+Assessing functional connectivity of micro-tissue engineered neural networks using calcium fluorescence imaging. 
+(August 2016 - May 2017).
+\item Yuchi, L.,
+ MS. 
+A computational model of bidirectional growth for micro-Tissue Engineered Neuronal Networks (micro-TENNs). 
+(August 2016 - May 2017).
+\item Fang, Z.,
+ MS. 
+MPM methods for modeling trabecular bone. 
+(August 2016 - May 2017).
+\item Motiwale, S.,
+ MS. 
+Modeling intervertebral disc degeneration due to cyclic loading. 
+(January 2015 - May 2016).
+\item Ranslow, A.,
+ MS. 
+Microstructural analysis of porcine skull bone subjected to impact loading. 
+Date Graduated: May 2016. 
+(July 2014 - May 2016).
+\item Fielding, R.,
+ MS. 
+Development of a lower extremity model for high strain rate impact loading. 
+Date Graduated: May 2015. 
+(September 2013 - May 2015).
+\end{enumerate}
+\subsubsection{Postdoctoral Mentorship}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+
+\end{enumerate}
+\subsubsection{Undergraduate Honors
+Thesis}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item Bennett Brown, ``Advanced visualization techniques for brain modeling'', January 2021 - May 2022
+\item Jaskson Mackay, ``Brain impact analysis from overpressure sources through machine learning based on explosion simulations and wearable blast gauges'', January 2021 - May 2022
+\item Ouniol Aklilu, ``Experimental and computational investigation of correlates of diffusion tensor imaging changes and mechanical strain'', August 2018 - May 2021
+\item Lauren Katch, ``Reverse source localization for identification of overpressure sources based on wearable blast gauges'', August 2019 - April 2020
+\item Patrick Casey, ``Behavior of a modeled hip implant insertion device through finite element analysis'', November 2017 - May 2018
+\item Patricia De Tomas-Medina, ``Modeling the response of neurons subjected to high rate deformation: Comparing simulations to experimental results'', January 2015 - May 2018
+\item Marisa Borusiewicz, ``Quantifying the structure of micro-tissue engineered neural networks'', August 2016 - May 2017
+\item Kush Sodha, ``Estimating dynamic properties for biological materials: Design, development, and calibration of a desktop miniaturized double-lap shear Kolsky bar'', September 2014 - May 2016
+\item Michael Robinson, ``The development of an anatomically correct model of calcaneus fracture and fragmentation due to impact loading'', September 2013 - May 2015
+\end{enumerate}\subsection{TEACHING EXPERIENCE}\label{teaching-experience}
+Computational Tools for Engineers (ME 330), 2024, 2022, 2020.
+
+Nonlinear Finite Element Analysis (ME 563), 2024, 2022, 2020, 2018, 2016, 2014.
+
+Machine Design (ME 360), 2022, 2014.
+
+Introduction to Finite Element Analysis (ME 461), 2022, 2020, 2018, 2016.
+
+Development course for Computational Tools for Engineers (ME 497), 2020, 2018.
+
+Capstone Design (ME 440), 2016.
+
+\subsection{SERVICE}\label{service}
+
+\subsubsection{College}\label{college}
+
+Committee Work, Member, ``Engineering laptop Initiative''. 
+(July
+2021 - December 2021).
+
+Committee Work, Member, ``Activity Insight Faculty Users
+Committee''. 
+(October 2017 - December 2020).
+
+Academic Leadership and Support Work, Member, ``College of
+Engineering National Science Foundation CAREER Award Winners''. 
+(April
+2016).
+
+Competition Judging, Judge, ``College of Engineering Symposium
+for Undergraduate Research'', College of Engineering Symposium for
+Undergraduate Research. 
+(April 2014).
+
+\subsubsection{Department}\label{department}
+
+Committee Work, Committee Member, ``Mechanical Engineering
+Promotion and Tenure Committee''. 
+(July 2022 - Present).
+
+Academic Leadership and Support Work, Representative,
+``Biomechanics \& Biodevices Research Supergroup Department Lead''.
+(August 2023 - May 2024).
+
+Committee Work, Chairperson, ``Mechanical Engineering
+Strategic Plan Tracking Committee''. 
+(August 2023 - May 2024).
+
+Committee Work, Member, ``Promotion and Tenure Committee''.
+(August 2023 - May 2024).
+
+Committee Work, Member, ``Research Advancement Committee''.
+(August 2023 - May 2024).
+
+Committee Work, Chairperson, ``Teaching Load Policy
+Committee''. 
+(September 2022 - May 2023).
+
+Academic Leadership and Support Work, Representative,
+``Biomechanics \& Biodevices Research Supergroup Department Lead''.
+(August 2022 - May 2023).
+
+Committee Work, Member, ``Department Facilities Committee''.
+(August 2022 - May 2023).
+
+Committee Work, Member, ``Promotion and Tenure Committee''.
+(August 2022 - May 2023).
+
+Committee Work, Member, ``Research Advancement Committee''.
+(August 2022 - May 2023).
+
+Committee Work, Committee Member, ``Mechanical Engineering
+Strategic Planning Committee''. 
+(January 2022 - December 2022).
+
+Committee Work, Chairperson, ``Teaching Load Policy
+Committee''. 
+(September 2020 - May 2021).
+
+Committee Work, Member, ``Mechanical Engineering Strategic
+Planning Committee''. 
+(August 2019 - September 2020).
+
+Committee Work, Chairperson, ``Joint Faculty Search in
+Mechanical Engineering and the Institute for CyberScience''. 
+(August 2018
+- May 2019).
+
+Committee Work, Member, ``Faculty Search Committee for
+Mechanical Systems in Mechanical Engineering''. 
+(August 2017 - 2018).
+
+Committee Work, Liaison, ``Mechanical Engineering Liaison to
+Institute for CyberScience''. 
+(2017 - 2018).
+
+Committee Work, Member, ``Faculty Search Committee for
+Emerging Areas in Mechanical Engineering''. 
+(August 2016 - 2017).
+
+Committee Work, Member, ``Faculty Search Committee for
+Mechanical Systems in Mechanical Engineering'', Search Committee for
+Mechanical Systems in Mechanical Engineering. 
+(September 2014 - March
+2015).
+
+\subsubsection{University}\label{university}
+
+Committee Work, Chairperson, ``Institute for Computational \&
+Data Sciences Coordinating Committee''. 
+(August 2023 - May 2024).
+
+Committee Work, Committee Member, ``Graduate Council
+Committee on Academic Standards'', Graduate Council Committee on Academic
+Standards. 
+(June 2023 - May 2024).
+
+Committee Work, Committee Member, ``Graduate Council
+Representative to Engineering Faculty''. 
+(June 2023 - May 2024).
+
+Committee Work, Co-Chairperson, ``Institute for Computational
+\& Data Sciences Coordinating Committee''. 
+(August 2022 - May 2023).
+
+Participation in Development/Fundraising Activities, Member,
+``AI/ML Faculty Engagement Team on behalf of Institute for CyberScience''.
+(October 2019 - May 2020).
+
+Participation in Development/Fundraising Activities, Member,
+``Faculty Participant'', Coalition team sent to IBM research headquarters
+on behalf of Institute for CyberScience. 
+(April 2019).
+
+Committee Work, Member, ``Hiring Committee for Project
+Coordinator for Institute for CyberScience''. 
+(March 2019 - April 2019).
+
+\subsubsection{Profession}\label{profession}
+
+Organizing Conferences and Service on Conference Committees,
+``Steering Committee Member (Elected)'', American Society of Mechanical
+Engineering International Mechanical Engineering Congress and Exposition
+(IMECE). 
+(2021 - Present).
+
+Yes, Organizing Conferences and Service on Conference
+Committees, ``Technical Chair (Elected)'', American Society of Mechanical
+Engineering International Mechanical Engineering Congress and Exposition
+(IMECE). 
+(November 2023 - November 2024).
+
+Yes, Organizing Conferences and Service on Conference
+Committees, Co-Organizer, Co-Organizer, ``Organizer for Biological and
+Biomimetic Soft Materials Symposium'', 2024 Mach Conference. 
+(April
+2024).
+
+Yes, Organizing Conferences and Service on Conference
+Committees, ``Vice Technical Chair (Elected)'', American Society of
+Mechanical Engineering International Mechanical Engineering Congress and
+Exposition (IMECE). 
+(November 2022 - November 2023).
+
+Organizing Conferences and Service on Conference Committees,
+Co-Chairperson, Co-Chairperson, ``Chair of Brain and Injury Mechanics
+Symposium'', Brain and Injury Mechanics Symposium, SB3C Conference, Vail,
+Colorado. 
+(June 2023).
+
+Yes, Organizing Conferences and Service on Conference
+Committees, Co-Organizer, Co-Organizer, ``Organizer for Biological and
+Biomimetic Soft Materials Symposium'', 2023 Mach Conference. 
+(April
+2023).
+
+Organizing Conferences and Service on Conference Committees,
+``Primary Organizer and Co-Chairperson'', Damage Biomechanics Symposium at
+the 2022 ASME International Mechanical Engineering Congress and
+Exposition (IMECE). 
+(November 2021 - November 2022).
+
+Organizing Conferences and Service on Conference Committees,
+``Track Co-Chair'', Biomedical \& Biotechnology Engineering Track at the
+2022 ASME International Mechanical Engineering Congress and Exposition
+(IMECE). 
+(November 2021 - November 2022).
+
+Organizing Conferences and Service on Conference Committees,
+Co-Organizer, Co-Organizer, ``Organizer for Injury Biomechanics
+Symposium'', 2022 Society of Engineering Science (SES) Annual Technical
+Meeting. 
+(February 2022 - October 2022).
+
+Organizing Conferences and Service on Conference Committees,
+Co-Organizer, Co-Organizer, ``Primary Organizer and Co-Chairperson'',
+Damage Biomechanics Symposium at the 2021 ASME International Mechanical
+Engineering Congress and Exposition (IMECE). 
+(November 2020 - November
+2021).
+
+Organizing Conferences and Service on Conference Committees,
+Co-Organizer, Co-Organizer, ``Primary Organizer and Co-Chairperson'',
+Damage Biomechanics Symposium at the 2020 ASME International Mechanical
+Engineering Congress and Exposition (IMECE). 
+(November 2019 - November
+2020).
+
+Organizing Conferences and Service on Conference Committees,
+Co-Organizer, Co-Organizer, ``Primary Organizer and Co-Chairperson'',
+Damage Biomechanics Symposium at the 2019 ASME International Mechanical
+Engineering Congress and Exposition (IMECE). 
+(November 2018 - November
+2019).
+
+Organizing Conferences and Service on Conference Committees,
+Co-Chairperson, Co-Chairperson, ``Chair of Brain Biomechanics II -
+Measurement and modeling Symposium'', Brain Biomechanics II - Measurement
+and modeling Symposium, New York City, New York, U.S.A. 
+(August 2019).
+
+Organizing Conferences and Service on Conference Committees,
+Co-Chairperson, Co-Chairperson, ``Chair of Growth Remodeling and Repair
+II: Musculoskeletal System Symposium'', Summer Biomechanics,
+Bioengineering, and Biotransport (SB3C) Conference, Seven Springs,
+Pennsylvania, U.S.A. 
+(June 2019).
+
+Organizing Conferences and Service on Conference Committees,
+Co-Chairperson, Co-Chairperson, ``Primary Organizer and Co-Chairperson'',
+Special symposium on ``Computational Modeling of Morphogenesis: Friend or
+Foe?'' at the annual meeting of American Association of Anatomists (AAA),
+Orlando, Florida. 
+(May 2018 - April 2019).
+
+Organizing Conferences and Service on Conference Committees,
+Co-Organizer, Co-Organizer, ``Primary Organizer and Co-Chairperson'',
+Damage Biomechanics Symposium at 2018 ASME International Mechanical
+Engineering Congress and Exposition (IMECE). 
+(November 2017 - November
+2018).
+
+Organizing Conferences and Service on Conference Committees,
+Co-Organizer, Co-Organizer, ``Co-Organizer'', ``Multiscale Brain Mechanics:
+From Growth to Injury'' Symposium at 18th U.S. 
+National Congress for
+Theoretical and Applied Mechanics. 
+(August 2017 - June 2018).
+
+Organizing Conferences and Service on Conference Committees,
+Co-Organizer, Co-Organizer, ``Primary Organizer and Co-Chairperson'',
+Damage Biomechanics Symposium at the 2017 ASME International Mechanical
+Engineering Congress and Exposition (IMECE). 
+(November 2016 - November
+2017).
+
+Organizing Conferences and Service on Conference Committees,
+Co-Organizer, Co-Organizer, ``Primary Organizer and Co-Chairperson'',
+Damage Biomechanics Symposium at the 2016 ASME International Mechanical
+Engineering Congress and Exposition (IMECE). 
+(November 2015 - November
+2016).
+
+Organizing Conferences and Service on Conference Committees,
+Co-Chairperson, Co-Chairperson, ``Co-Chairperson'', Brain Injury Symposium
+at Summer Biomechanics, Bioengineering, and Biotransport (SB3C)
+Conference, National Harbor, Maryland, U.S.A. 
+(June 2016).
+
+Organizing Conferences and Service on Conference Committees,
+Co-Organizer, Co-Organizer, ``Co-Organizer and Co-Chairperson'', Damage
+Biomechanics Symposium at the 2015 ASME International Mechanical
+Engineering Congress and Exposition (IMECE), Houston, Texas, USA, Damage
+Biomechanics. 
+(December 2014 - November 2015).
+
+Organizing Conferences and Service on Conference Committees,
+Co-Organizer, Co-Organizer, ``Co-Organizer and Co-Chairperson'', Advances
+in Computational Biomechanics Symposium at 2015 Pan-American Congress on
+Computational Mechanics International Conference, Buenos Aires,,
+Argentina. 
+(June 2014 - June 2015).
+
+Organizing Conferences and Service on Conference Committees,
+Co-Organizer, Co-Organizer, ``Co-Organizer and Co-Chairperson'', 2014
+Mid-Atlantic Section (M-AS) of the American Physical Society (APS),
+University Park, Pennsylvania, USA. 
+(January 2014 - October 2014).
+
+\subsubsection{Society}\label{society}
+
+Service to Governmental Agencies, Panelist, Panelist, ``NDSEG
+Fellowship Evaluation Panelist'', National Defense Science and
+Engineering Graduate (NDSEG) Fellowship program. 
+(2015).
+
+\subsection{EDITORIAL BOARD POSITIONS:}\label{editorial-board-positions}
+
+ASME Journal of Engineering and Science in Medical Diagnostics and
+Therapy (JESMDT), Associate Editor. 
+(November 2022 - Present).
+
+Frontiers in Bioengineering and Biotechnology, Associate Editor.
+(November 2014 - Present).
+
+\subsection{PROFESSIONAL MEMBERSHIPS}\label{professional-memberships}
+
+Member, American Society of Mechanical Engineers. 
+(January 2003 -
+Present).
+
+Member, United States Association for Computational Mechanics. 
+(February
+2014 - 2015).
+
+Member, American Physical Society. 
+(May 2013 - 2014).
+
+Member, American Society for Engineering Education. 
+(May 2013 - 2014).
+
+Member, American Society of Biomechanics. 
+(May 2013 - 2014).
+
+
+
+
+\end{document}
