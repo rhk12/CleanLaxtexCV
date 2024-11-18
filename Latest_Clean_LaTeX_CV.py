@@ -2778,7 +2778,7 @@ def main():
     #f = open(r'C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\main.tex', 'r')
     #f = open(r'C:\Users\rhk12\OneDrive - The Pennsylvania State University\resume\CV\main.tex', 'r', encoding='utf-8')
     # Read the document
-    word_text, table_data = read_word_document("word_file_3.docx")
+    word_text, table_data = read_word_document("CV_Data.docx")
 
     # Write the content to a text file
     # with open("doc.txt", "w", encoding="utf-8") as file:
