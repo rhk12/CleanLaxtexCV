@@ -263,7 +263,9 @@ def set_professional_positions(text_content, doc):
 
             if category == 'academic':
                 latex_content += r"""
-                \noindent """ + title_and_employer + " , " + r"\textbf{" + formatted_date + r"}" + r"""\vspace{0.25cm}
+                \begin{itemize}
+                    \item """ + title_and_employer + " , " + r"\textbf{" + formatted_date + r"}" + r"""
+                \end{itemize}
                 """
             else:
                 latex_content += r"""
