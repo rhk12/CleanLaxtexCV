@@ -261,9 +261,14 @@ def set_professional_positions(text_content, doc):
             else:
                 formatted_date = ""
 
-            latex_content += r"""
-            \noindent \parbox[t]{0.8\linewidth}{\raggedright """ + title_and_employer + r"""} \hfill \parbox[t]{0.2\linewidth}{\raggedleft """ + formatted_date + r"""} \\
-            """
+            if category == 'academic':
+                latex_content += r"""
+                \noindent """ + title_and_employer + " , " + r"\textbf{" + formatted_date + r"}" + r"""\vspace{0.25cm}
+                """
+            else:
+                latex_content += r"""
+                \noindent \parbox[t]{0.8\linewidth}{\raggedright """ + title_and_employer + r"""} \hfill \parbox[t]{0.2\linewidth}{\raggedleft """ + formatted_date + r"""} \\
+                """
             
     text_content = text_content.replace("{{positions}}", latex_content)
 
