@@ -1,6 +1,5 @@
 import re
 import datetime
-import datetime
 from docx import Document 
 import unidecode
 
