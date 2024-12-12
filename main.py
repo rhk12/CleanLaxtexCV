@@ -209,6 +209,18 @@ def set_professional_positions(text_content, doc):
                 'Work Performed: If Teacher, List Subjects Taught': 'Responsible for teaching undergraduate and graduate level classes in engineering and leading basic research in the area of computational biomechanics.',
                 'Rank or Title': 'Professor of Mechanical and Biomedical Engineering (Courtesy)', 
                 'Dates': '2024 - 2024'
+            },
+            {
+                'Previous Employers with City/State\nIncluding U.S. Military\n(Most Recent First)': 'The Pennsylvania State University, University Park, PA', 
+                'Work Performed: If Teacher, List Subjects Taught': 'Responsible for teaching undergraduate and graduate level classes in engineering and leading basic research in the area of computational biomechanics.',
+                'Rank or Title': 'Associate Professor of Mechanical and Biomedical Engineering', 
+                'Dates': '2019 - 2024'
+            },
+            {
+                'Previous Employers with City/State\nIncluding U.S. Military\n(Most Recent First)': 'The Pennsylvania State University, University Park, PA', 
+                'Work Performed: If Teacher, List Subjects Taught': 'Responsible for teaching undergraduate and graduate level classes in engineering and leading basic research in the area of computational biomechanics.',
+                'Rank or Title': 'Assistant Professor of Mechanical and Biomedical Engineering', 
+                'Dates': '2013 - 2019'
             }
         ],
         "government" : [],
@@ -225,9 +237,7 @@ def set_professional_positions(text_content, doc):
     for row in table_data:
         rank_or_title = row.get('Rank or Title', '')
         employer = row.get('Previous Employers with City/State\nIncluding U.S. Military\n(Most Recent First)', '')
-        if "Associate Professor" in rank_or_title or "Assistant Professor" in rank_or_title:
-            positions["academic"].append(row)
-        elif "U.S. Army Research Laboratory" in employer:
+        if "U.S. Army Research Laboratory" in employer:
             positions["government"].append(row)
         else:
             positions["professional"].append(row)
@@ -263,10 +273,8 @@ def set_professional_positions(text_content, doc):
 
             if category == 'academic':
                 latex_content += r"""
-                \begin{itemize}
-                    \item """ + title_and_employer + " , " + r"\textbf{" + formatted_date + r"}" + r"""
-                \end{itemize}
-                """
+                \noindent """ + title_and_employer + ", " + r"\textbf{" + formatted_date + r"}" + r"""\vspace{0.25cm}
+                """ 
             else:
                 latex_content += r"""
                 \noindent \parbox[t]{0.8\linewidth}{\raggedright """ + title_and_employer + r"""} \hfill \parbox[t]{0.2\linewidth}{\raggedleft """ + formatted_date + r"""} \\
