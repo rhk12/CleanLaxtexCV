@@ -1795,34 +1795,52 @@ def extract_presentations(word_text, latex_text):
 
     # Begin LaTeX output for presentations
     latex_output = r"""
-\subsection{Presentations}\label{presentations}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
+\subsection*{Papers, Presentations, Seminars, and Workshops}\label{presentations}
 """
 
-    # Helper function to determine if a line is a label or an actual entry
-    def is_content_line(line):
-        # Ignore lines that are just section names or irrelevant headings
-        headings = {"Oral Presentations", "Panels", "Posters", "Seminars", "Posters and Oral Presentations", "and Workshops",'Invited Keynote'}
-        return bool(line.strip()) and line.strip() not in headings and "Won Best Poster Award" and ", and Workshops" not in line
+    def normalize_heading(line):
+        return re.sub(r'^\s*\d+[.)]?\s*', '', line).strip()
+
+    heading_order = [
+        "Demonstrations",
+        "Keynotes/Plenary Addresses",
+        "Oral Presentations",
+        "Panels",
+        "Posters",
+        "Posters and Oral Presentations",
+        "Seminars",
+    ]
 
     # Extract text between markers for each section and add unique entries only
-    for section, (start_marker, end_marker) in section_markers.items():
+    for section in heading_order:
+        start_marker, end_marker = section_markers[section]
         extracted_text = extract_text_between_markers(word_text, start_marker, end_marker)
+        section_entries = []
         
         for entry in extracted_text.splitlines():
-            entry = entry.strip()
-            if is_content_line(entry) and entry not in unique_entries:  # Ensure entry is unique and skip irrelevant lines
+            entry = normalize_heading(entry)
+            if not entry:
+                continue
+            if entry in heading_order:
+                continue
+            if "Won Best Poster Award" in entry:
+                continue
+            if ", and Workshops" in entry:
+                continue
+            if entry not in unique_entries:  # Ensure entry is unique and skip irrelevant lines
                 unique_entries.add(entry)  # Track it to prevent future duplicates
                 formatted_entry = replace_special_characters(format_publication_entry(entry))
                 formatted_entry = formatted_entry.replace("&", r"\&")
                 formatted_entry = re.sub(r'^\\item\s*\d+\.', r'\\item', formatted_entry)  # Clean item numbering
-                latex_output += f"  {formatted_entry}\n"
+                section_entries.append(formatted_entry)
 
-    latex_output += r"""
-\end{enumerate}
-"""
+        if section_entries:
+            latex_output += rf"\subsubsection*{{{section}}}" + "\n"
+            latex_output += "\\begin{enumerate}\n"
+            latex_output += "\\def\\labelenumi{\\arabic{enumi}.}\n"
+            for formatted_entry in section_entries:
+                latex_output += f"  {formatted_entry}\n"
+            latex_output += "\\end{enumerate}\n\n"
 
     # Insert the new presentation section into the LaTeX text
     latex_text += latex_output

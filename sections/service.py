@@ -4,14 +4,32 @@ import re
 from typing import Dict, List, Tuple
 
 from core.io_utils import extract_text_between_markers
-from core.latex_utils import spaced_note
+from core.section_helpers import extract_clean_entries
+from core.latex_utils import tight_note
 
 
 def _clean(text: str) -> str:
-    text = re.sub(r"\s+", " ", text).strip()
-    text = text.replace("&", r"\&")
-    text = text.replace("$", r"\$")
-    text = text.replace("#", r"\#")
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _dedupe_repeated_phrase(text: str) -> str:
+    text = _clean(text)
+
+    # Collapse patterns like "X, X, Role" or "X, Y, Role" when Y is just a
+    # shortened repeat of X.
+    parts = [part.strip() for part in text.split(",")]
+    if len(parts) < 3:
+        return text
+
+    first = parts[0]
+    second = parts[1]
+
+    if _clean(first).lower() == _clean(second).lower():
+        return ", ".join([first] + parts[2:])
+
+    if first.lower().endswith(second.lower()) or second.lower().endswith(first.lower()):
+        return ", ".join([first] + parts[2:])
+
     return text
 
 
@@ -28,10 +46,20 @@ def _normalize_quotes(text: str) -> str:
     return text
 
 
+def _strip_parenthesized_dates(text: str) -> str:
+    cleaned = re.sub(
+        r"\s*\(([^()]*(?:19\d{2}|20\d{2})[^()]*)\)\.",
+        lambda m: f". {m.group(1)}.",
+        text,
+    )
+    return re.sub(r"\.\.\s+", ". ", cleaned)
+
+
 def _extract_entries(block_text: str) -> List[str]:
-    if not block_text:
-        return []
-    return [b.strip() for b in block_text.split("\n\n") if b.strip()]
+    return extract_clean_entries(
+        block_text,
+        noise_entries={"College", "Department", "University", "Society", "National"},
+    )
 
 
 def _categorize_service_entries(entries: List[str]) -> Dict[str, List[Tuple[int, str]]]:
@@ -45,6 +73,7 @@ def _categorize_service_entries(entries: List[str]) -> Dict[str, List[Tuple[int,
 
     for entry in entries:
         entry = _normalize_quotes(_clean(entry))
+        entry = _dedupe_repeated_phrase(entry)
         year = _extract_year(entry)
         lowered = entry.lower()
 
@@ -70,6 +99,8 @@ def _categorize_service_entries(entries: List[str]) -> Dict[str, List[Tuple[int,
                 "college representative",
                 "college",
                 "engineering laptop",
+                "activity insight",
+                "faculty users committee",
             ]
         ):
             categories["College"].append((year, entry))
@@ -113,7 +144,7 @@ def _render_category(title: str, entries: List[Tuple[int, str]]) -> str:
         return ""
     latex = rf"\subsection*{{{title}}}" + "\n\n"
     for _, entry in entries:
-        latex += spaced_note(entry)
+        latex += tight_note(_strip_parenthesized_dates(entry))
     latex += "\n"
     return latex
 

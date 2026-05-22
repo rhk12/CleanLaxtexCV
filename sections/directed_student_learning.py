@@ -4,15 +4,11 @@ import re
 from typing import List, Dict
 
 from core.io_utils import extract_text_between_markers
-from core.latex_utils import latex_quotes
+from core.latex_utils import latex_escape, latex_quotes
 
 
 def _clean(text: str) -> str:
-    text = re.sub(r"\s+", " ", text).strip()
-    text = text.replace("&", r"\&")
-    text = text.replace("$", r"\$")
-    text = text.replace("#", r"\#")
-    return text
+    return re.sub(r"\s+", " ", text).strip()
 
 
 def _extract_entries(section_text: str, split_token: str, label: str) -> List[Dict[str, str]]:
@@ -96,8 +92,8 @@ def _extract_year(text: str) -> int:
 
 def _format_entry(entry: Dict[str, str]) -> str:
     if entry["section"] == "Postdoctoral Mentorship":
-        return rf"\item {entry['author']}, {entry['dates']}"
-    return rf"\item {entry['author']}, {latex_quotes(entry['title'])}, {entry['dates']}"
+        return rf"\item {latex_escape(entry['author'])}, {latex_escape(entry['dates'])}"
+    return rf"\item {latex_escape(entry['author'])}, {latex_quotes(entry['title'])}, {latex_escape(entry['dates'])}"
 
 
 def _limit_entries(entries: List[Dict[str, str]], max_items: int) -> List[Dict[str, str]]:

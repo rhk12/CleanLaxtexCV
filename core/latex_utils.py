@@ -45,8 +45,10 @@ def right_date_line(left_text: str, right_text: str) -> str:
     left = latex_escape(left_text)
     right = latex_escape(right_text)
     return (
-        rf"\noindent \parbox[t]{{0.8\linewidth}}{{\raggedright {left}}} "
-        rf"\hfill \parbox[t]{{0.2\linewidth}}{{\raggedleft {right}}} \\"
+        r"\noindent\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X"
+        r">{\raggedleft\arraybackslash}p{0.18\linewidth}@{}}"
+        rf"{left} & {right}\\"
+        r"\end{tabularx}"
         "\n"
     )
 
@@ -55,10 +57,16 @@ def labeled_line(label: str, value: str) -> str:
     label_esc = latex_escape(label)
     value_esc = latex_escape(value)
     return (
-        rf"\noindent \parbox[t]{{0.8\linewidth}}{{\raggedright \textbf{{{label_esc}:}} {value_esc}}} \\"
+        r"\noindent\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X@{}}"
+        rf"\textbf{{{label_esc}:}} {value_esc}\\"
+        r"\end{tabularx}"
         "\n"
     )
 
 
 def spaced_note(text: str) -> str:
-    return rf"\noindent {latex_escape(text)}\vspace{{0.25cm}}" + "\n"
+    return rf"\noindent {latex_escape(text)}\par\vspace{{0.25cm}}" + "\n"
+
+
+def tight_note(text: str) -> str:
+    return rf"\noindent {latex_escape(text)}\newline" + "\n"

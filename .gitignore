@@ -91,6 +91,16 @@ StyleCopReport.xml
 *.tmp_proj
 *_wpftmp.csproj
 *.log
+*.aux
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.out
+*.toc
+*.pdf
+build/
+build_verify/
+Dossiers/*.docx
 *.vspscc
 *.vssscc
 .builds

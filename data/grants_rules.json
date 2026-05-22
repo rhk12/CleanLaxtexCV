@@ -1,0 +1,40 @@
+{
+  "title_cleanup_patterns": [
+    "\\s*\\(formerly award number[^\\)]*\\)",
+    "\\s*\\(Previously Agreement #[^\\)]*\\)"
+  ],
+  "exclude_entries": [
+    {
+      "match_contains": "Optimizing the Morphogenesis of Stem Cells During Mammalian Embryonic Development in Microgravity",
+      "sponsor_match_contains": "Center for the Advancement of Science in Space"
+    }
+  ],
+  "title_aliases": [
+    {
+      "match": "Craniosynostosis Network",
+      "canonical": "Craniosynostosis Network"
+    }
+  ],
+  "sponsor_overrides": [
+    {
+      "match": "Craniosynostosis Network",
+      "sponsor": "National Institutes of Health"
+    },
+    {
+      "match_contains": "Biological Living Electrodes Using Tissue Engineered Axonal Tracts to Probe and Modulate the Nervous System",
+      "sponsor": "National Institutes of Health"
+    },
+    {
+      "match": "Microstructural Analysis of Porcine Skull Bone Subjected to Impact Loading",
+      "sponsor": "U.S. Army Research Laboratory"
+    },
+    {
+      "match_contains": "Embedded Finite Elements for a Multiscale, Multifunctional Approach for Modeling Axonal Bundles",
+      "sponsor": "U.S. Army Research Laboratory"
+    },
+    {
+      "match_contains": "NEUP: Multilayer Composite Fuel Cladding for LWR Performance Enhancement and Severe Accident Tolerance",
+      "sponsor": "Department of Energy"
+    }
+  ]
+}

@@ -4,6 +4,8 @@ import argparse
 import importlib
 import inspect
 import re
+import subprocess
+from shutil import which
 from datetime import datetime
 from pathlib import Path
 
@@ -39,6 +41,11 @@ def parse_args():
     parser.add_argument("--header-date", type=str, default=datetime.now().strftime("%B %Y"))
     parser.add_argument("--full-cv", action="store_true")
     parser.add_argument("--three-page-cv", action="store_true")
+    parser.add_argument(
+        "--compile-pdf",
+        action="store_true",
+        help="Compile the generated .tex locally into a PDF using latexmk or pdflatex.",
+    )
     parser.add_argument("--verbose", action="store_true")
     return parser.parse_args()
 
@@ -109,11 +116,69 @@ def strip_unreplaced_placeholders(text: str, verbose: bool = False) -> str:
     return re.sub(r"\{\{[A-Za-z0-9_]+\}\}\n*", "", text)
 
 
+def compile_latex(tex_path: Path, verbose: bool = False) -> Path:
+    if not tex_path.exists():
+        raise FileNotFoundError(f"LaTeX source not found: {tex_path}")
+
+    workdir = tex_path.parent
+    build_dir = workdir / "build"
+    tex_name = tex_path.name
+    build_dir.mkdir(parents=True, exist_ok=True)
+
+    latexmk = which("latexmk")
+    pdflatex = which("pdflatex")
+
+    def run_pdflatex_passes() -> None:
+        if not pdflatex:
+            raise RuntimeError(
+                "No LaTeX compiler found. Install latexmk or pdflatex to enable local PDF builds."
+            )
+
+        cmd = [
+            pdflatex,
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "-file-line-error",
+            f"-output-directory={build_dir.name}",
+            tex_name,
+        ]
+        if verbose:
+            print(f"[info] Compiling with pdflatex: {' '.join(cmd)}")
+        subprocess.run(cmd, cwd=workdir, check=True)
+        subprocess.run(cmd, cwd=workdir, check=True)
+
+    if latexmk:
+        cmd = [
+            latexmk,
+            "-pdf",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "-file-line-error",
+            f"-outdir={build_dir.name}",
+            tex_name,
+        ]
+        if verbose:
+            print(f"[info] Compiling with latexmk: {' '.join(cmd)}")
+        try:
+            subprocess.run(cmd, cwd=workdir, check=True)
+        except subprocess.CalledProcessError as exc:
+            if verbose:
+                print(
+                    "[warn] latexmk failed, falling back to pdflatex. "
+                    "This usually means MiKTeX needs Perl for latexmk."
+                )
+            run_pdflatex_passes()
+    else:
+        run_pdflatex_passes()
+
+    return build_dir / tex_path.with_suffix(".pdf").name
+
+
 def main():
     args = parse_args()
     mode = resolve_mode(args)
 
-    dossier_path = Path(args.dossier) if args.dossier else find_latest_dossier()
+    dossier_path = Path(args.dossier) if args.dossier else find_latest_dossier(Path("Dossiers"))
     dossier_path = ensure_docx(dossier_path)
 
     if args.verbose:
@@ -129,10 +194,17 @@ def main():
     output_text = apply_sections(template, doc, document_text, mode, args.verbose)
     output_text = strip_unreplaced_placeholders(output_text, args.verbose)
 
-    Path(args.output).write_text(output_text, encoding="utf-8")
+    output_path = Path(args.output)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(output_text, encoding="utf-8")
 
     if args.verbose:
-        print("[info] Wrote output.tex successfully.")
+        print(f"[info] Wrote {output_path} successfully.")
+
+    if args.compile_pdf:
+        pdf_path = compile_latex(output_path, args.verbose)
+        if args.verbose:
+            print(f"[info] Wrote {pdf_path} successfully.")
 
 
 if __name__ == "__main__":

@@ -4,15 +4,12 @@ import re
 from typing import List
 
 from core.io_utils import extract_text_between_markers
-from core.latex_utils import spaced_note
+from core.section_helpers import extract_clean_entries
+from core.latex_utils import tight_note
 
 
 def _clean(text: str) -> str:
-    text = re.sub(r"\s+", " ", text).strip()
-    text = text.replace("&", r"\&")
-    text = text.replace("$", r"\$")
-    text = text.replace("#", r"\#")
-    return text
+    return re.sub(r"\s+", " ", text).strip()
 
 
 def _extract_year(text: str) -> int:
@@ -23,9 +20,16 @@ def _extract_year(text: str) -> int:
 
 
 def _extract_entries(block_text: str) -> List[str]:
-    if not block_text:
-        return []
-    return [b.strip() for b in block_text.split("\n\n") if b.strip()]
+    return extract_clean_entries(block_text, noise_entries={"National"})
+
+
+def _strip_parenthesized_dates(text: str) -> str:
+    cleaned = re.sub(
+        r"\s*\(([^()]*(?:19\d{2}|20\d{2})[^()]*)\)\.",
+        lambda m: f". {m.group(1)}.",
+        text,
+    )
+    return re.sub(r"\.\.\s+", ". ", cleaned)
 
 
 def apply(text_content: str, doc, document_text: str | None = None, mode: str = "full") -> str:
@@ -47,7 +51,7 @@ def apply(text_content: str, doc, document_text: str | None = None, mode: str = 
 
     latex = "\n\\section*{PROFESSIONAL MEMBERSHIPS}\n\n"
     for entry in entries:
-        latex += spaced_note(entry)
+        latex += tight_note(_strip_parenthesized_dates(entry))
     latex += "\n"
 
     return text_content.replace("{{professionalmembership}}", latex)

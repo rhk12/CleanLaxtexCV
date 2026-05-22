@@ -44,6 +44,10 @@ def _extract_year(text: str) -> int:
     return max(int(y) for y in years)
 
 
+def _normalize_heading(text: str) -> str:
+    return re.sub(r"\s+", " ", text).strip()
+
+
 def _format_publication_entry(publication: str) -> str:
     publication = re.sub(r"\s+", " ", publication).strip()
 
@@ -79,6 +83,66 @@ def _parse_publication_blocks(publications_text: str, category: str) -> List[Dic
             }
         )
     return entries
+
+
+def _parse_other_publication_blocks(publications_text: str) -> Dict[str, List[Dict]]:
+    sections: Dict[str, List[Dict]] = {
+        "base": [],
+        "accepted": [],
+        "articles": [],
+    }
+
+    current_section = "base"
+    skip_headers = {
+        "Pre-Print",
+        "Technical Report",
+        "Journal Article",
+        "Refereed Conference Proceedings",
+    }
+    stop_headings = {
+        "Papers, Presentations, Seminars, and Workshops",
+        "Oral Presentations",
+        "Panels",
+        "Posters",
+        "Posters and Oral Presentations",
+        "Seminars",
+        "Description of Outreach or Other Activities in which there was Significant Use of Candidate's Expertise",
+    }
+
+    for block in publications_text.split("\n\n"):
+        block = block.strip()
+        if not block or block in skip_headers:
+            continue
+
+        heading = _normalize_heading(block)
+        if heading in stop_headings:
+            break
+        if heading == "Manuscripts Accepted for Publication":
+            current_section = "accepted"
+            continue
+        if heading == "Manuscripts Submitted for Publication":
+            current_section = "skip"
+            continue
+        if heading == "Articles in Refereed Journals":
+            current_section = "articles"
+            continue
+
+        if current_section == "skip":
+            continue
+
+        if "[submitted" in block.lower():
+            continue
+
+        target_section = current_section if current_section in sections else "base"
+        sections[target_section].append(
+            {
+                "category": "other",
+                "year": _extract_year(block),
+                "text": block,
+            }
+        )
+
+    return sections
 
 
 def _filter_entries(entries: List[Dict], mode: str) -> List[Dict]:
@@ -118,6 +182,17 @@ def _build_enum_block(title: str, entries: List[Dict]) -> str:
     return latex
 
 
+def _build_subsection_block(title: str, entries: List[Dict]) -> str:
+    if not entries:
+        return ""
+
+    latex = rf"\subsubsection*{{{title}}}" + "\n\\begin{enumerate}\n"
+    for entry in entries:
+        latex += _format_publication_entry(entry["text"]) + "\n"
+    latex += "\\end{enumerate}\n\n"
+    return latex
+
+
 def apply(text_content: str, doc, document_text: str | None = None, mode: str = "full") -> str:
     if not isinstance(document_text, str):
         raise TypeError("publications.apply requires document_text as a string.")
@@ -136,11 +211,13 @@ def apply(text_content: str, doc, document_text: str | None = None, mode: str = 
     if technical_reports:
         merged_other += technical_reports.strip()
 
-    other_entries = _parse_publication_blocks(merged_other, "other")
+    other_sections = _parse_other_publication_blocks(merged_other)
 
     journal_entries = _filter_entries(journal_entries, mode)
     conference_entries = _filter_entries(conference_entries, mode)
-    other_entries = _filter_entries(other_entries, mode)
+    other_sections["base"] = _filter_entries(other_sections["base"], mode)
+    other_sections["accepted"] = _filter_entries(other_sections["accepted"], mode)
+    other_sections["articles"] = _filter_entries(other_sections["articles"], mode)
 
     latex = "\n\\section*{PUBLICATIONS}\n"
     latex += "\\textit{Mentored student and postdoc co-authors are underlined.}\n\n"
@@ -149,7 +226,9 @@ def apply(text_content: str, doc, document_text: str | None = None, mode: str = 
         latex += _build_enum_block("Journal Articles", journal_entries)
     if conference_entries:
         latex += _build_enum_block("Conference Proceedings", conference_entries)
-    if other_entries:
-        latex += _build_enum_block("Preprints and Technical Reports", other_entries)
+    if other_sections["base"]:
+        latex += _build_enum_block("Preprints and Technical Reports", other_sections["base"])
+    latex += _build_subsection_block("Manuscripts Accepted for Publication", other_sections["accepted"])
+    latex += _build_subsection_block("Articles in Refereed Journals", other_sections["articles"])
 
     return text_content.replace("{{publications}}", latex)
