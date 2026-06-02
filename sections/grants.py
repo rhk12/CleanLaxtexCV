@@ -39,8 +39,16 @@ class GrantRecord:
     sponsor: str
     start: datetime | None = None
     end: datetime | None = None
+    awarded: datetime | None = None
+    submitted: datetime | None = None
+    anticipated_total_usd: float | None = None
+    is_awarded: bool = False
     order: int = 0
     matched_catalog: str | None = None
+
+
+def extract_records(doc) -> list[GrantRecord]:
+    return _build_records(doc)
 
 
 def _load_json(path: Path) -> dict:
@@ -130,26 +138,35 @@ def _extract_section_paragraphs(doc) -> list[str]:
     return paragraphs[start_index + 1 : end_index]
 
 
-def _split_grant_blocks(paragraphs: list[str]) -> list[str]:
-    blocks: list[str] = []
+def _split_grant_blocks(paragraphs: list[str]) -> list[tuple[str, str]]:
+    blocks: list[tuple[str, str]] = []
     current: list[str] = []
+    current_group = "unknown"
 
     for paragraph in paragraphs:
         cleaned = paragraph.strip()
         if not cleaned:
             continue
-        if cleaned == "Awarded" and not current:
+
+        # Penn State dossier uses group markers inside the section.
+        if cleaned in {"Awarded", "Pending", "Not Funded"}:
+            if current:
+                blocks.append((current_group, "\n".join(current)))
+                current = []
+            current_group = cleaned
             continue
+
         if cleaned.startswith("OSP Number:"):
             if current:
-                blocks.append("\n".join(current))
+                blocks.append((current_group, "\n".join(current)))
             current = [cleaned]
             continue
+
         if current:
             current.append(cleaned)
 
     if current:
-        blocks.append("\n".join(current))
+        blocks.append((current_group, "\n".join(current)))
 
     return blocks
 
@@ -168,11 +185,48 @@ def _table_text(table) -> str:
 def _parse_key_values(text: str) -> dict[str, str]:
     values: dict[str, str] = {}
     for line in text.splitlines():
+        line = line.strip()
+        if ":" not in line:
+            continue
+
+        # Some table lines contain multiple key/value pairs, e.g.:
+        # "Award Amount: $X Total Anticipated: $Y"
+        for match in re.finditer(r"([^:]+):\s*([^:]*?)(?=(?:\s+[^:]+:\s*)|$)", line):
+            key = match.group(1).strip()
+            value = _clean_text(match.group(2))
+            if key:
+                values[key] = value
+    return values
+
+
+def _best_field_value(block_text: str, field_name: str) -> str:
+    # Some blocks contain multiple occurrences (e.g. amendments). Prefer the most informative value.
+    candidates: list[str] = []
+    for line in block_text.splitlines():
         if ":" not in line:
             continue
         key, value = line.split(":", 1)
-        values[key.strip()] = _clean_text(value)
-    return values
+        if key.strip() != field_name:
+            continue
+        cleaned = _clean_text(value)
+        if cleaned:
+            candidates.append(cleaned)
+    if not candidates:
+        return ""
+    # Prefer longer values (SBIR/STTR short labels lose the real title).
+    candidates.sort(key=lambda v: (len(v), v), reverse=True)
+    return candidates[0]
+
+
+def _parse_usd(value: str) -> float | None:
+    cleaned = _clean_text(value)
+    if not cleaned:
+        return None
+    cleaned = cleaned.replace("$", "").replace(",", "")
+    try:
+        return float(cleaned)
+    except ValueError:
+        return None
 
 
 def _date_spans_from_text(text: str) -> list[tuple[datetime, datetime]]:
@@ -196,6 +250,42 @@ def _collect_record_spans(block_text: str, table_text: str) -> list[tuple[dateti
 
     spans.extend(_date_spans_from_text(block_text))
     return spans
+
+
+def _table_dates(table_text: str) -> tuple[datetime | None, datetime | None]:
+    table_fields = _parse_key_values(table_text)
+    submitted = _parse_date(table_fields.get("Submitted for Funding", ""))
+    awarded = _parse_date(table_fields.get("Awarded Date", ""))
+    return submitted, awarded
+
+
+def _funding_total_from_table(table_text: str) -> float | None:
+    table_fields = _parse_key_values(table_text)
+    candidates = [
+        _parse_usd(table_fields.get("Total Anticipated", "")),
+        _parse_usd(table_fields.get("Total Requested", "")),
+        _parse_usd(table_fields.get("Award Amount", "")),
+    ]
+    candidates = [c for c in candidates if c is not None]
+    if not candidates:
+        return None
+    return max(candidates)
+
+
+def _is_grant_detail_table(table_text: str) -> bool:
+    # The detail table we want consistently contains the date fields.
+    keys = set(_parse_key_values(table_text).keys())
+    return bool({"Start Date", "End Date", "Awarded Date", "Submitted for Funding"} & keys)
+
+
+def _find_detail_table_start_index(doc) -> int:
+    # Dossier exports can shift table indices between downloads. Find the first table that looks like
+    # a grant detail table (contains the standard date fields).
+    for idx, table in enumerate(getattr(doc, "tables", [])):
+        txt = _table_text(table)
+        if _is_grant_detail_table(txt):
+            return idx
+    return TABLE_START_INDEX
 
 
 def _normalize_candidates(values: list[str]) -> list[str]:
@@ -294,14 +384,25 @@ def _build_records(doc) -> list[GrantRecord]:
     blocks = _split_grant_blocks(paragraphs)
 
     grouped: OrderedDict[tuple[str, str, str, str], GrantRecord] = OrderedDict()
+    # The dossier stores a run of grant detail tables (with Start/End/Submitted/Awarded)
+    # but they do not align 1:1 with paragraph blocks once Pending/Not Funded items appear.
+    detail_tables: list[str] = []
+    table_start = _find_detail_table_start_index(doc)
+    for table in doc.tables[table_start:]:
+        txt = _table_text(table)
+        if _is_grant_detail_table(txt):
+            detail_tables.append(txt)
+    awarded_table_cursor = 0
 
-    for idx, block_text in enumerate(blocks):
-        table_index = TABLE_START_INDEX + idx
-        table_text = _table_text(doc.tables[table_index]) if table_index < len(doc.tables) else ""
+    for idx, (group_label, block_text) in enumerate(blocks):
+        table_text = ""
+        if group_label == "Awarded" and awarded_table_cursor < len(detail_tables):
+            table_text = detail_tables[awarded_table_cursor]
+            awarded_table_cursor += 1
 
         fields = _parse_key_values(block_text)
-        raw_title = fields.get("Project Title", "")
-        raw_sponsor = fields.get("Agency", "")
+        raw_title = _best_field_value(block_text, "Project Title") or fields.get("Project Title", "")
+        raw_sponsor = _best_field_value(block_text, "Agency") or fields.get("Agency", "")
         display_name, role_label = _choose_display_name(fields)
 
         cleaned_title = _apply_cleanup_rules(raw_title, rules)
@@ -329,6 +430,9 @@ def _build_records(doc) -> list[GrantRecord]:
             continue
 
         spans = _collect_record_spans(block_text, table_text)
+        submitted, awarded = _table_dates(table_text)
+        is_awarded = group_label == "Awarded"
+        anticipated_total_usd = _funding_total_from_table(table_text) if is_awarded else None
         key = (
             _normalize_key(canonical_title),
             _normalize_key(canonical_sponsor),
@@ -344,6 +448,7 @@ def _build_records(doc) -> list[GrantRecord]:
                 sponsor=canonical_sponsor,
                 order=idx,
                 matched_catalog=matched_catalog,
+                is_awarded=is_awarded,
             )
 
         record = grouped[key]
@@ -361,6 +466,16 @@ def _build_records(doc) -> list[GrantRecord]:
             record.start = canonical_start
         if canonical_end and (record.end is None or canonical_end > record.end):
             record.end = canonical_end
+        if anticipated_total_usd is not None and (
+            record.anticipated_total_usd is None or anticipated_total_usd > record.anticipated_total_usd
+        ):
+            record.anticipated_total_usd = anticipated_total_usd
+        if is_awarded:
+            record.is_awarded = True
+        if submitted and (record.submitted is None or submitted > record.submitted):
+            record.submitted = submitted
+        if awarded and (record.awarded is None or awarded > record.awarded):
+            record.awarded = awarded
 
         for start, end in spans:
             if record.start is None or start < record.start:

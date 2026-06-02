@@ -1,0 +1,119 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\usepackage{enumitem}
+
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp}
+  \usepackage{newtxtext,newtxmath}
+\else
+  \usepackage{fontspec}
+  \setmainfont{Times New Roman}
+\fi
+
+\usepackage{lmodern}
+
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{%
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath}
+}{}
+
+\makeatletter
+\@ifundefined{KOMAClassName}{%
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{%
+    \setlength{\parindent}{0pt}%
+    \setlength{\parskip}{6pt}%
+  }%
+}{%
+  \KOMAoptions{parskip=half}%
+}
+\makeatother
+
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{}
+\urlstyle{same}
+
+\setlength{\emergencystretch}{3em}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen}
+
+\ifLuaTeX
+  \usepackage{selnolig}
+  \setmainfont{Times New Roman}
+\fi
+
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}
+}
+
+\author{}
+\date{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{black}}
+  {\thesubsection}
+  {1em}
+  {}
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{black}}
+  {\thesubsection}
+  {1em}
+  {}
+
+\usepackage{fancyhdr}
+\definecolor{darkgray}{gray}{0.4}
+\fancypagestyle{firstpage}{
+  \fancyhf{}
+  \rhead{\textcolor{darkgray}{{HEADER_DATE}}}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+\begin{document}
+\thispagestyle{firstpage}
+
+\begin{center}
+\LARGE \textbf{\textsc{REUBEN H. KRAFT}} \\
+\normalsize Professor of Mechanical and Biomedical Engineering, The Pennsylvania State University \\
+\rule{\linewidth}{2pt}
+\end{center}
+\normalsize
+
+{{highlights}}
+
+\newpage
+
+{{positions}}
+
+{{education}}
+
+{{awards_and_honor}}
+
+{{publications}}
+
+{{awarded}}
+
+{{Intellectual}}
+
+{{directedstudent}}
+
+{{service}}
+
+{{editorialboard}}
+
+{{professionalmembership}}
+
+\end{document}

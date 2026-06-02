@@ -3,8 +3,10 @@ from __future__ import annotations
 import argparse
 import importlib
 import inspect
+import os
 import re
 import subprocess
+import sys
 from shutil import which
 from datetime import datetime
 from pathlib import Path
@@ -14,6 +16,7 @@ from docx import Document
 from core.io_utils import ensure_docx, find_latest_dossier, paragraphs_text
 
 FULL_SECTIONS = [
+    "sections.highlights",
     "sections.professional_positions",
     "sections.education",
     "sections.awards_honors",
@@ -27,6 +30,7 @@ FULL_SECTIONS = [
 ]
 
 THREE_PAGE_SECTIONS = [
+    "sections.highlights",
     "sections.professional_positions",
     "sections.education",
     "sections.awards_honors",
@@ -36,11 +40,25 @@ THREE_PAGE_SECTIONS = [
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dossier", type=str, default=None)
+    parser.add_argument("--profile", type=str, default=None, help="Use a profile under profiles/<name>/ for template and optional extras.")
     parser.add_argument("--template", type=str, default="template_cv.tex")
     parser.add_argument("--output", type=str, default="output.tex")
+    parser.add_argument("--metrics-html", action="store_true", help="Generate an HTML research metrics report.")
+    parser.add_argument(
+        "--metrics-output",
+        type=str,
+        default=str(Path("reports") / "metrics.html"),
+        help="Path to write the metrics HTML report.",
+    )
+    parser.add_argument(
+        "--metrics-only",
+        action="store_true",
+        help="Only generate metrics (skip CV LaTeX generation).",
+    )
     parser.add_argument("--header-date", type=str, default=datetime.now().strftime("%B %Y"))
     parser.add_argument("--full-cv", action="store_true")
     parser.add_argument("--three-page-cv", action="store_true")
+    parser.add_argument("--highlights-file", type=str, default=None, help="Path to a text file with one highlight bullet per line.")
     parser.add_argument(
         "--compile-pdf",
         action="store_true",
@@ -48,6 +66,17 @@ def parse_args():
     )
     parser.add_argument("--verbose", action="store_true")
     return parser.parse_args()
+
+
+def _resolve_profile_paths(args) -> tuple[Path | None, Path | None]:
+    if not args.profile:
+        return None, None
+
+    profile_dir = Path("profiles") / args.profile
+    template_path = profile_dir / "template_cv.tex"
+    highlights_path = profile_dir / "highlights.txt"
+
+    return (template_path if template_path.exists() else None, highlights_path if highlights_path.exists() else None)
 
 
 def resolve_mode(args) -> str:
@@ -181,6 +210,15 @@ def main():
     dossier_path = Path(args.dossier) if args.dossier else find_latest_dossier(Path("Dossiers"))
     dossier_path = ensure_docx(dossier_path)
 
+    profile_template, profile_highlights = _resolve_profile_paths(args)
+    template_arg_was_explicit = "--template" in sys.argv
+    if profile_template and not template_arg_was_explicit:
+        args.template = str(profile_template)
+    if not args.highlights_file and profile_highlights:
+        args.highlights_file = str(profile_highlights)
+    if args.highlights_file:
+        os.environ["CV_HIGHLIGHTS_FILE"] = str(Path(args.highlights_file).resolve())
+
     if args.verbose:
         print(f"[info] Build mode: {mode}")
         print(f"[info] Output path: {args.output}")
@@ -190,6 +228,17 @@ def main():
     template = load_template(args.template, args.header_date)
     document_text = paragraphs_text(str(dossier_path))
     doc = Document(str(dossier_path))
+
+    if args.metrics_html:
+        from analysis.metrics import generate_metrics_html
+
+        metrics_path = Path(args.metrics_output)
+        metrics_path.parent.mkdir(parents=True, exist_ok=True)
+        metrics_path.write_text(generate_metrics_html(document_text, doc), encoding="utf-8")
+        if args.verbose:
+            print(f"[info] Wrote metrics report: {metrics_path}")
+        if args.metrics_only:
+            return
 
     output_text = apply_sections(template, doc, document_text, mode, args.verbose)
     output_text = strip_unreplaced_placeholders(output_text, args.verbose)

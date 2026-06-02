@@ -101,6 +101,7 @@ StyleCopReport.xml
 build/
 build_verify/
 Dossiers/*.docx
+reports/
 *.vspscc
 *.vssscc
 .builds

@@ -23,23 +23,37 @@ def _extract_entries(section_text: str, split_token: str, label: str) -> List[Di
         if first_line_match:
             block = first_line_match.group(1).strip()
 
-        if split_token not in block:
-            continue
+        # Dossier exports are inconsistent: some entries include "Ph.D."/"MS." tokens and some don't.
+        # Treat each block as an entry and parse "Author. Title. (...dates...)" when possible.
+        author = ""
+        title = ""
+        dates = ""
 
-        parts = block.split(split_token, 1)
-        author = _clean(parts[0].strip().rstrip(","))
-        rest = parts[1].strip()
-
-        match = re.match(r"^(.*)\s\(([^)]+)\)\.?$", rest)
+        match = re.match(r"^(?P<author>[^.]+)\.\s*(?P<body>.*)$", block)
         if match:
-            title = match.group(1).strip()
-            dates = match.group(2).strip()
+            author = _clean(match.group("author").strip().rstrip(","))
+            body = match.group("body").strip()
         else:
-            title = rest
+            body = block
+
+        body_match = re.match(r"^(?P<title>.*)\s\((?P<dates>[^)]+)\)\.?$", body)
+        if body_match:
+            title = body_match.group("title").strip()
+            dates = body_match.group("dates").strip()
+        else:
+            title = body.strip().rstrip(".")
             dates = ""
 
         title = re.sub(r"Date Graduated:.*$", "", title).strip()
         title = re.sub(r"\.$", "", title).strip()
+        title = re.sub(r"^[,\s]+", "", title).strip()
+        title = re.sub(r"^(Ph\.D\.|MS\.)\s*", "", title).strip()
+
+        # If we didn't detect an author above, fall back to the segment before the split token (older format).
+        if not author and split_token and split_token in block:
+            parts = block.split(split_token, 1)
+            author = _clean(parts[0].strip().rstrip(","))
+            title = _clean(parts[1].strip())
 
         entries.append(
             {
@@ -130,7 +144,7 @@ def apply(text_content: str, doc, document_text: str | None = None, mode: str = 
     )
 
     phd_entries = _extract_entries(phd_text, "Ph.D.", "Ph.D. Dissertation")
-    masters_entries = _extract_entries(masters_text, "MS.", "Master’s Thesis")
+    masters_entries = _extract_entries(masters_text, "MS.", "Master's Thesis")
     postdoc_entries = _extract_postdoc_entries(postdoc_text)
     undergrad_entries = _extract_entries(undergrad_text, "Undergraduate.", "Undergraduate Honors Thesis")
 
@@ -149,7 +163,7 @@ def apply(text_content: str, doc, document_text: str | None = None, mode: str = 
         latex += "\\end{enumerate}\n\n"
 
     if masters_entries:
-        latex += "\\subsection*{Master’s Thesis}\n\\begin{enumerate}\n"
+        latex += "\\subsection*{Master's Thesis}\n\\begin{enumerate}\n"
         for entry in masters_entries:
             latex += _format_entry(entry) + "\n"
         latex += "\\end{enumerate}\n\n"
